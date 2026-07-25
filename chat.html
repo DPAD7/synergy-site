@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat — Synergy Dominican Barbershop &amp; Premium Barber &amp; Beauty Supply</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root { --barber-red:#d4af37; --ink:#1a1a1a; --gold:#d4af37; --line:rgba(255,255,255,0.16); }
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    min-height:100vh; background:#0a0a0a;
+    font-family:'Inter',-apple-system,sans-serif;
+    display:flex; justify-content:center; align-items:center; color:#fff;
+}
+.chat { width:100%; max-width:520px; height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+
+.chat-head {
+    padding:16px 20px; border-bottom:1px solid var(--line);
+    display:flex; align-items:center; gap:13px;
+    background:linear-gradient(90deg, rgba(212,175,55,0.2), transparent);
+}
+.chat-head p { font-size:0.82rem; font-weight:900; letter-spacing:1.6px; opacity:0.85; text-transform:uppercase; }
+.dot { width:7px; height:7px; border-radius:50%; background:#22c55e; display:inline-block; margin-right:5px; }
+
+.messages { flex:1; overflow-y:auto; padding:18px 20px; display:flex; flex-direction:column; gap:11px; }
+.msg { max-width:86%; padding:12px 15px; border-radius:16px; font-size:0.86rem; line-height:1.5; font-weight:500; }
+.msg.bot { background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); align-self:flex-start; border-bottom-left-radius:5px; }
+.msg.user { background:var(--gold); color:var(--ink); align-self:flex-end; border-bottom-right-radius:5px; font-weight:700; }
+.msg a { font-weight:800; color:var(--gold); }
+.msg.user a { color:var(--ink); }
+.msg b { font-weight:900; }
+
+.hit { display:flex; gap:10px; align-items:center; margin-top:9px; padding:9px; background:rgba(255,255,255,0.06); border:1px solid var(--line); border-radius:11px; }
+.hit img { width:44px; height:44px; object-fit:contain; background:#fff; border-radius:7px; padding:2px; flex-shrink:0; }
+.hit .h-info { flex:1; min-width:0; }
+.hit .h-info strong { display:block; font-size:0.78rem; font-weight:900; line-height:1.2; }
+.hit .h-info span { font-size:0.71rem; opacity:0.68; font-weight:700; }
+.hit .h-price { font-weight:900; font-size:0.86rem; white-space:nowrap; color:var(--gold); }
+.hit button { background:#fff; color:#000; border:none; border-radius:50px; padding:7px 14px; font-size:0.68rem; font-weight:900; text-transform:uppercase; cursor:pointer; font-family:inherit; white-space:nowrap; }
+.hit button:hover { background:var(--gold); }
+
+.typing { align-self:flex-start; display:flex; gap:4px; padding:13px 15px; background:rgba(255,255,255,0.08); border-radius:16px; border-bottom-left-radius:5px; }
+.typing span { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.6); animation:bounce 1.3s infinite; }
+.typing span:nth-child(2){animation-delay:.15s} .typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce { 0%,60%,100%{transform:translateY(0);opacity:.4} 30%{transform:translateY(-6px);opacity:1} }
+
+.quick { padding:0 20px 10px; display:flex; flex-wrap:wrap; gap:6px; }
+.quick-btn { background:rgba(255,255,255,0.07); border:1px solid var(--line); color:#fff; padding:8px 13px; border-radius:50px; font-size:0.71rem; font-weight:800; cursor:pointer; font-family:inherit; transition:all .2s; }
+.quick-btn:hover { background:var(--gold); border-color:var(--gold); color:var(--ink); }
+
+.chat-input { padding:14px 20px; border-top:1px solid var(--line); display:flex; gap:9px; }
+.chat-input input { flex:1; background:rgba(255,255,255,0.08); border:1px solid var(--line); color:#fff; padding:13px 16px; border-radius:50px; font-size:0.86rem; font-family:inherit; font-weight:600; outline:none; }
+.chat-input input:focus { border-color:var(--gold); }
+.chat-input button { width:45px; height:45px; border-radius:50%; border:none; cursor:pointer; font-size:0.95rem; background:var(--gold); color:var(--ink); transition:transform .2s; }
+.chat-input button:active { transform:scale(0.93); }
+</style>
+</head>
+<body>
+
+<div class="chat">
+    <div class="chat-head">
+        <div>
+            <p><span class="dot"></span><span id="hSub">Barbershop &amp; Supply &middot; Online</span></p>
+        </div>
+    </div>
+
+    <div class="messages" id="messages"></div>
+    <div class="quick" id="quick"></div>
+
+    <div class="chat-input">
+        <input type="text" id="input" placeholder="Ask about booking, prices, products...">
+        <button onclick="send()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<script>
+var lang = new URLSearchParams(location.search).get('lang') === 'es' ? 'es' : 'en';
+
+var STORE = {
+    barber: { address:'128 E Queen St, Chambersburg, PA 17201', phone:'(717) 251-3970', tel:'7172513970',
+              hours:{en:'Tuesday – Sunday: 10am – 7pm. Closed Mondays.', es:'Martes – Domingo: 10am – 7pm. Lunes cerrado.'},
+              maps:'https://www.google.com/maps/search/?api=1&query=128+E+Queen+St+Chambersburg+PA', facebook:'https://www.facebook.com/synergybarbershop/' },
+    supply: { address:'180 S Main St, Chambersburg, PA 17201', phone:'(717) 491-0997', tel:'7174910997',
+              hours:{en:'Monday – Saturday: 10am – 6pm. Closed Sundays.', es:'Lunes – Sabado: 10am – 6pm. Domingo cerrado.'},
+              maps:'https://www.google.com/maps/search/?api=1&query=180+S+Main+St+Chambersburg+PA+17201', facebook:'https://www.facebook.com/61590492305050' }
+};
+
+// Mirror of index.html SERVICES — keep prices/names/images in sync when they change there.
+// `kw` = extra search words so questions like "how much is a fade" map to the right service.
+var SERVICES = [
+    { id:'svc-haircut',  name:'Haircut',                   name_es:'Corte',                price:35, mins:30, img:'images/images1.jpeg',                                                  kw:'fade taper skin bald low high mid drop burst hair cut haircut regular men mens blowout' },
+    { id:'svc-kidcut',   name:'Kids Haircut',              name_es:'Corte de Nino',        price:30, mins:30, img:'images/barbers/marcos/001E17E0-A2FF-4BB4-93D3-821C23C8C09D.jpg',       kw:'kid kids child children boy son young' },
+    { id:'svc-kidshape', name:'Kids Shape Up',             name_es:'Delineado de Nino',    price:15, mins:15, img:'images/barbers/marcos/IMG_1148.JPG',                                  kw:'kid kids child shapeup line edge' },
+    { id:'svc-senior',   name:'Seniors',                   name_es:'Adultos Mayores',      price:25, mins:30, img:'images/barbershop2.jpeg',                                             kw:'senior seniors elder elderly old grandpa 65' },
+    { id:'svc-lineup',   name:'Line Up / Shape Up',        name_es:'Delineado',            price:20, mins:20, img:'images/barbers/marcos/IMG_1118.JPG',                                  kw:'lineup line shapeup shape edge up outline neck touchup' },
+    { id:'svc-combo',    name:'Haircut, Beard & Eyebrows', name_es:'Corte, Barba y Cejas', price:40, mins:50, img:'images/barbers/marcos/IMG_0276.JPG',                                  kw:'combo package full haircut beard eyebrow eyebrows everything' },
+    { id:'svc-design',   name:'Design / Pattern',          name_es:'Diseno / Patron',      price:10, mins:30, img:'images/barbers/marcos/IMG_1115.JPG',                                  kw:'design pattern part carve custom art hairart' },
+    { id:'svc-beard',    name:'Beard Trim',                name_es:'Recorte de Barba',     price:20, mins:20, img:'images/barbershop10.webp',                                            kw:'beard facial shave lineup' },
+    { id:'svc-eyebrow',  name:'Eyebrow Cleanup',           name_es:'Arreglo de Cejas',     price:10, mins:10, img:'images/barbershop3.jpeg',                                             kw:'eyebrow eyebrows brow brows' }
+];
+
+var PRODUCTS = [];
+fetch('products.json').then(function(r){return r.json()}).then(function(d){ PRODUCTS = d.filter(function(p){return p.stock}); }).catch(function(){});
+
+function t(en, es) { return lang === 'es' ? es : en; }
+function sName(s) { return lang === 'es' && s.name_es ? s.name_es : s.name; }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+/* Keep exactly the quick prompts the shop asked for, in one combined set. */
+var QUICK = {
+    en: ["Book a haircut","How much is a fade?","What are your hours?","Do you take walk-ins?","Add a product to my cut","Do you have clippers?","Pro discount?","Can I get delivery?","Do you sell L3VEL3?","Where are you located?"],
+    es: ["Reservar un corte","Cuanto cuesta un fade?","Cual es el horario?","Aceptan sin cita?","Agregar producto a mi cita","Tienen maquinas?","Descuento profesional?","Hay entrega?","Venden L3VEL3?","Donde estan ubicados?"]
+};
+
+var STOP = ['do','you','have','any','got','sell','the','a','an','is','are','for','me','i','need','want','looking','buy','price','of','what','whats','how','much','my','to','add','get','can','tiene','tienen','venden','quiero','necesito','cuanto','cuesta','busco','el','la','los','las','un','una','de','y','mi'];
+function words(text){ return text.toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/).filter(function(w){return w.length>2 && STOP.indexOf(w)===-1}); }
+
+function searchProducts(text){
+    var ws=words(text); if(!ws.length||!PRODUCTS.length) return [];
+    var scored=PRODUCTS.map(function(p){var hay=(p.name+' '+p.variation+' '+p.cat+' '+p.desc+' '+p.vendor).toLowerCase();var sc=0;ws.forEach(function(w){if(hay.indexOf(w)!==-1)sc++});return{p:p,sc:sc}}).filter(function(x){return x.sc>0});
+    scored.sort(function(a,b){return b.sc-a.sc||a.p.price-b.p.price});
+    var seen={},out=[]; scored.forEach(function(x){if(!seen[x.p.name.toLowerCase()]){seen[x.p.name.toLowerCase()]=1;out.push(x.p)}}); return out.slice(0,4);
+}
+function searchServices(text){
+    var ws=words(text); if(!ws.length) return [];
+    return SERVICES.filter(function(s){var hay=(s.name+' '+(s.name_es||'')+' '+(s.kw||'')).toLowerCase();return ws.some(function(w){return hay.indexOf(w)!==-1})}).slice(0,4);
+}
+function productCards(hits){
+    return hits.map(function(p){return "<div class='hit'>"+(p.img?"<img src='"+p.img+"' alt='' onerror=\"this.style.display='none'\">":"")+"<div class='h-info'><strong>"+esc(p.name)+"</strong>"+(p.variation?"<span>"+esc(p.variation)+"</span>":"")+"</div><div class='h-price'>$"+p.price.toFixed(2)+"</div></div>"}).join('');
+}
+function serviceCards(hits){
+    return hits.map(function(s){return "<div class='hit'><img src='"+s.img+"' alt='' onerror=\"this.style.display='none'\"><div class='h-info'><strong>"+esc(sName(s))+"</strong><span>"+s.mins+" "+t('min','min')+" · $"+s.price.toFixed(2)+"</span></div><button onclick=\"bookNow('"+s.id+"')\">"+t('Book','Reservar')+"</button></div>"}).join('');
+}
+
+/* Booking + shopping both live on the main page — break out of the iframe. */
+function bookNow(id){ go('index.html?view=services'+(lang==='es'?'&lang=es':'')+'#'+id); }
+function goShop(){ go('index.html?view=products'+(lang==='es'?'&lang=es':'')); }
+function go(url){ if (window.parent && window.parent !== window) window.parent.location.href = url; else location.href = url; }
+
+function getResponse(text){
+    var q = text.toLowerCase();
+
+    if (q.match(/hour|open|close|when|time|schedule|horario|abierto|cerrado|hora/))
+        return "<b>"+t('Barbershop','Barberia')+":</b> "+STORE.barber.hours[lang]+"<br><b>"+t('Supply store','Tienda')+":</b> "+STORE.supply.hours[lang];
+
+    if (q.match(/where|locat|address|direction|map|find|donde|ubicad|direcc|mapa/))
+        return "<i class='fa-solid fa-scissors'></i> <b>"+STORE.barber.address+"</b> — <a href='"+STORE.barber.maps+"' target='_blank'>"+t('map','mapa')+"</a><br><br><i class='fa-solid fa-bag-shopping'></i> <b>"+STORE.supply.address+"</b> — <a href='"+STORE.supply.maps+"' target='_blank'>"+t('map','mapa')+"</a>";
+
+    if (q.match(/call|phone|contact|number|reach|email|text|llamar|telefono|contacto|correo/))
+        return "<i class='fa-solid fa-scissors'></i> "+t('Barbershop','Barberia')+": <a href='tel:"+STORE.barber.tel+"'><b>"+STORE.barber.phone+"</b></a><br><i class='fa-solid fa-bag-shopping'></i> "+t('Supply store','Tienda')+": <a href='tel:"+STORE.supply.tel+"'><b>"+STORE.supply.phone+"</b></a>";
+
+    if (q.match(/discount|licen|cosmet|pro |descuento|licencia/))
+        return t("<b>Licensed barbers &amp; cosmetologists get 10% off everything</b> at the supply store. Show your license at the counter — it's applied when you pay.",
+                 "<b>Barberos y cosmetologos con licencia reciben 10% de descuento</b> en la tienda. Muestra tu licencia en el mostrador — se aplica al pagar.");
+
+    if (q.match(/deliver|pick.?up|entrega|recoger/))
+        return t("Two ways to get products:<br><br><b>1. Pick up at the supply store</b> — 180 S Main St.<br><b>2. Delivery to the barbershop</b> — we drop it at 128 E Queen St so you can grab it with your cut.<br><br>Choose either one at checkout.",
+                 "Dos formas:<br><br><b>1. Recoger en la tienda</b> — 180 S Main St.<br><b>2. Entrega en la barberia</b> — lo dejamos en 128 E Queen St para recoger con tu corte.<br><br>Elige al reservar.");
+
+    if (q.match(/pay|cash|card|credit|debit|venmo|zelle|apple pay|pago|efectivo|tarjeta/))
+        return t("We take <b>cash, all major cards, Cash App, Venmo, and Zelle</b>. Nothing is charged online — you pay in person.",
+                 "Aceptamos <b>efectivo, tarjetas, Cash App, Venmo y Zelle</b>. No se cobra en linea — pagas en persona.");
+
+    if (q.match(/walk.?in|appointment|wait|busy|sin cita|espera/))
+        return t("Walk-ins are always welcome — no appointment needed. Want to skip the wait? Pick a service and I'll start the booking.",
+                 "Siempre aceptamos sin cita. Quieres evitar la espera? Elige un servicio y empiezo la reserva.")+serviceCards(SERVICES.slice(0,3));
+
+    if (q.match(/book|reserv|schedule|agendar|cita/))
+        return t("Pick a service and I'll take you right to booking:","Elige un servicio y te llevo a reservar:")+serviceCards(SERVICES.slice(0,4));
+
+    if (q.match(/add.*(product|item)|product.*(cut|appointment|cart)|producto.*cita|agregar.*producto/))
+        return t("You can add products right inside the booking — there's an <b>Add products</b> button with search and quantity, and they ride along in your order.","Puedes agregar productos dentro de la reserva — hay un boton <b>Agregar productos</b> con busqueda y cantidad.")+"<br><br><a href='#' onclick='goShop();return false'>"+t('Browse products','Ver productos')+"</a>";
+
+    if (q.match(/kid|child|nino|hijo/))
+        return t("Kids haircuts (12 &amp; under) are <b>$30</b>, kids shape ups <b>$15</b>. Family friendly — bring the whole crew!","Cortes de ninos (12 y menor) a <b>$30</b>, delineados <b>$15</b>. Trae a toda la familia!")+serviceCards(SERVICES.filter(function(s){return s.id==='svc-kidcut'||s.id==='svc-kidshape'}));
+
+    if (q.match(/catalog|everything|all product|what do you (sell|have|carry)|inventory|catalogo|que venden/))
+        return t("We carry clippers, blades, color, shampoo, beard care, capes, combs, gloves and more — over 180 products.","Tenemos maquinas, hojas, color, champu, barba, capas, peines, guantes y mas — mas de 180 productos.")+"<br><br><a href='#' onclick='goShop();return false'>"+t('Browse the shop','Ver la tienda')+"</a>";
+
+    // A fade is a type of HAIRCUT — so unambiguous cut terms always map to a service (never a product).
+    // Beard/eyebrow/design only map to a service when there's price intent (so "beard oil" still finds the product).
+    var cutTerm    = q.match(/haircut|\bhair\b|\bcut\b|fade|taper|line ?up|shape ?up|edge ?up|skin ?fade|senior|corte|delineado/);
+    var priceIntent = q.match(/price|cost|how much|rate|precio|cuesta|cuanto|cobr|service|servicio|menu/);
+    if (cutTerm || priceIntent){
+        var sh=searchServices(text);
+        if (!sh.length) sh = (priceIntent && q.match(/service|servicio|menu/)) ? SERVICES.slice(0,5)
+                                                                              : SERVICES.filter(function(s){return s.id==='svc-haircut'});
+        return t("Here's what we do:","Esto es lo que hacemos:")+serviceCards(sh);
+    }
+
+    // product lookup
+    var ph = searchProducts(text);
+    if (ph.length)
+        return t("Here's what we've got:","Esto es lo que tenemos:")+productCards(ph)+"<br><a href='#' onclick='goShop();return false'>"+t('See all &amp; reserve','Ver todo y reservar')+"</a>";
+
+    if (q.match(/facebook|social|follow|seguir|redes/))
+        return t('Follow us!','Siguenos!')+"<br><br><a href='"+STORE.barber.facebook+"' target='_blank'><i class='fa-brands fa-facebook'></i> "+t('Barbershop','Barberia')+"</a><br><a href='"+STORE.supply.facebook+"' target='_blank'><i class='fa-brands fa-facebook'></i> "+t('Supply store','Tienda')+"</a>";
+
+    if (q.match(/^(hey|hi|hello|yo|sup|what'?s? up|hola|buenas|que tal)/))
+        return t("Hey! I can book your cut, quote prices, or look up any product. What do you need?","Hola! Te reservo el corte, doy precios o busco productos. Que necesitas?");
+
+    if (q.match(/thank|thanks|gracia/))
+        return t("Anytime! See you soon.","Con gusto! Nos vemos pronto.");
+
+    return t("I can help with booking, prices, services, products, hours, delivery, and the pro discount. Try one of the buttons, or ask away.",
+             "Te ayudo con reservas, precios, servicios, productos, horario, entrega y el descuento. Prueba un boton o pregunta.");
+}
+
+var msgs = document.getElementById('messages');
+var input = document.getElementById('input');
+function addMsg(html, who){ var d=document.createElement('div'); d.className='msg '+who; d.innerHTML=html; msgs.appendChild(d); msgs.scrollTop=msgs.scrollHeight; }
+function ask(text){
+    addMsg(esc(text),'user');
+    var tp=document.createElement('div'); tp.className='typing'; tp.id='typing'; tp.innerHTML='<span></span><span></span><span></span>'; msgs.appendChild(tp); msgs.scrollTop=msgs.scrollHeight;
+    setTimeout(function(){ var e=document.getElementById('typing'); if(e)e.remove(); addMsg(getResponse(text),'bot'); }, 420+Math.random()*500);
+}
+function send(){ var v=input.value.trim(); if(!v)return; input.value=''; ask(v); }
+input.addEventListener('keydown', function(e){ if(e.key==='Enter') send(); });
+
+if (lang === 'es') document.getElementById('hSub').textContent = 'Barberia y Tienda · En linea';
+var qr = document.getElementById('quick');
+QUICK[lang].forEach(function(text){ var btn=document.createElement('button'); btn.className='quick-btn'; btn.textContent=text; btn.onclick=function(){ask(text)}; qr.appendChild(btn); });
+
+addMsg(t("Hey! Welcome. I can help book your cut, quote prices, or add products to your appointment. Ask me about any product, price, or stock.",
+         "Hola! Bienvenido. Te ayudo a reservar tu corte, dar precios o agregar productos a tu cita. Preguntame por cualquier producto, precio o existencia."), 'bot');
+</script>
+</body>
+</html>

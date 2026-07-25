@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Redirecting…</title>
+<link rel="canonical" href="index.html">
+<script>
+// The shop and the barbershop are one page now — carry any view/lang across.
+(function () {
+    var p = new URLSearchParams(location.search);
+    var out = new URLSearchParams();
+    var v = p.get('view');
+    if (v) out.set('view', v);
+    if (p.get('lang') === 'es') out.set('lang', 'es');
+    var qs = out.toString();
+    location.replace('index.html' + (qs ? '?' + qs : ''));
+})();
+</script>
+<meta http-equiv="refresh" content="0; url=index.html">
+</head>
+<body style="background:#000;color:#fff;font-family:Inter,sans-serif;padding:40px">
+<p>Redirecting to <a href="index.html" style="color:#d4af37">the shop</a>…</p>
+</body>
+</html>

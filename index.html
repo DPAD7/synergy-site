@@ -1,0 +1,2894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Synergy Dominican Barbershop | Chambersburg, PA</title>
+<meta name="description" content="Premium Barber & Beauty Supply — now open at 180 S Main St, Chambersburg, PA. Pro clippers, blades, color, and grooming products, plus barbershop booking. Licensed barbers & cosmetologists get 10% off.">
+<meta name="keywords" content="barber supply chambersburg, beauty supply pa, premium barber and beauty supply, book barber chambersburg, l3vel3, andis, wahl, babyliss">
+
+<meta property="og:title" content="Synergy Dominican Barbershop | Chambersburg, PA">
+<meta property="og:description" content="Pro barber and beauty supply in Chambersburg, PA. Shop products and book your cut in one place.">
+<meta property="og:url" content="https://barbershopinchambersburg.com/shop.html">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root {
+    --barber-red: #d4af37;  /* was red — now gold, single accent */
+    --ink: #1a1a1a;
+    --barber-blue: #002244;
+    --barber-white: #ffffff;
+    --gold: #d4af37;
+    --line: rgba(255,255,255,0.16);
+    --panel: rgba(255,255,255,0.045);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+* { box-sizing: border-box; }
+
+body {
+    margin: 0; padding: 0;
+    min-height: 100vh; width: 100%; overflow-x: clip;
+    background: #000;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--barber-white);
+    display: flex; flex-direction: column;
+}
+/* Footer pinned to the bottom so short views don't leave a gap and the layout
+   stays consistent across every page. */
+.topnav { flex-shrink: 0; }
+.wrap { flex: 1 0 auto; display: flex; flex-direction: column; padding-bottom: 96px; }
+
+/* ── TOP NAV ─────────────────────────────────────────────── */
+.topnav {
+    position: sticky; top: 0; z-index: 9995;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 18px; padding: 11px 26px;
+    background: rgba(0,0,0,0.94);
+    border-bottom: 1px solid rgba(212,175,55,0.35);
+    backdrop-filter: blur(14px);
+}
+.tn-brand {
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+    background: none; border: none; cursor: pointer; padding: 0; font-family: inherit; color: #fff;
+    overflow: hidden; max-width: 460px; max-height: 60px;
+    transition: opacity 0.7s ease, max-width 0.75s cubic-bezier(0.4,0,0.2,1), max-height 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+/* On the About page the brand fades out and the nav links glide to center (JS-driven transform). */
+.topnav.nav-centered .tn-brand { opacity: 0; max-width: 0; max-height: 0; pointer-events: none; }
+@media (min-width: 769px) {
+    .topnav { position: relative; justify-content: flex-end; }
+    .tn-brand { position: absolute; left: 26px; top: 50%; transform: translateY(-50%); }
+    .tn-links { transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); will-change: transform; }
+}
+.tn-brand img { height: 48px; width: auto; border-radius: 6px; }
+.bn { display: flex; flex-direction: row; align-items: baseline; gap: 6px; line-height: 1.15; text-align: left; white-space: nowrap; }
+.bn b { font-size: 0.86rem; font-weight: 900; letter-spacing: 0.8px; white-space: nowrap; }
+.bn small { font-size: 0.86rem; font-weight: 900; letter-spacing: 0.8px; white-space: nowrap; }
+
+.tn-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.tn-cart b {
+    background: var(--gold); color: var(--ink); border-radius: 50px;
+    min-width: 18px; height: 18px; font-size: 0.66rem;
+    display: flex; align-items: center; justify-content: center; padding: 0 5px;
+}
+.tn-link {
+    background: none; border: 1px solid transparent; color: #fff;
+    padding: 9px 16px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 900; letter-spacing: 0.8px; text-transform: uppercase;
+    cursor: pointer; font-family: inherit; text-decoration: none;
+    display: flex; align-items: center; gap: 7px; transition: var(--transition); white-space: nowrap;
+}
+.tn-link:hover { background: rgba(255,255,255,0.1); }
+.tn-link.active { background: rgba(212,175,55,0.16); border-color: var(--gold); color: var(--gold); }
+.tn-link.solid { background: var(--gold); border-color: var(--gold); }
+.tn-link.solid:hover { background: #e00; }
+.tn-link b {
+    background: #fff; color: var(--gold); border-radius: 50px;
+    min-width: 19px; height: 19px; font-size: 0.68rem;
+    display: flex; align-items: center; justify-content: center; padding: 0 5px;
+}
+.lang-toggle {
+    background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; padding: 9px 15px; border-radius: 50px; font-size: 0.72rem;
+    font-weight: 900; cursor: pointer; font-family: inherit; transition: var(--transition);
+}
+.lang-toggle:hover { background: var(--gold); border-color: var(--gold); }
+
+/* ── SHELL ───────────────────────────────────────────────── */
+.wrap { width: 94vw; max-width: 1440px; margin: 0 auto; }
+
+.page-head { padding: 34px 0 20px 0; border-bottom: 1px solid var(--line); }
+.page-head h1 {
+    margin: 0; font-size: 2.9rem; font-weight: 900;
+    text-transform: uppercase; letter-spacing: -1.5px; line-height: 1;
+}
+.page-head p { margin: 11px 0 0 0; font-size: 0.9rem; font-weight: 600; opacity: 0.72; line-height: 1.5; white-space: nowrap; }
+.page-hours { display: none; }   /* shown on mobile only (see media query) */
+html, body { max-width: 100%; overflow-x: clip; overscroll-behavior-y: none; }
+
+/* ── ABOUT PAGE ─────────────────────────────────────────── */
+#view-about { position: relative; }
+.about-bg {
+    position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0.46; z-index: 0; pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 100% 100% at center, #000 68%, transparent 100%);
+    mask-image: radial-gradient(ellipse 100% 100% at center, #000 68%, transparent 100%);
+}
+#view-about > *:not(.about-bg) { position: relative; z-index: 1; }
+.about-hero { text-align: center; padding: 40px 0 30px; text-shadow: 0 2px 16px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.9); }
+.about-title { margin: 0 0 8px; font-size: 2.6rem; font-weight: 900; line-height: 1.05; text-transform: uppercase; letter-spacing: -0.5px; }
+.about-eyebrow { display: inline-block; font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: var(--gold); margin-bottom: 18px; }
+.about-lead { margin: 0 auto 12px; max-width: 560px; font-size: 1.05rem; font-weight: 700; opacity: 0.95; line-height: 1.5; }
+.about-sub { margin: 0 auto 26px; max-width: 620px; font-size: 0.9rem; font-weight: 600; opacity: 0.62; line-height: 1.55; }
+.about-loc-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: nowrap; }
+.about-loc-title { min-width: 0; }
+.about-est { font-size: 0.66rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; opacity: 0.5; margin-top: 2px; }
+.about-new { flex-shrink: 0; background: var(--gold); color: var(--ink); font-size: 0.62rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.6px; padding: 4px 10px; border-radius: 50px; }
+.about-rating { display: flex; align-items: center; gap: 7px; flex-shrink: 0; white-space: nowrap; }
+.about-stars { display: flex; gap: 2px; color: var(--gold); font-size: 0.95rem; }
+.about-rating-text { font-size: 0.85rem; font-weight: 700; opacity: 0.85; }
+.about-rating-text b { color: var(--gold); }
+.about-rating-text a { color: inherit; text-decoration: underline; }
+.about-rating-text a:hover { color: var(--gold); }
+.about-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.about-actions .primary-btn, .about-actions .ghost-btn { width: auto; display: inline-flex; align-items: center; gap: 9px; padding: 14px 26px; }
+.about-map { position: relative; display: block; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); margin-bottom: 20px; }
+.about-map img { display: block; width: 100%; height: 320px; object-fit: cover; }
+.about-map-note { position: absolute; left: 14px; bottom: 14px; display: flex; align-items: center; gap: 9px; background: rgba(0,0,0,0.9); border: 1px solid var(--gold); color: #fff; padding: 10px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 900; }
+.about-map-note i { color: var(--gold); }
+.about-locs { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 10px 0 40px; }
+.about-loc-actions { display: flex; gap: 8px; margin-top: 10px; }
+.about-loc-btn { flex: 1 1 auto; margin-top: 0; justify-content: center; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; white-space: nowrap; }
+.about-icon-btn {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 6px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line); color: #fff;
+    padding: 11px 6px; border-radius: 12px; font-size: 0.62rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
+    cursor: pointer; font-family: inherit; transition: var(--transition); text-decoration: none;
+}
+/* Fixed-height icon/stars row so every button's icon top + label bottom line up. */
+.about-icon-btn > i, .about-icon-btn > .rate-btn-stars { height: 20px; display: flex; align-items: center; justify-content: center; }
+.about-icon-btn i { color: var(--gold); font-size: 1.1rem; }
+.about-icon-btn:hover { border-color: var(--gold); background: rgba(212,175,55,0.12); }
+.about-rate-btn { flex: 1.5; }
+.rate-btn-stars { gap: 1px; }
+.rate-btn-stars i { font-size: 0.66rem; }
+.about-loc { background: rgba(28,28,30,0.55); backdrop-filter: blur(8px); border: 1px solid var(--line); border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 9px; }
+.about-loc-name { font-size: 1.15rem; font-weight: 900; }
+.about-loc-name.gold { color: var(--gold); }
+.about-loc-desc { margin: 0 0 4px; font-size: 0.83rem; font-weight: 600; opacity: 0.66; line-height: 1.5; }
+.about-loc-line { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 700; color: #fff; text-decoration: none; opacity: 0.85; }
+a.about-loc-line:hover { color: var(--gold); opacity: 1; }
+.about-loc-line i { color: var(--gold); width: 16px; text-align: center; }
+@media (max-width: 768px) {
+    .about-title { font-size: 1.9rem; }
+    .about-lead { font-size: 0.95rem; }
+    .about-locs { grid-template-columns: 1fr; }
+    .about-actions .primary-btn, .about-actions .ghost-btn { flex: 1; justify-content: center; }
+}
+.drawer-scroll { overscroll-behavior: contain; }
+
+.pro-banner {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 20px; padding: 13px 20px;
+    background: linear-gradient(90deg, rgba(212,175,55,0.2), rgba(212,175,55,0.04));
+    border: 1px solid rgba(212,175,55,0.5); border-radius: 13px;
+    font-size: 0.83rem; font-weight: 700; line-height: 1.4;
+}
+.pro-banner i { color: var(--gold); font-size: 1.25rem; flex-shrink: 0; }
+.pro-banner b { color: var(--gold); font-weight: 900; }
+
+.view { display: none; }
+.view.active { display: block; }
+
+/* ── PRODUCTS ────────────────────────────────────────────── */
+.shop-bar { display: flex; justify-content: space-between; align-items: flex-end; gap: 18px; padding: 22px 0 12px 0; flex-wrap: wrap; }
+.count-pill { font-size: 0.7rem; font-weight: 900; opacity: 0.55; letter-spacing: 1.2px; text-transform: uppercase; }
+.tools { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.search-wrap { position: relative; }
+.search-wrap > i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; opacity: 0.65; }
+#search, #sort {
+    background: rgba(255,255,255,0.07); border: 1px solid var(--line);
+    color: #fff; padding: 11px 16px; border-radius: 9px;
+    font-size: 0.8rem; font-weight: 700; font-family: inherit; outline: none;
+}
+#search { padding-left: 36px; width: 230px; }
+#search:focus, #sort:focus { border-color: var(--gold); }
+#sort option { background: #111; }
+
+.filter-row { display: flex; gap: 8px; padding: 4px 0 20px 0; overflow-x: auto; }
+.filter-row::-webkit-scrollbar { height: 6px; }
+.filter-row::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.22); border-radius: 3px; }
+.filter-btn {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+    color: #fff; padding: 10px 17px; border-radius: 9px;
+    font-size: 0.71rem; font-weight: 900; text-transform: uppercase;
+    cursor: pointer; transition: var(--transition); white-space: nowrap; font-family: inherit;
+}
+.filter-btn:hover { border-color: rgba(255,255,255,0.5); }
+.filter-btn.active { background: #fff; color: #000; border-color: #fff; }
+.filter-btn b { opacity: 0.5; margin-left: 6px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(228px, 1fr)); gap: 18px; padding-bottom: 26px; }
+.card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 18px;
+    overflow: hidden; display: flex; flex-direction: column; transition: var(--transition);
+}
+.card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.45); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
+.card-img-wrap { position: relative; background: #fff; height: 180px; }
+.card img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 10px; }
+.no-img {
+    width: 100%; height: 100%; display: flex; flex-direction: column; gap: 7px;
+    align-items: center; justify-content: center;
+    background: linear-gradient(145deg, #f2f2f2, #d6d6d6); color: rgba(0,0,0,0.26); font-size: 1.9rem;
+}
+.no-img small { font-size: 0.58rem; font-weight: 900; letter-spacing: 1.4px; text-transform: uppercase; }
+
+.card-body { padding: 15px; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.card-cat { font-size: 0.59rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.7px; color: var(--gold); }
+.card-name { margin: 0; font-size: 0.93rem; font-weight: 900; line-height: 1.25; }
+.card-var { font-size: 0.67rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; background: rgba(255,255,255,0.11); padding: 3px 9px; border-radius: 5px; width: fit-content; }
+.card-desc { margin: 0; font-size: 0.74rem; font-weight: 600; opacity: 0.7; line-height: 1.4; flex: 1; }
+.var-select {
+    width: 100%; background: rgba(255,255,255,0.09); border: 1px solid var(--line);
+    color: #fff; padding: 8px 10px; border-radius: 7px;
+    font-size: 0.74rem; font-weight: 800; font-family: inherit; cursor: pointer; outline: none;
+}
+.var-select:focus { border-color: var(--gold); }
+.var-select option { background: #111; }
+.var-count { font-size: 0.61rem; font-weight: 900; letter-spacing: 1.2px; text-transform: uppercase; opacity: 0.45; }
+
+.card-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 6px; }
+.price { font-size: 1.22rem; font-weight: 900; }
+.add-btn {
+    background: #fff; color: var(--gold); border: 2px solid #fff;
+    padding: 10px 18px; border-radius: 50px;
+    font-size: 0.74rem; font-weight: 900; text-transform: uppercase;
+    cursor: pointer; font-family: inherit; transition: var(--transition); white-space: nowrap;
+}
+.add-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.empty-msg { padding: 70px 20px; text-align: center; font-weight: 900; opacity: 0.65; grid-column: 1/-1; line-height: 1.7; }
+.empty-msg code { background: rgba(255,255,255,0.12); padding: 3px 8px; border-radius: 5px; }
+.load-more { min-height: 8px; }
+
+/* ── SERVICES ────────────────────────────────────────────── */
+.svc-tabs { display: none; }   /* haircut + grooming shown together, no tabs */
+.svc-tab {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+    color: #fff; padding: 12px 26px; border-radius: 50px;
+    font-size: 0.79rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.8px;
+    cursor: pointer; font-family: inherit; transition: var(--transition);
+}
+.svc-tab:hover { border-color: rgba(255,255,255,0.5); }
+.svc-tab.active { background: var(--gold); color: #1a1a1a; border-color: var(--gold); }
+
+/* Total + Add to cart at the bottom of the booking. */
+.bk-cta { display: flex; flex-direction: column; gap: 12px; }
+.bk-total { display: flex; align-items: baseline; justify-content: space-between; padding: 0 4px; }
+.bk-total span { font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.4px; opacity: 0.6; }
+.bk-total b { font-size: 1.5rem; font-weight: 900; color: var(--gold); }
+
+/* "Who's it for?" — large quantity counter. */
+.forwho-count { display: flex; align-items: center; justify-content: center; gap: 22px; margin-bottom: 14px; }
+.fw-step {
+    width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(255,255,255,0.08); border: 1px solid var(--line); color: #fff;
+    font-size: 1.4rem; font-weight: 900; cursor: pointer; transition: var(--transition);
+}
+.fw-step:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.fw-num { display: flex; flex-direction: column; align-items: center; line-height: 1; min-width: 90px; }
+.fw-num b { font-size: 2.6rem; font-weight: 900; color: var(--gold); }
+.fw-num span { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-top: 4px; }
+
+/* "Who's it for?" buttons — Just me / Add kid haircut. */
+.forwho-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.forwho-btn {
+    flex: 1 1 auto; display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line); color: #fff;
+    padding: 13px 16px; border-radius: 12px; font-size: 0.82rem; font-weight: 800;
+    cursor: pointer; font-family: inherit; transition: var(--transition); white-space: nowrap;
+}
+.forwho-btn i { color: var(--gold); }
+.forwho-btn:hover { border-color: var(--gold); }
+.forwho-btn.selected { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.forwho-btn.selected i { color: var(--ink); }
+
+/* Product category chips inside the booking's "Add products" panel. */
+.svc-cat-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.svc-cat-chip {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line); color: #fff;
+    padding: 8px 16px; border-radius: 50px; font-size: 0.72rem; font-weight: 800;
+    cursor: pointer; font-family: inherit; transition: var(--transition); white-space: nowrap;
+}
+.svc-cat-chip:hover { border-color: var(--gold); background: rgba(212,175,55,0.14); }
+
+/* Two columns so Haircut and Grooming both read as a grid, not a long list */
+.svc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding-bottom: 30px; }
+.svc-card {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 16px; transition: var(--transition); min-width: 0; overflow: hidden;
+}
+.svc-card:hover { border-color: rgba(212,175,55,0.6); }
+.svc-card.booking-open { border-color: var(--gold); grid-column: 1 / -1; }
+/* The whole header row is the accordion toggle. */
+.svc-head { display: flex; align-items: center; gap: 15px; padding: 14px; cursor: pointer; }
+.svc-chevron { color: var(--gold); font-size: 0.9rem; transition: var(--transition); }
+.svc-card.booking-open .svc-chevron { transform: rotate(180deg); }
+/* Booking panel fills the card below the header. */
+.svc-card.booking-open #svcBooking { display: block; padding: 0 14px 14px; max-width: 100%; min-width: 0; }
+.svc-card.booking-open #svcBooking .panel { box-sizing: border-box; max-width: 100%; padding: 14px; margin-bottom: 10px; border-radius: 12px; }
+.svc-card.booking-open #svcBooking .daytime-box { border-width: 1px; box-shadow: none; }
+.svc-card.booking-open #svcBooking .panel-title { margin-bottom: 10px; }
+.svc-card.booking-open #svcBooking > *:last-child { margin-bottom: 0; }
+.svc-head img { width: 72px; height: 68px; object-fit: cover; border-radius: 11px; flex-shrink: 0; }
+.svc-media { width: 72px; height: 68px; border-radius: 11px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.svc-badge { background: linear-gradient(135deg, #e7c65a, #b8912f); color: #141414; font-weight: 900; font-size: 1.15rem; letter-spacing: 2px; }
+.svc-icon { background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.4); color: var(--gold); font-size: 1.7rem; }
+.svc-icon svg { display: block; }
+.svc-ph { background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.18); }
+.svc-meta { flex: 1; min-width: 0; }
+.svc-meta h3 { margin: 0 0 5px 0; font-size: 1rem; font-weight: 900; line-height: 1.25; }
+.svc-meta .svc-sub { font-size: 0.74rem; font-weight: 600; opacity: 0.62; line-height: 1.4; }
+.svc-facts { display: flex; gap: 13px; margin-top: 8px; font-size: 0.73rem; font-weight: 800; flex-wrap: wrap; }
+.svc-facts span { display: flex; align-items: center; gap: 5px; }
+.svc-facts i { color: var(--gold); }
+.svc-right { display: flex; flex-direction: column; align-items: flex-end; gap: 9px; flex-shrink: 0; }
+.svc-price { font-size: 1.25rem; font-weight: 900; white-space: nowrap; }
+.book-btn {
+    background: var(--gold); color: var(--ink); border: 2px solid var(--gold);
+    padding: 10px 22px; border-radius: 50px;
+    font-size: 0.74rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.6px;
+    cursor: pointer; font-family: inherit; transition: var(--transition); white-space: nowrap;
+}
+.book-btn:hover { background: #fff; color: var(--gold); border-color: #fff; }
+.book-btn.added { background: transparent; color: var(--gold); border-color: var(--gold); }
+.book-btn.added:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.book-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.book-btn:disabled:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+/* ── BOOKING FLOW ────────────────────────────────────────── */
+.back-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: none; border: none; color: #fff;
+    font-size: 0.79rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
+    cursor: pointer; font-family: inherit; padding: 22px 0 0 0; opacity: 0.72; transition: var(--transition);
+}
+.back-btn:hover { opacity: 1; color: var(--gold); }
+
+.panel {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 18px; padding: 24px; margin-bottom: 18px;
+}
+.panel-title { font-size: 0.68rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.8px; opacity: 0.55; margin-bottom: 14px; }
+
+.bk-line { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.bk-line h3 { margin: 0 0 7px 0; font-size: 1.3rem; font-weight: 900; }
+.bk-line .bk-facts { display: flex; gap: 15px; font-size: 0.82rem; font-weight: 700; opacity: 0.75; flex-wrap: wrap; }
+.bk-line .bk-facts i { color: var(--gold); margin-right: 5px; }
+.bk-price { font-size: 1.6rem; font-weight: 900; white-space: nowrap; }
+
+.field { margin-top: 18px; }
+.field label { display: block; font-size: 0.71rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.3px; opacity: 0.6; margin-bottom: 8px; }
+.field select, .field input {
+    width: 100%; background: rgba(255,255,255,0.08); border: 1px solid var(--line);
+    color: #fff; padding: 13px 15px; border-radius: 10px;
+    font-size: 0.87rem; font-weight: 700; font-family: inherit; outline: none;
+}
+.field select:focus, .field input:focus { border-color: var(--gold); }
+.field select option { background: #111; }
+
+.ghost-btn {
+    display: flex; align-items: center; justify-content: center; gap: 9px; width: 100%;
+    background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.35);
+    color: #fff; padding: 14px; border-radius: 11px;
+    font-size: 0.8rem; font-weight: 900; cursor: pointer; font-family: inherit;
+    transition: var(--transition); margin-top: 11px;
+}
+.ghost-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,175,55,0.07); }
+.ghost-btn i { font-size: 0.9rem; }
+.details-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; margin-top: 18px; }
+.details-cols .panel { margin-bottom: 0; height: 100%; }
+.extra-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.extra-btns .ghost-btn { margin-top: 11px; }
+.panel-divider { height: 1px; background: var(--line); margin: 22px 0 18px 0; }
+
+/* keep the guest picker compact rather than a full-width slab */
+.guest-field { max-width: 280px; }
+.guest-field select { padding: 11px 13px; font-size: 0.83rem; }
+
+.primary-btn {
+    width: 100%; background: var(--gold); color: var(--ink); border: 2px solid var(--gold);
+    padding: 17px; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
+    cursor: pointer; font-family: inherit; transition: var(--transition); margin-top: 20px;
+}
+.primary-btn:hover { background: #fff; color: var(--gold); border-color: #fff; }
+.primary-btn:disabled { background: transparent; color: #666; border-color: #444; cursor: not-allowed; }
+
+.added-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.added-row {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+    border-radius: 10px; padding: 11px 14px; font-size: 0.81rem; font-weight: 800;
+}
+.added-row .ar-x { background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 0.9rem; }
+.added-row img { width: 38px; height: 38px; object-fit: contain; background: #fff; border-radius: 7px; padding: 2px; flex-shrink: 0; }
+.added-row .ar-icon {
+    width: 38px; height: 38px; border-radius: 7px; flex-shrink: 0;
+    background: rgba(212,175,55,0.16); border: 1px solid rgba(212,175,55,0.45);
+    display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 0.8rem;
+}
+.added-row .ar-name { flex: 1; min-width: 0; display: flex; align-items: center; gap: 11px; }
+
+/* searchable picker overlay */
+.pick-overlay { z-index: 10001; overflow-y: auto; }
+.pick-box {
+    max-width: 470px; margin: 6vh auto; background: #0d0d0d;
+    border: 1px solid var(--line); border-radius: 18px; padding: 20px;
+    max-height: 84vh; display: flex; flex-direction: column;
+}
+.pick-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
+.pick-head strong { font-size: 1.05rem; font-weight: 900; }
+.pick-search { position: relative; margin-bottom: 12px; }
+.pick-search i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 0.8rem; opacity: 0.6; }
+.pick-search input {
+    width: 100%; background: rgba(255,255,255,0.08); border: 1px solid var(--line);
+    color: #fff; padding: 12px 15px 12px 36px; border-radius: 10px;
+    font-size: 0.84rem; font-weight: 700; font-family: inherit; outline: none;
+}
+.pick-search input:focus { border-color: var(--gold); }
+.pick-list { overflow-y: auto; display: flex; flex-direction: column; gap: 7px; flex: 1; }
+.pick-row {
+    display: flex; align-items: center; gap: 11px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--line);
+    border-radius: 11px; padding: 9px 12px; transition: var(--transition);
+}
+.pick-row.picked { border-color: var(--gold); background: rgba(212,175,55,0.1); }
+.pick-row img { width: 42px; height: 42px; object-fit: contain; background: #fff; border-radius: 7px; padding: 2px; flex-shrink: 0; }
+.pick-noimg {
+    width: 42px; height: 42px; border-radius: 7px; flex-shrink: 0;
+    background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.35); font-size: 0.85rem;
+}
+.pick-info { flex: 1; min-width: 0; }
+.pick-info strong { display: block; font-size: 0.79rem; font-weight: 900; line-height: 1.25; }
+.pick-info span { font-size: 0.68rem; opacity: 0.55; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; }
+.pick-price { font-size: 0.87rem; font-weight: 900; white-space: nowrap; }
+.pick-none { text-align: center; padding: 40px 10px; opacity: 0.5; font-weight: 800; font-size: 0.83rem; }
+
+/* staff picker — two across */
+.staff-av {
+    width: 54px; height: 54px; border-radius: 50%; flex-shrink: 0;
+    background: rgba(212,175,55,0.16); border: 1px solid rgba(212,175,55,0.5);
+    display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem;
+    font-weight: 900; overflow: hidden;
+}
+.staff-av img { width: 100%; height: 100%; object-fit: cover; }
+.select-btn {
+    background: transparent; color: #fff; border: 2px solid #fff;
+    padding: 11px 30px; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 900; text-transform: uppercase;
+    cursor: pointer; font-family: inherit; transition: var(--transition); white-space: nowrap;
+}
+.select-btn:hover { background: #fff; color: #000; }
+.select-btn:disabled { border-color: #444; color: #666; cursor: not-allowed; }
+
+/* Time picker: appointment card, then a horizontal date strip, then the three
+   time-of-day sections all visible, then confirm. */
+.slot-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+
+.ap-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.appt-total-box { text-align: right; white-space: nowrap; }
+.appt-total-box span { display: block; font-size: 0.66rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.2px; opacity: 0.55; }
+.appt-total-box b { font-size: 1.5rem; font-weight: 900; }
+
+.date-strip-wrap { display: flex; align-items: center; gap: 10px; margin: 16px 0; }
+.strip-nav {
+    flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.1); border: 1px solid var(--line); color: #fff;
+    cursor: pointer; transition: var(--transition);
+}
+.strip-nav:hover:not(:disabled) { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.strip-nav:disabled { opacity: 0.25; cursor: not-allowed; }
+.date-strip { display: flex; gap: 9px; overflow-x: auto; scroll-behavior: smooth; padding: 4px 2px; flex: 1; }
+.date-strip::-webkit-scrollbar { height: 5px; }
+.date-strip::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.22); border-radius: 3px; }
+.date-pill {
+    flex-shrink: 0; width: 72px; padding: 12px 6px; border-radius: 13px;
+    background: var(--panel); border: 1px solid var(--line); color: #fff;
+    cursor: pointer; font-family: inherit; text-align: center; transition: var(--transition);
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+}
+.date-pill:hover:not(:disabled) { border-color: var(--gold); }
+.date-pill:disabled { opacity: 0.22; cursor: not-allowed; }
+.date-pill.selected { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.date-pill .dp-dow { font-size: 0.62rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.date-pill .dp-day { font-size: 1.35rem; font-weight: 900; line-height: 1; }
+.date-pill .dp-mon { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; opacity: 0.6; }
+.date-pill.selected .dp-dow, .date-pill.selected .dp-mon { opacity: 0.9; }
+
+.appt-card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.appt-card h4 { margin: 0 0 4px 0; font-size: 1rem; font-weight: 900; }
+.appt-card .appt-with { font-size: 0.79rem; opacity: 0.68; font-weight: 700; }
+.appt-card .appt-meta { font-size: 0.79rem; opacity: 0.68; font-weight: 700; margin-top: 7px; }
+.ap-extras { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+.ap-extra {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--line);
+    border-radius: 8px; padding: 8px 11px; font-size: 0.76rem; font-weight: 800;
+}
+.ap-extra span { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.ap-extra i { color: var(--gold); font-size: 0.72rem; flex-shrink: 0; }
+.ap-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.change-btn {
+    background: none; border: none; color: var(--gold);
+    font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.8px;
+    cursor: pointer; font-family: inherit; padding: 0; margin-top: 11px; text-decoration: underline;
+}
+.appt-total { border-top: 1px solid var(--line); margin-top: 15px; padding-top: 13px; display: flex; justify-content: space-between; font-weight: 900; font-size: 1.1rem; }
+
+.cal { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.cal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+.cal-head strong { font-size: 1.05rem; font-weight: 900; }
+.cal-nav { background: rgba(255,255,255,0.1); border: 1px solid var(--line); color: #fff; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; transition: var(--transition); }
+.cal-nav:hover:not(:disabled) { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.cal-nav:disabled { opacity: 0.25; cursor: not-allowed; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.cal-dow { text-align: center; font-size: 0.63rem; font-weight: 900; opacity: 0.45; text-transform: uppercase; padding-bottom: 6px; }
+.cal-day {
+    aspect-ratio: 1; border-radius: 10px; border: 1px solid transparent;
+    background: rgba(255,255,255,0.05); color: #fff;
+    font-size: 0.83rem; font-weight: 800; cursor: pointer; font-family: inherit; transition: var(--transition);
+}
+.cal-day:hover:not(:disabled) { border-color: var(--gold); }
+.cal-day:disabled { opacity: 0.2; cursor: not-allowed; background: none; }
+.cal-day.selected { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.cal-day.empty { background: none; cursor: default; }
+.cal-note { font-size: 0.7rem; opacity: 0.5; font-weight: 700; margin-top: 14px; text-align: center; }
+
+.slots { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+#view-services .slots { background: none; border: none; border-radius: 0; padding: 0; }
+#pickDayTime { scroll-margin-top: 90px; }
+.daytime-box { border: 2px solid var(--gold); box-shadow: 0 0 0 4px rgba(212,175,55,0.12); }
+
+/* Services page: days scroll horizontally on top, times scroll horizontally below. */
+.daytime-cols { display: flex; flex-direction: column; gap: 14px; }
+.daytime-cols { min-width: 0; }
+.daytime-cols .date-strip { flex-direction: row; overflow-x: auto; overflow-y: hidden; max-height: none; gap: 9px; padding: 4px 2px; margin: 0; min-width: 0; }
+.daytime-cols .date-pill { width: 72px; }
+.daytime-cols .slots { width: 100%; min-width: 0; }
+.daytime-cols .date-strip::-webkit-scrollbar,
+.daytime-cols .slot-scroll::-webkit-scrollbar { height: 5px; }
+.daytime-cols .date-strip::-webkit-scrollbar-thumb,
+.daytime-cols .slot-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.22); border-radius: 3px; }
+
+/* Times as a horizontal scrolling row under the days. */
+.slot-scroll { display: flex; flex-direction: row; gap: 9px; overflow-x: auto; overflow-y: hidden; scroll-behavior: smooth; padding: 4px 2px; }
+.slot-scroll .slot { flex: 0 0 auto; width: auto; }
+
+/* Staff as a horizontal scroll of name pills, like the date/time scrolls. */
+.staff-scroll { display: flex; flex-direction: row; gap: 9px; overflow-x: auto; overflow-y: hidden; scroll-behavior: smooth; padding: 4px 2px; min-width: 0; }
+.staff-scroll::-webkit-scrollbar { height: 5px; }
+.staff-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.22); border-radius: 3px; }
+.staff-pill {
+    flex: 0 0 auto; width: 96px; padding: 12px 8px; border-radius: 13px;
+    background: var(--panel); border: 1px solid var(--line); color: #fff;
+    cursor: pointer; font-family: inherit; transition: var(--transition);
+    display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+}
+.staff-pill:hover:not(:disabled) { border-color: var(--gold); }
+.staff-pill:disabled { opacity: 0.3; cursor: not-allowed; }
+.staff-pill.selected { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.staff-pill .staff-av { width: 40px; height: 40px; font-size: 0.95rem; }
+.staff-pill.selected .staff-av { background: rgba(0,0,0,0.15); border-color: rgba(0,0,0,0.25); color: var(--ink); }
+.staff-pill { width: 108px; }
+.staff-pill-name { font-size: 0.82rem; font-weight: 900; line-height: 1.1; }
+.staff-name-link { background: none; border: none; color: inherit; font: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; padding: 0; text-decoration: underline; }
+.staff-name-link i { font-size: 0.62rem; color: var(--gold); text-decoration: none; }
+.staff-pill.selected .staff-name-link i { color: var(--ink); }
+/* Barber photo gallery modal */
+.gallery-overlay { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.gallery-box { width: 100%; max-width: 640px; max-height: 88vh; background: #0a0a0a; border: 1px solid var(--line); border-radius: 18px; display: flex; flex-direction: column; overflow: hidden; }
+.gallery-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.gallery-head strong { font-size: 1.1rem; font-weight: 900; }
+.gallery-grid { overflow-y: auto; padding: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gallery-grid img { width: 100%; height: 180px; object-fit: cover; border-radius: 12px; }
+.staff-stars { display: flex; gap: 2px; color: var(--gold); font-size: 0.7rem; height: 46px; align-items: center; }
+.staff-pill.selected .staff-stars { color: var(--ink); }
+.staff-photo { width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 1px solid var(--line); }
+.staff-photo img { width: 100%; height: 100%; object-fit: cover; }
+.staff-pill-sub { font-size: 0.64rem; font-weight: 700; opacity: 0.72; line-height: 1.15; }
+a.staff-pill-sub.review-link { color: inherit; text-decoration: underline; cursor: pointer; opacity: 0.85; }
+a.staff-pill-sub.review-link:hover { color: #fff; opacity: 1; }
+.staff-pill-sub-empty { opacity: 0.4; font-style: italic; font-weight: 600; }
+.staff-stars-empty { opacity: 0.3; }
+.staff-pill.selected a.review-link { color: var(--ink); }
+.slot-group h5 {
+    margin: 0 0 11px 0; font-size: 0.68rem; font-weight: 900;
+    text-transform: uppercase; letter-spacing: 1.6px; opacity: 0.55;
+    padding-bottom: 9px; border-bottom: 1px solid var(--line);
+}
+.slot-wrap { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 7px; }
+.slot-group.empty .slot-wrap::after {
+    content: attr(data-none); grid-column: 1/-1;
+    font-size: 0.73rem; font-weight: 700; opacity: 0.35; padding: 6px 0;
+}
+.slot {
+    background: rgba(255,255,255,0.07); border: 1px solid var(--line); color: #fff;
+    padding: 10px 4px; border-radius: 9px;
+    font-size: 0.76rem; font-weight: 800; cursor: pointer; font-family: inherit; transition: var(--transition);
+}
+.slot:hover:not(:disabled) { border-color: var(--gold); background: rgba(212,175,55,0.14); }
+.slot.selected { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.slot:disabled { opacity: 0.22; cursor: not-allowed; text-decoration: line-through; }
+.slots-empty { font-size: 0.8rem; opacity: 0.5; font-weight: 700; text-align: center; padding: 30px 10px; line-height: 1.6; }
+
+/* sign in */
+.signin-wrap { max-width: 440px; margin: 30px auto 0 auto; }
+.signin-wrap .panel { padding: 30px; }
+.signin-wrap h2 { margin: 0 0 6px 0; font-size: 1.6rem; font-weight: 900; text-align: center; }
+.signin-wrap .si-sub { font-size: 0.83rem; opacity: 0.65; text-align: center; font-weight: 600; margin-bottom: 22px; line-height: 1.5; }
+.si-summary { margin-bottom: 20px; }
+.si-total { display: flex; justify-content: flex-end; padding: 14px 4px 2px; font-size: 1rem; }
+.si-total b { color: var(--gold); }
+.co-status { display: flex; align-items: center; gap: 9px; padding: 10px 12px; margin-top: 8px; border-radius: 10px; background: rgba(255,255,255,0.05); border: 1px solid var(--line); font-size: 0.8rem; font-weight: 700; }
+.co-status i { color: var(--gold); }
+.co-status.ok { background: rgba(212,175,55,0.12); border-color: rgba(212,175,55,0.45); }
+.pay-box { background: rgba(255,255,255,0.05); border: 1px solid var(--line); border-radius: 13px; padding: 17px; margin-bottom: 6px; }
+.pay-title { font-size: 0.78rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.1px; margin-bottom: 11px; }
+.pay-title i { color: var(--gold); margin-right: 6px; }
+.pay-steps { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
+.pay-steps li { font-size: 0.79rem; font-weight: 600; opacity: 0.82; line-height: 1.5; }
+.pay-steps li b { font-weight: 900; opacity: 1; }
+.pay-note { font-size: 0.72rem; font-weight: 700; color: var(--gold); margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(255,255,255,0.1); line-height: 1.45; }
+
+.call-split { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.call-split .checkout-btn { margin-top: 0; font-size: 0.78rem; padding: 13px 8px; }
+.si-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0; opacity: 0.4; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; }
+.si-divider::before, .si-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.3); }
+.si-note { font-size: 0.72rem; opacity: 0.5; text-align: center; margin-top: 16px; font-weight: 700; line-height: 1.5; }
+
+/* ── CART DRAWER ─────────────────────────────────────────── */
+.fab-stack { position: fixed; bottom: 24px; right: 16px; z-index: 9990; display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.cart-fab, .chat-fab {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    width: 60px; height: 60px; border-radius: 50%; color: #fff; border: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.55); cursor: pointer; transition: transform 0.2s;
+}
+.cart-fab { background: var(--gold); color: var(--ink); }
+.chat-fab { background: var(--barber-blue); width: 52px; height: 52px; }
+.cart-fab:active, .chat-fab:active { transform: scale(0.94); }
+.cart-fab i { font-size: 1.35rem; }
+.chat-fab i { font-size: 1.15rem; }
+.cart-count {
+    position: absolute; top: -4px; right: -4px;
+    background: #fff; color: var(--gold);
+    min-width: 23px; height: 23px; border-radius: 50%;
+    font-size: 0.73rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center;
+}
+/* Bet-slip style bar — only shown on mobile (see media query). */
+.cart-bar { display: none; }
+.cart-head-count {
+    background: var(--gold); color: var(--ink);
+    min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px;
+    font-size: 0.8rem; font-weight: 900;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.drawer-grip { display: none; }
+.cart-success {
+    position: absolute; inset: 0; z-index: 5; background: #0a0a0a; border-radius: inherit;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; gap: 8px;
+}
+.cart-success i { font-size: 3.2rem; color: var(--gold); margin-bottom: 8px; }
+.cart-success h3 { margin: 0; font-size: 1.4rem; font-weight: 900; }
+.cart-success p { margin: 0; font-size: 0.9rem; opacity: 0.7; font-weight: 600; }
+/* App-style bottom nav — mobile only (see media query for display). */
+.bottom-nav { display: none; }
+
+.drawer-overlay { display: none; position: fixed; inset: 0; z-index: 9996; background: rgba(0,0,0,0.72); backdrop-filter: blur(6px); }
+.drawer-overlay.open { display: block; animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.drawer {
+    position: fixed; top: 50%; left: 50%; z-index: 9997;
+    width: 92vw; max-width: 460px; max-height: 86vh;
+    background: #0a0a0a; border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+    transform: translate(-50%, -50%) scale(0.94); opacity: 0; pointer-events: none;
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), opacity 0.28s ease;
+    display: flex; flex-direction: column;
+}
+.drawer.open { transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto; }
+.drawer-scroll { flex: 1; overflow-y: auto; padding-bottom: 16px; }
+#cartBody { padding: 12px 22px 4px; }
+.cart-checkout { padding: 0; margin: 0 0 4px; }
+.cart-checkout .total-row { margin: 6px 0 12px; }
+.cart-checkout .field { margin-top: 12px; }
+.cart-checkout .field input { text-align: center; font-size: 16px; }   /* 16px stops iOS from zooming on focus */
+.name-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.name-row .field { margin-top: 12px; }
+.drawer-head { display: flex; justify-content: space-between; align-items: center; padding: 20px 22px; border-bottom: 1px solid var(--line); gap: 10px; }
+.drawer-head h3 { flex: 1; }
+.drawer-head h3 { margin: 0; font-size: 1.2rem; font-weight: 900; text-transform: uppercase; }
+.drawer-clear { background: none; border: none; color: #fff; opacity: 0.55; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; padding: 6px 8px; flex-shrink: 0; transition: var(--transition); }
+.drawer-clear:hover { opacity: 1; color: var(--gold); }
+.drawer-close { width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid var(--line); color: #fff; cursor: pointer; transition: var(--transition); }
+.drawer-close:hover { background: var(--gold); color: var(--ink); }
+.drawer-body { flex: 1; overflow-y: auto; padding: 12px 22px; }
+.cart-empty { text-align: center; padding: 55px 10px; opacity: 0.55; font-weight: 800; }
+
+/* One uniform card for every cart entry — appointment or product. No image, inline. */
+.cart-item {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: 13px; padding: 12px 14px; margin-bottom: 10px;
+}
+.ci-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+.ci-top strong { font-size: 0.9rem; font-weight: 900; line-height: 1.25; }
+.ci-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.ci-x, .ci-edit { background: none; border: none; color: #fff; opacity: 0.5; font-size: 0.95rem; cursor: pointer; padding: 0 2px; transition: var(--transition); }
+.ci-edit { font-size: 0.82rem; }
+.ci-x:hover, .ci-edit:hover { opacity: 1; color: var(--gold); }
+.ci-desc { font-size: 0.72rem; font-weight: 700; opacity: 0.66; line-height: 1.45; margin-top: 4px; }
+.ci-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 10px; }
+.ci-foot b, .ci-price { font-size: 0.98rem; font-weight: 900; flex-shrink: 0; }
+.ci-foot-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.ci-fulfill { font-size: 0.68rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gold); line-height: 1.15; }
+.ci-when { font-size: 0.68rem; font-weight: 800; color: var(--gold); line-height: 1.2; }
+.ci-foot .change-btn { margin-top: 0; }
+.ci-was { text-decoration: line-through; opacity: 0.5; font-weight: 700; font-size: 0.82rem; margin-right: 4px; }
+
+.cart-section-label { font-size: 0.64rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.5; margin: 12px 0 8px 0; }
+.cart-section-label:first-child { margin-top: 2px; }
+
+.qty { display: flex; align-items: center; gap: 7px; }
+.qty button { width: 26px; height: 26px; border-radius: 50%; background: rgba(255,255,255,0.11); border: 1px solid var(--line); color: #fff; font-weight: 900; cursor: pointer; transition: var(--transition); }
+.qty button:hover { background: var(--gold); color: var(--ink); }
+.qty span { font-weight: 900; min-width: 17px; text-align: center; }
+
+.rewards-sec { margin: 0 0 10px 0; }
+.rewards-title { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.4px; opacity: 0.65; margin-bottom: 8px; }
+.rewards-title i { color: var(--gold); }
+.pro-check {
+    display: none; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 12px 14px;
+    background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 11px;
+}
+.pro-check.show { display: flex; }
+.pro-text strong { display: block; font-size: 0.85rem; font-weight: 900; color: var(--gold); }
+.pro-text small { display: block; font-size: 0.68rem; font-weight: 700; opacity: 0.62; margin-top: 2px; line-height: 1.35; }
+/* On/off toggle switch */
+.toggle { position: relative; display: inline-block; width: 46px; height: 26px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; inset: 0; background: rgba(255,255,255,0.2); border-radius: 26px; transition: var(--transition); cursor: pointer; }
+.toggle-slider::before { content: ''; position: absolute; width: 20px; height: 20px; left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: var(--transition); }
+.toggle input:checked + .toggle-slider { background: var(--gold); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+.fulfill-block { padding: 13px 22px; border-top: 1px solid var(--line); }
+.fulfill-label { font-size: 0.68rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1.3px; opacity: 0.55; margin-bottom: 9px; }
+.fulfill-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+.fulfill-btn {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+    background: rgba(255,255,255,0.06); border: 1px solid var(--line);
+    border-radius: 11px; padding: 11px; cursor: pointer; color: #fff; font-family: inherit; text-align: left;
+    transition: var(--transition);
+}
+.fulfill-btn i { color: var(--gold); font-size: 0.85rem; }
+.fulfill-btn b { font-size: 0.73rem; font-weight: 900; line-height: 1.2; }
+.fulfill-btn small { font-size: 0.63rem; opacity: 0.58; font-weight: 700; }
+.fulfill-btn.active { background: rgba(212,175,55,0.17); border-color: var(--gold); }
+
+.drawer-foot { padding: 16px 22px; border-top: 1px solid var(--line); }
+.total-row { display: flex; justify-content: space-between; font-weight: 900; }
+.total-row.sub { font-size: 0.81rem; font-weight: 700; opacity: 0.72; margin-bottom: 5px; }
+.total-row.grand { font-size: 1.4rem; padding-top: 10px; border-top: 1px solid var(--line); margin-top: 9px; }
+.checkout-btn {
+    width: 100%; margin-top: 13px; background: #fff; color: var(--gold); border: 2px solid #fff;
+    padding: 15px; border-radius: 50px; font-size: 0.92rem; font-weight: 900; text-transform: uppercase;
+    cursor: pointer; font-family: inherit; transition: var(--transition);
+}
+.checkout-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+.checkout-btn.ghost { background: transparent; color: #fff; border-color: rgba(255,255,255,0.4); margin-top: 9px; }
+.checkout-btn.ghost:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.checkout-btn:disabled { background: transparent; color: #666; border-color: #444; cursor: not-allowed; }
+.pickup-note { font-size: 0.67rem; opacity: 0.6; text-align: center; margin: 11px 0 0 0; font-weight: 700; line-height: 1.45; }
+
+/* chat modal */
+.book-overlay { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 20px; }
+.book-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
+.book-modal { width: 100%; max-width: 480px; height: 90vh; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.85); position: relative; }
+.book-modal iframe { width: 100%; height: 100%; border: none; border-radius: 24px; }
+.book-close {
+    position: absolute; top: 14px; right: 14px; z-index: 10;
+    width: 35px; height: 35px; border-radius: 50%;
+    background: rgba(0,0,0,0.65); border: 1px solid rgba(255,255,255,0.2);
+    color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition);
+}
+.book-close:hover { background: var(--gold); color: var(--ink); }
+
+/* subscribe popup */
+.sub-overlay {
+    display: none; position: fixed; inset: 0; z-index: 10002;
+    background: rgba(0,0,0,0.78); backdrop-filter: blur(8px);
+    justify-content: center; align-items: center; padding: 20px;
+}
+.sub-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
+.sub-box {
+    position: relative; width: 100%; max-width: 400px;
+    background: #0e0e0e; border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 20px; padding: 32px 26px; text-align: center;
+}
+.sub-badge {
+    width: 58px; height: 58px; border-radius: 50%; margin: 0 auto 16px auto;
+    background: rgba(212,175,55,0.16); border: 1px solid rgba(212,175,55,0.5);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 1.5rem;
+}
+.sub-badge.ok { background: rgba(34,197,94,0.16); border-color: rgba(34,197,94,0.5); color: #4ade80; }
+.sub-box h2 { margin: 0 0 8px 0; font-size: 1.4rem; font-weight: 900; }
+.sub-box p { margin: 0 0 18px 0; font-size: 0.83rem; font-weight: 600; opacity: 0.7; line-height: 1.5; }
+.sub-box input {
+    width: 100%; background: rgba(255,255,255,0.08); border: 1px solid var(--line);
+    color: #fff; padding: 13px 15px; border-radius: 10px; margin-bottom: 12px;
+    font-size: 0.9rem; font-weight: 700; font-family: inherit; outline: none; text-align: center;
+}
+.sub-box input:focus { border-color: var(--gold); }
+.sub-skip {
+    background: none; border: none; color: #fff; opacity: 0.5;
+    font-size: 0.78rem; font-weight: 800; cursor: pointer; font-family: inherit;
+    margin-top: 12px; text-decoration: underline;
+}
+.sub-skip:hover { opacity: 0.85; }
+
+.toast {
+    position: fixed; bottom: 100px; right: 16px; z-index: 10000;
+    background: #fff; color: var(--gold); padding: 13px 22px; border-radius: 50px;
+    font-weight: 900; font-size: 0.81rem; max-width: 70vw;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    opacity: 0; transform: translateY(18px); pointer-events: none; transition: all 0.28s ease;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+/* Desktop: footer locked to the bottom of the viewport (hidden on mobile). */
+footer {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+    background: rgba(0,0,0,0.96); border-top: 1px solid var(--line); backdrop-filter: blur(10px);
+    padding: 16px max(26px, calc((100vw - 1440px) / 2 + 26px));
+}
+.foot-col { display: flex; flex-direction: column; gap: 6px; }
+.foot-top { display: flex; align-items: center; gap: 14px; }
+.foot-top strong { font-size: 1rem; font-weight: 900; white-space: nowrap; }
+.foot-col.right { align-items: flex-end; text-align: right; }
+.foot-col.right .foot-top { flex-direction: row-reverse; }
+.foot-col.right .foot-col strong { font-size: 1rem; font-weight: 900; }
+.foot-col strong.gold { color: var(--gold); }
+.foot-line {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 0.79rem; font-weight: 700; opacity: 0.7;
+    text-decoration: none; color: #fff; transition: var(--transition);
+}
+.foot-col.right .foot-line { flex-direction: row-reverse; }
+a.foot-line:hover { opacity: 1; color: var(--gold); }
+.foot-line i { width: 15px; text-align: center; opacity: 0.75; }
+.foot-icons { display: flex; gap: 10px; margin: 0; }
+.foot-col.right .foot-icons { justify-content: flex-end; }
+.foot-icons a {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: rgba(255,255,255,0.09); border: 1px solid var(--line);
+    color: #fff; text-decoration: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.83rem; transition: var(--transition);
+}
+.foot-icons a:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+
+
+/* ── MOBILE ──────────────────────────────────────────────── */
+@media (max-width: 1000px) {
+    .time-layout { grid-template-columns: 1fr 1fr; }
+    .appt-card { grid-column: 1 / -1; }
+}
+@media (max-width: 720px) {
+    .time-layout { grid-template-columns: 1fr; }
+    .appt-card { grid-column: auto; }
+}
+@media (max-width: 900px) {
+    .shop-bar { flex-direction: column; align-items: stretch; }
+    .tools { width: 100%; }
+    .search-wrap { flex: 1; }
+    #search { width: 100%; }
+}
+@media (max-width: 768px) {
+    /* ── App-style bottom nav locked at the very bottom ── */
+    .bottom-nav {
+        display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 9989;
+        background: rgba(0,0,0,0.97); border-top: 1px solid var(--line); backdrop-filter: blur(14px);
+        padding: 6px 0 calc(6px + env(safe-area-inset-bottom, 0px));
+    }
+    .bnav-item {
+        flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
+        background: none; border: none; color: rgba(255,255,255,0.72); text-decoration: none;
+        font-family: inherit; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.4px;
+        cursor: pointer; padding: 6px 0;
+    }
+    .bnav-item i { font-size: 1.1rem; color: var(--gold); }
+    .bnav-item:active { opacity: 0.6; }
+    footer { display: none; }   /* the bottom nav replaces the contacts footer on mobile */
+    .wrap { padding-bottom: 96px; }   /* clear the bottom nav */
+    body.cart-bar-on .wrap { padding-bottom: 156px; }   /* also clear the cart bar when it shows */
+
+    /* ── Bet-slip bar sits above the bottom nav, chat FAB beside it ── */
+    .fab-stack { left: 10px; right: 10px; bottom: 74px; flex-direction: row; align-items: center; justify-content: flex-end; gap: 10px; }
+    .cart-fab { display: none; }                 /* replaced by the bar on mobile */
+    .cart-bar {
+        flex: 1; align-items: center; gap: 12px;
+        background: #fff; color: #0a0a0a; border: none; border-radius: 50px;
+        padding: 14px 20px; box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+        font-family: inherit; cursor: pointer; min-width: 0;
+    }
+    .cart-bar.show { display: flex; }
+    .cart-bar-count {
+        background: var(--gold); color: var(--ink); width: 26px; height: 26px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center; font-size: 0.82rem; font-weight: 900; flex-shrink: 0;
+    }
+    .cart-bar-label { font-size: 1rem; font-weight: 900; }
+    .cart-bar-total { margin-left: auto; font-size: 0.95rem; font-weight: 900; white-space: nowrap; }
+    .chat-fab { flex-shrink: 0; }
+
+    /* ── Cart as a bottom sheet ── */
+    .drawer {
+        top: auto; left: 0; right: 0; bottom: 0;
+        width: 100%; max-width: 100%; max-height: 90vh;
+        border-radius: 22px 22px 0 0; border: none; border-top: 1px solid var(--line);
+        transform: translateY(100%); opacity: 1;
+    }
+    .drawer.open { transform: translateY(0); }
+    .drawer-grip { display: block; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 38px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.3); }
+    .drawer-head { padding-top: 24px; }
+    .topnav { flex-direction: column; gap: 11px; padding: 11px 14px; }
+    .tn-links { width: 100%; justify-content: center; gap: 5px; }
+    .tn-link { padding: 8px 12px; font-size: 0.68rem; }
+    .wrap { width: 94vw; }
+    .page-head { padding: 22px 0 16px 0; }
+    .page-head h1 { font-size: 1.9rem; }
+    .page-head p { white-space: normal; font-size: 0.82rem; }
+    .page-head .page-hours { display: block; margin-top: 6px; font-size: 0.82rem; font-weight: 900; opacity: 1; color: var(--gold); }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(146px, 1fr)); gap: 12px; }
+    .card-img-wrap { height: 128px; }
+    .card-body { padding: 11px; }
+    .card-name { font-size: 0.83rem; }
+    .card-foot { flex-direction: column; align-items: stretch; gap: 8px; }
+    .add-btn { width: 100%; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .svc-tabs { display: none; }   /* all services listed together on mobile */
+    .book-btn { flex: 1; }
+    .extra-btns { grid-template-columns: 1fr; gap: 0; }
+    .guest-field { max-width: none; }
+    .slot-wrap { grid-template-columns: repeat(4, 1fr); }
+    .pro-banner { font-size: 0.76rem; padding: 12px 14px; }
+
+    /* Compact sticky header on phones */
+    .topnav { padding: 9px 14px; }
+
+    /* Day / time columns stay side-by-side but tighter */
+    .daytime-cols { gap: 9px; }
+    .daytime-cols .date-strip {
+        flex: 0 0 92px; max-height: 260px;
+        /* Show ~4 days, then fade the rest off the right edge so it's clear more scroll into view. */
+        -webkit-mask-image: linear-gradient(to right, #000 0, #000 74%, transparent 100%);
+        mask-image: linear-gradient(to right, #000 0, #000 74%, transparent 100%);
+    }
+    .slot-scroll { max-height: 260px; }
+
+    /* Staff options: avatar + name/position in a row, description under, Select full-width below */
+
+    /* Footer: single clean left-aligned column */
+    footer { display: none; }   /* hidden on mobile — the bottom nav has the contacts */
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══════════════════════════════════════════════════ -->
+<nav class="topnav">
+    <!-- Synergy logo + business name, then the nav -->
+    <button class="tn-brand" data-nav="services">
+        <img id="tnLogo" src="images/synergy-logo.png" alt="Synergy Dominican Barbershop">
+        <span class="bn" id="tnName"><b>SYNERGY</b><small>DOMINICAN BARBERSHOP</small></span>
+    </button>
+
+    <div class="tn-links">
+        <button class="tn-link" data-nav="about"><i class="fa-solid fa-circle-info"></i><span data-en="About" data-es="Nosotros">About</span></button>
+        <button class="tn-link" data-nav="services"><i class="fa-solid fa-calendar-check"></i><span data-en="Book" data-es="Reservar">Book</span></button>
+        <button class="tn-link" data-nav="products"><i class="fa-solid fa-bag-shopping"></i><span data-en="Shop" data-es="Tienda">Shop</span></button>
+        <button class="tn-link tn-cart" onclick="openCart()">
+            <i class="fa-solid fa-cart-shopping"></i><span data-en="Cart" data-es="Carrito">Cart</span>
+            <b id="navCartCount" style="display:none">0</b>
+        </button>
+        <button class="lang-toggle" onclick="toggleLang()">ES</button>
+    </div>
+</nav>
+
+<div class="wrap">
+
+    <!-- Page heading — text swaps with the active view -->
+    <div class="page-head">
+        <h1 id="pageTitle">Products</h1>
+        <p id="pageSub"></p>
+        <p class="page-hours" id="pageHours"></p>
+    </div>
+
+    <div class="pro-banner" id="proBanner" style="display:none"></div>
+
+    <!-- ══ VIEW: PRODUCTS ═══════════════════════════════════ -->
+    <section class="view" id="view-products">
+        <div class="shop-bar">
+            <div class="tools">
+                <div class="search-wrap">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search" placeholder="Search products, brands, SKU..." data-en-ph="Search products, brands, SKU..." data-es-ph="Buscar productos, marcas, SKU...">
+                </div>
+                <select id="sort">
+                    <option value="featured" data-en="Sort: Featured" data-es="Orden: Destacado">Sort: Featured</option>
+                    <option value="low" data-en="Price: Low to High" data-es="Precio: Menor a Mayor">Price: Low to High</option>
+                    <option value="high" data-en="Price: High to Low" data-es="Precio: Mayor a Menor">Price: High to Low</option>
+                    <option value="az" data-en="Name: A - Z" data-es="Nombre: A - Z">Name: A - Z</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="filter-row" id="filterRow"></div>
+        <div class="grid" id="grid"></div>
+        <div id="loadMore" class="load-more"></div>
+    </section>
+
+    <!-- ══ VIEW: SERVICES ═══════════════════════════════════ -->
+    <section class="view" id="view-services">
+        <div class="svc-tabs">
+            <button class="svc-tab active" data-svctab="Haircut" data-en="Haircut" data-es="Corte">Haircut</button>
+            <button class="svc-tab" data-svctab="Grooming" data-en="Grooming" data-es="Arreglo">Grooming</button>
+        </div>
+        <div class="svc-grid" id="svcGrid"></div>
+
+        <!-- Inline booking — appears when a service is picked -->
+        <div id="svcBooking" style="display:none">
+            <!-- Date + time — days on the left, times on the right -->
+            <div class="panel daytime-box" id="pickDayTime">
+                <div class="panel-title" id="pickDayTimeTitle" data-en="Pick a day &amp; time" data-es="Elige dia y hora">Pick a day &amp; time</div>
+                <div class="daytime-cols">
+                    <div class="date-strip"></div>
+                    <div class="slots"></div>
+                </div>
+            </div>
+
+            <!-- Staff -->
+            <div class="panel">
+                <div class="panel-title" id="staffTitle"></div>
+                <div id="staffList"></div>
+            </div>
+
+            <!-- Add products -->
+            <div class="panel">
+                <div class="panel-title" data-en="Add products" data-es="Agregar productos">Add products</div>
+                <div class="svc-cat-chips" id="svcCatChips"></div>
+                <div class="added-list" id="extraList"></div>
+            </div>
+
+            <!-- Who's it for? -->
+            <div class="panel">
+                <div class="panel-title" data-en="Who's it for?" data-es="Para quien?">Who's it for?</div>
+                <div class="forwho-count">
+                    <button class="fw-step" onclick="setGuestCount(-1)">&minus;</button>
+                    <div class="fw-num"><b id="guestBig">1</b><span id="guestLabel">haircut</span></div>
+                    <button class="fw-step" onclick="setGuestCount(1)">+</button>
+                </div>
+                <div class="forwho-row">
+                    <button class="forwho-btn selected" onclick="justMe()"><i class="fa-solid fa-user"></i> <span data-en="Just me" data-es="Solo yo">Just me</span></button>
+                    <button class="forwho-btn" onclick="addKidHaircut()"><i class="fa-solid fa-plus"></i> <span data-en="Add kid haircut" data-es="Agregar corte de nino">Add kid haircut</span></button>
+                </div>
+                <div class="added-list" id="kidList"></div>
+            </div>
+
+            <!-- Total + Add to checkout -->
+            <div class="bk-cta">
+                <div class="bk-total"><span data-en="Total" data-es="Total">Total</span><b id="bkTotal"></b></div>
+                <button class="primary-btn" id="addToCartBtn" onclick="addBookingToCart()"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ VIEW: SIGN IN ════════════════════════════════════ -->
+    <!-- Checkout now happens inside the cart modal; this view just bounces there. -->
+    <section class="view" id="view-checkout"></section>
+
+    <!-- ══ VIEW: ABOUT ══════════════════════════════════════ -->
+    <section class="view" id="view-about">
+        <video class="about-bg" autoplay loop muted playsinline preload="auto">
+            <source src="images/video/about-bg.mp4" type="video/mp4">
+        </video>
+        <div class="about-hero">
+            <h2 class="about-title" data-en="Two doors.<br>One family." data-es="Dos puertas.<br>Una familia.">Two doors.<br>One family.</h2>
+            <span class="about-eyebrow" data-en="Chambersburg, PA" data-es="Chambersburg, PA">Chambersburg, PA</span>
+            <p class="about-lead" data-en="Book your cut, shop for products, or both — 3-minute walk apart." data-es="Reserva tu corte, compra productos, o ambos — 3 minutos a pie.">Book your cut, shop for products, or both — 3-minute walk apart.</p>
+        </div>
+
+
+        <div class="about-locs">
+            <div class="about-loc">
+                <div class="about-loc-head">
+                    <div class="about-loc-title">
+                        <div class="about-loc-name">Synergy Dominican Barbershop</div>
+                        <div class="about-est" data-en="Est. 2018" data-es="Desde 2018">Est. 2018</div>
+                    </div>
+                </div>
+                <p class="about-loc-desc" data-en="The best cuts for the best price in Chambersburg. Locally owned and family-ran." data-es="Los mejores cortes al mejor precio en Chambersburg. Negocio local y familiar.">The best cuts for the best price in Chambersburg. Locally owned and family-ran.</p>
+                <a class="about-loc-line" href="https://www.google.com/maps/search/?api=1&query=128+E+Queen+St+Chambersburg+PA" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i> 128 E Queen St, Chambersburg, PA</a>
+                <span class="about-loc-line"><i class="fa-solid fa-clock"></i> <span data-en="Tue - Sun, 10AM - 7PM &middot; Mon closed" data-es="Mar - Dom, 10AM - 7PM &middot; Lun cerrado">Tue - Sun, 10AM - 7PM &middot; Mon closed</span></span>
+                <a class="about-loc-line" href="tel:7172513970"><i class="fa-solid fa-phone"></i> (717) 251-3970</a>
+                <div class="about-loc-actions">
+                    <button class="about-icon-btn" onclick="showView('services')" title="Book"><i class="fa-solid fa-calendar-check"></i><span data-en="Book" data-es="Reservar">Book</span></button>
+                    <a class="about-icon-btn about-rate-btn" href="https://www.google.com/search?q=Synergy+Dominican+Barbershop+Reviews" target="_blank" rel="noopener" title="Review">
+                        <span class="rate-btn-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></span>
+                        <span data-en="Review" data-es="Resena">Review</span>
+                    </a>
+                    <button class="about-icon-btn" onclick="shareShop('synergy')" title="Share"><i class="fa-solid fa-share-nodes"></i><span data-en="Share" data-es="Compartir">Share</span></button>
+                </div>
+            </div>
+            <div class="about-loc">
+                <div class="about-loc-head">
+                    <div class="about-loc-title">
+                        <div class="about-loc-name gold">Premium Barber &amp; Beauty Supply</div>
+                        <div class="about-est" data-en="Est. 2026" data-es="Desde 2026">Est. 2026</div>
+                    </div>
+                    <span class="about-new" data-en="New" data-es="Nuevo">New</span>
+                </div>
+                <p class="about-loc-desc" data-en="For clients and barbers — beard, shave, and grooming products, in store." data-es="Para clientes y barberos — barba, afeitado y productos de arreglo, en tienda.">For clients and barbers — beard, shave, and grooming products, in store.</p>
+                <a class="about-loc-line" href="https://www.google.com/maps/search/?api=1&query=180+S+Main+St+Chambersburg+PA+17201" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i> 180 S Main St, Chambersburg, PA</a>
+                <span class="about-loc-line"><i class="fa-solid fa-clock"></i> <span data-en="Mon - Sat, 10AM - 6PM &middot; Sun closed" data-es="Lun - Sab, 10AM - 6PM &middot; Dom cerrado">Mon - Sat, 10AM - 6PM &middot; Sun closed</span></span>
+                <a class="about-loc-line" href="tel:7174910997"><i class="fa-solid fa-phone"></i> (717) 491-0997</a>
+                <div class="about-loc-actions">
+                    <button class="about-icon-btn" onclick="showView('products')" title="Shop"><i class="fa-solid fa-bag-shopping"></i><span data-en="Shop" data-es="Tienda">Shop</span></button>
+                    <a class="about-icon-btn about-rate-btn" href="https://www.facebook.com/61590492305050" target="_blank" rel="noopener" title="Review">
+                        <span class="rate-btn-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></span>
+                        <span data-en="Review" data-es="Resena">Review</span>
+                    </a>
+                    <button class="about-icon-btn" onclick="shareShop('premium')" title="Share"><i class="fa-solid fa-share-nodes"></i><span data-en="Share" data-es="Compartir">Share</span></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <!-- Left: the barbershop.  Right: the supply store. -->
+        <div class="foot-col">
+            <div class="foot-top">
+                <strong>Synergy Dominican Barbershop</strong>
+                <div class="foot-icons">
+                    <a href="https://www.facebook.com/synergybarbershop/" target="_blank" rel="noopener" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=128+E+Queen+St+Chambersburg+PA" target="_blank" rel="noopener" title="Map"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="tel:7172513970" title="Call"><i class="fa-solid fa-phone"></i></a>
+                    <a href="mailto:synergybarbers@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <span class="foot-line"><i class="fa-solid fa-clock"></i><span data-en="Tue - Sun, 10AM - 7PM &middot; Mon closed" data-es="Mar - Dom, 10AM - 7PM &middot; Lun cerrado">Tue - Sun, 10AM - 7PM &middot; Mon closed</span></span>
+        </div>
+
+        <div class="foot-col right">
+            <div class="foot-top">
+                <strong class="gold">Premium Barber &amp; Beauty Supply</strong>
+                <div class="foot-icons">
+                    <a href="https://www.facebook.com/61590492305050" target="_blank" rel="noopener" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://www.google.com/maps/search/?api=1&query=180+S+Main+St+Chambersburg+PA+17201" target="_blank" rel="noopener" title="Map"><i class="fa-solid fa-location-dot"></i></a>
+                    <a href="tel:7174910997" title="Call"><i class="fa-solid fa-phone"></i></a>
+                    <a href="mailto:premiumbarberbeautysupply@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <span class="foot-line"><i class="fa-solid fa-clock"></i><span data-en="Mon - Sat, 10AM - 6PM &middot; Sun closed" data-es="Lun - Sab, 10AM - 6PM &middot; Dom cerrado">Mon - Sat, 10AM - 6PM &middot; Sun closed</span></span>
+        </div>
+    </footer>
+</div>
+
+<div class="fab-stack" id="fabStack">
+    <!-- Bet-slip style bar (mobile): collapsed cart preview; hidden when the cart is empty -->
+    <button class="cart-bar" id="cartBar" onclick="openCart()">
+        <span class="cart-bar-count" id="cartBarCount">0</span>
+        <span class="cart-bar-label" data-en="Your Order" data-es="Tu Pedido">Your Order</span>
+        <span class="cart-bar-total" id="cartBarTotal"></span>
+    </button>
+    <button class="cart-fab" onclick="openCart()" aria-label="Cart">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <b id="cartCount" class="cart-count" style="display:none">0</b>
+    </button>
+    <button class="chat-fab" onclick="openChat()" aria-label="Chat"><i class="fa-solid fa-comment-dots"></i></button>
+</div>
+
+<!-- App-style bottom nav (mobile) — contacts for whichever business you're viewing -->
+<nav class="bottom-nav" id="bottomNav">
+    <a class="bnav-item" id="bnavFb" href="https://www.facebook.com/synergybarbershop/" target="_blank" rel="noopener"><i class="fa-brands fa-facebook"></i><span>Facebook</span></a>
+    <a class="bnav-item" id="bnavMap" href="https://www.google.com/maps/search/?api=1&query=128+E+Queen+St+Chambersburg+PA" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i><span data-en="Address" data-es="Direccion">Address</span></a>
+    <a class="bnav-item" id="bnavPhone" href="tel:7172513970"><i class="fa-solid fa-phone"></i><span data-en="Phone" data-es="Telefono">Phone</span></a>
+    <a class="bnav-item" id="bnavEmail" href="mailto:synergybarbers@gmail.com"><i class="fa-solid fa-envelope"></i><span>Email</span></a>
+</nav>
+
+<!-- Subscribe popup — gathers an email for promos, then nudges sign-in -->
+<div class="sub-overlay" id="subOverlay">
+    <div class="sub-box">
+        <button class="drawer-close" onclick="closeSubscribe()" style="position:absolute;top:14px;right:14px"><i class="fa-solid fa-xmark"></i></button>
+        <div id="subStep1">
+            <div class="sub-badge"><i class="fa-solid fa-gift"></i></div>
+            <h2 data-en="Get 10% off &amp; promos" data-es="10% de descuento y promos">Get 10% off &amp; promos</h2>
+            <p data-en="Join the list for deals from the supply store and the barbershop. First order gets a discount at the counter." data-es="Unete a la lista para ofertas de la tienda y la barberia. Tu primer pedido lleva descuento en el mostrador.">Join the list for deals from the supply store and the barbershop. First order gets a discount at the counter.</p>
+            <input type="email" id="subEmail" placeholder="you@email.com">
+            <button class="primary-btn" onclick="submitSubscribe()" data-en="Subscribe" data-es="Suscribirse">Subscribe</button>
+            <button class="sub-skip" onclick="closeSubscribe()" data-en="No thanks" data-es="Ahora no">No thanks</button>
+        </div>
+        <div id="subStep2" style="display:none">
+            <div class="sub-badge ok"><i class="fa-solid fa-check"></i></div>
+            <h2 data-en="You're subscribed!" data-es="Te suscribiste!">You're subscribed!</h2>
+            <p data-en="Check your inbox for deals. Want to save your info and track orders? Sign in or create an account." data-es="Revisa tu correo para ofertas. Quieres guardar tu info y ver pedidos? Entra o crea una cuenta.">Check your inbox for deals. Want to save your info and track orders? Sign in or create an account.</p>
+            <button class="primary-btn" onclick="closeSubscribe(); openCart()" data-en="Checkout" data-es="Finalizar">Checkout</button>
+            <button class="sub-skip" onclick="closeSubscribe()" data-en="Maybe later" data-es="Despues">Maybe later</button>
+        </div>
+    </div>
+</div>
+
+<div class="book-overlay" id="chatOverlay">
+    <div class="book-modal">
+        <button class="book-close" onclick="closeChat()"><i class="fa-solid fa-xmark"></i></button>
+        <iframe id="chatFrame" src="about:blank"></iframe>
+    </div>
+</div>
+
+<div class="drawer-overlay" id="drawerOverlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer">
+    <!-- Success overlay after Confirm — auto-closes the cart -->
+    <div class="cart-success" id="cartSuccess" style="display:none">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3 data-en="Request sent!" data-es="Solicitud enviada!">Request sent!</h3>
+        <p data-en="We will confirm with you shortly." data-es="Te confirmaremos pronto.">We will confirm with you shortly.</p>
+    </div>
+    <div class="drawer-head" id="drawerHead">
+        <span class="drawer-grip"></span>
+        <span class="cart-head-count" id="cartHeadCount">0</span>
+        <h3 id="cartTitle" data-en="Your Order" data-es="Tu Pedido">Your Order</h3>
+        <button class="drawer-clear" id="cartClearBtn" onclick="clearCart()" data-en="Clear all" data-es="Vaciar">Clear all</button>
+        <button class="drawer-close" onclick="closeCart()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Only the order items scroll -->
+    <div class="drawer-scroll" id="drawerScroll">
+        <div id="cartBody"></div>
+    </div>
+
+    <!-- Fixed from View rewards down -->
+    <div class="drawer-foot">
+        <!-- View rewards — always available; licensed barbers toggle it for 10% off products. -->
+        <div class="rewards-sec" id="proCheck">
+            <div class="rewards-title"><i class="fa-solid fa-gift"></i> <span data-en="View rewards" data-es="Ver recompensas">View rewards</span></div>
+            <div class="pro-check">
+                <div class="pro-text">
+                    <strong data-en="10% industry discount" data-es="10% de descuento de industria">10% industry discount</strong>
+                    <small data-en="Valid for licensed barbers / cosmetologists" data-es="Valido para barberos / cosmetologos con licencia">Valid for licensed barbers / cosmetologists</small>
+                </div>
+                <label class="toggle">
+                    <input type="checkbox" id="proBox" onchange="renderCart()">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="cart-checkout">
+            <div class="name-row">
+                <div class="field">
+                    <input type="text" id="siFirst" required placeholder="First name" data-en-ph="First name" data-es-ph="Nombre">
+                </div>
+                <div class="field">
+                    <input type="text" id="siLast" required placeholder="Last name" data-en-ph="Last name" data-es-ph="Apellido">
+                </div>
+            </div>
+            <div class="field">
+                <input type="tel" id="siPhone" required placeholder="(717) 000-0000">
+            </div>
+            <div class="field">
+                <input type="email" id="siEmail" placeholder="Email" data-en-ph="Email" data-es-ph="Correo">
+            </div>
+        </div>
+
+        <button class="checkout-btn" id="checkoutBtn" onclick="confirmReservation()" data-en="Confirm" data-es="Confirmar">Confirm</button>
+    </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM BARBER & BEAUTY SUPPLY  ×  SYNERGY DOMINICAN BARBERSHOP
+
+   Products come from products.json (generated by build_products.py
+   from the Square exports). Services are defined below and are
+   shared with book.html and the chatbots.
+   ═══════════════════════════════════════════════════════════ */
+
+const SHOP = {
+    phone: '7174910997',
+    phoneDisplay: '(717) 491-0997',
+    barberPhone: '7172513970',
+    email: 'synergybarbers@gmail.com',
+    taxRate: 0.06,
+    currency: '$',
+    hideSoldOut: true
+};
+
+/* Barbershop services — price and duration drive the booking flow. */
+// Icons for services where a photo doesn't fit.
+const ICON_SCISSORS = '<i class="fa-solid fa-scissors"></i>';
+const ICON_EYEBROW  = '<svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 13 Q16 4 28 13"/><path d="M9 20 Q16 16 23 20"/></svg>';
+
+// Old menu + official price list combined and de-duplicated. Prices from the price list.
+// Cut photos are real work from the shop (images/barbers/…), matched to each service.
+const SERVICES = [
+    { id:'svc-haircut',  tab:'Haircut',  name:'Haircut',                   name_es:'Corte',                       price:35, mins:30, img:'images/images1.jpeg',
+      desc:'Classic cut, washed and styled. Clippers and shears.', desc_es:'Corte clasico, lavado y peinado.' },
+    { id:'svc-kidcut',   tab:'Haircut',  name:'Kids Haircut',              name_es:'Corte de Nino',               price:30, mins:30, img:'images/barbers/marcos/001E17E0-A2FF-4BB4-93D3-821C23C8C09D.jpg',
+      desc:'Patient cuts for the young ones (12 & under).', desc_es:'Cortes con paciencia para los pequenos (12 y menor).' },
+    { id:'svc-kidshape', tab:'Haircut',  name:'Kids Shape Up',             name_es:'Delineado de Nino',           price:15, mins:15, img:'images/barbers/marcos/IMG_1148.JPG',
+      desc:'Quick line up for the young ones (12 & under).', desc_es:'Delineado rapido para ninos (12 y menor).' },
+    { id:'svc-senior',   tab:'Haircut',  name:'Seniors',                   name_es:'Adultos Mayores',             price:25, mins:30, img:'images/barbershop2.jpeg', badge:'65+',
+      desc:'Senior haircut.', desc_es:'Corte para adultos mayores.' },
+    { id:'svc-lineup',   tab:'Haircut',  name:'Line Up / Shape Up',        name_es:'Delineado',                   price:20, mins:20, img:'images/barbers/marcos/IMG_1118.JPG',
+      desc:'Clean line up on the hairline — no length off the top.', desc_es:'Delineado limpio, sin quitar largo.' },
+    { id:'svc-combo',    tab:'Haircut',  name:'Haircut, Beard & Eyebrows', name_es:'Corte, Barba y Cejas',        price:40, mins:50, img:'images/barbers/marcos/IMG_0276.JPG',
+      desc:'Full cut, beard shaped and lined, plus eyebrows.', desc_es:'Corte completo, barba delineada y cejas.' },
+    { id:'svc-design',   tab:'Haircut',  name:'Design / Pattern',          name_es:'Diseno / Patron',             price:10, mins:30, img:'images/barbers/marcos/IMG_1115.JPG',
+      desc:'Freehand line work and patterns. Priced from.', desc_es:'Lineas y disenos a mano alzada. Desde.' },
+    { id:'svc-beard',    tab:'Grooming', name:'Beard Trim',                name_es:'Recorte de Barba',            price:20, mins:20, img:'images/barbershop10.webp',
+      desc:'Shaped, trimmed, and lined with a hot towel.', desc_es:'Recortada, con forma y toalla caliente.' },
+    { id:'svc-eyebrow',  tab:'Grooming', name:'Eyebrow Cleanup',           name_es:'Arreglo de Cejas',            price:10, mins:10, img:'images/barbershop3.jpeg', icon:ICON_EYEBROW,
+      desc:'Cleaned up and sharpened.', desc_es:'Limpias y definidas.' },
+    { id:'svc-shear',    tab:'Grooming', name:'Shear Work 2"+',            name_es:'Trabajo con Tijera 2"+',      price:10, mins:15, img:'images/barbershop4.jpeg',
+      desc:'Add-on for scissor work over 2 inches.', desc_es:'Adicional por trabajo con tijera de mas de 2 pulgadas.' },
+    { id:'svc-after',    tab:'Grooming', name:'After Hours',               name_es:'Fuera de Horario',            price:50, mins:30, img:'images/barbershop2.jpeg', badge:'VIP',
+      desc:'Appointment after closing time.', desc_es:'Cita despues del cierre.' },
+    { id:'svc-before',   tab:'Grooming', name:'Before Open Hours',         name_es:'Antes de Abrir',              price:50, mins:30, img:'images/barbershop2.jpeg', badge:'VIP',
+      desc:'Appointment before opening time.', desc_es:'Cita antes de abrir.' }
+].map(s => ({ ...s, isService:true, cat:'Barbershop Service', variation:'', stock:true, qty:0, sku:'', vendor:'' }));
+
+// `licensed` is internal-only (never shown to clients) — licensed barbers are simply listed first.
+const STAFF = [
+    { id:'any',      name:'Walk-in', name_es:'Sin cita', active:true, rating:4.6, reviews:38, google:true },
+    // ── Licensed (shown first) ──
+    { id:'marcos',   name:'Marcos', active:true, licensed:true, img:'images/barbers/marcos/IMG_1115.JPG',
+      gallery:['images/barbers/marcos/IMG_1115.JPG','images/barbers/marcos/IMG_1117.JPG','images/barbers/marcos/IMG_1118.JPG','images/barbers/marcos/IMG_1120.JPG','images/barbers/marcos/IMG_1122.JPG','images/barbers/marcos/IMG_1129.JPG','images/barbers/marcos/IMG_1146.JPG','images/barbers/marcos/IMG_1148.JPG','images/barbers/marcos/IMG_1160.JPG','images/barbers/marcos/IMG_1163.JPG','images/barbers/marcos/IMG_1278.JPG','images/barbers/marcos/IMG_1306.JPG','images/barbers/marcos/IMG_1334.JPG','images/barbers/marcos/IMG_1427.JPG','images/barbers/marcos/IMG_1428.JPG','images/barbers/marcos/IMG_0239.JPG','images/barbers/marcos/IMG_0244.JPG','images/barbers/marcos/IMG_0276.JPG','images/barbers/marcos/IMG_0282.JPG','images/barbers/marcos/IMG_0337.JPG','images/barbers/marcos/001E17E0-A2FF-4BB4-93D3-821C23C8C09D.jpg'] },
+    { id:'diogenes', name:'Diogenes', active:true, licensed:true, rating:3.9, reviews:18, booksy:'https://booksy.com/en-us/685187_diogenes-by-sinergy-barbershop_barber-shop_33751_chambersburg' },
+    { id:'jash',     name:'Jash',        active:true, licensed:true },
+    { id:'edwin',    name:'Edwin Wicho', active:true, licensed:true },
+    { id:'tay',      name:'Tay',         active:true, licensed:true },
+    // ── Everyone else ──
+    { id:'kalel',    name:'Kalel',  active:true, img:'images/barbers/kalel/IMG_0050.PNG',
+      gallery:['images/barbers/kalel/IMG_0050.PNG','images/barbers/kalel/IMG_0037.jpg'] },
+    { id:'stanley',  name:'Stanley',  active:true, rating:5.0, reviews:5,  booksy:'https://booksy.com/en-us/1687733_stanley-barber_barber-shop_33751_chambersburg' },
+    { id:'eduard',   name:'Eduard',   active:true, rating:4.3, reviews:16, booksy:'https://booksy.com/en-us/1139004_eduard-barber_barber-shop_33751_chambersburg' },
+    { id:'n',        name:'N',        active:true, rating:4.4, reviews:21, booksy:'https://booksy.com/en-us/1110999_n_barber-shop_33751_chambersburg' },
+    { id:'rodrigo',  name:'Rodrigo',   active:true },
+    { id:'jt',       name:'JT',        active:true },
+    { id:'jose',     name:'Jose',      active:true },
+    { id:'christian',name:'Christian', active:true },
+    { id:'lucas',    name:'Lucas',     active:true }
+];
+
+/* Barbershop opening hours by weekday (0 = Sun). null = closed. */
+const BARBER_HOURS = { 0:[10,19], 1:null, 2:[10,19], 3:[10,19], 4:[10,19], 5:[10,19], 6:[10,19] };
+
+/* Block off times you're NOT working — matching slots show greyed/unavailable in the picker.
+   Two forms (times are 24h "HH:MM"):
+     { date:'2026-07-29', from:'12:00', to:'13:00' }  → one-off, that date only
+     { dow:6,             from:'13:00', to:'14:00' }  → recurring weekly (0=Sun … 6=Sat)
+   Leave out from/to to block the WHOLE day (e.g. a vacation day):
+     { date:'2026-08-04' }                            → all of Aug 4 blocked
+   Add/remove lines as your schedule changes. */
+const BLOCKS = [
+    // { dow:6, from:'13:00', to:'14:00' },   // example: every Saturday 1–2pm off
+];
+function hmToMin(s) { const [h, m] = s.split(':').map(Number); return h * 60 + (m || 0); }
+function slotBlocked(date, startMin, endMin) {
+    const p = n => String(n).padStart(2, '0');
+    const iso = `${date.getFullYear()}-${p(date.getMonth() + 1)}-${p(date.getDate())}`;
+    return BLOCKS.some(b => {
+        if (b.date && b.date !== iso) return false;
+        if (b.dow != null && b.dow !== date.getDay()) return false;
+        if (b.date == null && b.dow == null) return false;      // ignore malformed entries
+        if (!b.from || !b.to) return true;                      // whole-day block
+        return startMin < hmToMin(b.to) && endMin > hmToMin(b.from);   // time overlaps the block
+    });
+}
+
+let PRODUCTS = [], GROUPS = [];
+let lang = new URLSearchParams(location.search).get('lang') === 'es' ? 'es' : 'en';
+let activeCat = 'All', query = '', sortBy = 'featured', activeSvcTab = 'Haircut';
+const svcQty = {};   // per-service quantity chosen on the card before booking
+let cart = {};
+let fulfillment = localStorage.getItem('synergyFulfillment') || 'pickup';
+let currentView = 'products';
+
+/* booking draft (the one service being configured on a card) */
+let booking = { service:null, guests:1, extras:[], staff:null, date:null, time:null };
+/* committed appointments in the cart — each is its own service + barber + time,
+   so a kids cut for one person and a senior cut for another live side by side. */
+let appts = [];
+
+/* ── helpers ─────────────────────────────────────────────── */
+const $ = id => document.getElementById(id);
+const money = n => SHOP.currency + n.toFixed(2);
+const t = (en, es) => lang === 'es' ? es : en;
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const attr = s => esc(s).replace(/\n/g, ' ');
+const sName = s => lang === 'es' && s.name_es ? s.name_es : s.name;
+const sDesc = s => lang === 'es' && s.desc_es ? s.desc_es : s.desc;
+const pName = p => p.isService ? sName(p) : p.name;
+
+/* ── view routing ────────────────────────────────────────── */
+const VIEW_META = {
+    'products':      { en:['Shop','Pro clippers, blades, color, and grooming lines — stocked and ready. Reserve online, pay and pick up in store.'],
+                       es:['Tienda','Maquinas, hojas, color y productos profesionales. Reserva en linea, paga y recoge en tienda.'], banner:false },
+    'services':      { en:['Book','Book with Synergy Dominican Barbershop. Walk-ins welcome, but booking skips the wait.'],
+                       es:['Reservar','Reserva con Synergy Dominican Barbershop. Aceptamos sin cita, pero reservar evita la espera.'], banner:false },
+    'book':          { en:['Book','Set it all up here — guests, extras, your barber, and a time.'], es:['Reservar','Arma todo aqui — invitados, extras, tu barbero y una hora.'], banner:false },
+    'checkout':      { en:['Checkout','One last step.'], es:['Finalizar','Un ultimo paso.'], banner:false },
+    'about':         { en:['About',''], es:['Nosotros',''], banner:false, hideHead:true }
+};
+
+// Glide the nav links to horizontal center on the About page (brand is out of flow there),
+// and back to their normal right-aligned spot elsewhere. Desktop only; mobile stacks vertically.
+// `animate` false = snap instantly (used on resize / language change so it doesn't re-slide).
+function centerNav(on, animate = true) {
+    const links = document.querySelector('.tn-links');
+    const nav = document.querySelector('.topnav');
+    if (!links || !nav) return;
+    if (!animate) links.style.transition = 'none';
+    if (!on || window.innerWidth <= 768) {
+        links.style.transform = '';
+    } else {
+        links.style.transform = '';        // reset so we measure the natural (right) position
+        const nr = nav.getBoundingClientRect();
+        const lr = links.getBoundingClientRect();
+        const dx = (nr.left + nr.width / 2) - (lr.left + lr.width / 2);
+        links.style.transform = 'translateX(' + Math.round(dx) + 'px)';
+    }
+    if (!animate) { void links.offsetWidth; links.style.transition = ''; }   // apply without transition, then restore
+}
+window.addEventListener('resize', () => centerNav(currentView === 'about', false));
+
+function showView(v, push) {
+    const prevView = currentView;
+    currentView = v;
+    // Keep the URL in step so the barbershop page can deep-link straight into
+    // a view (shop.html?view=services) and back/forward still work.
+    if (push !== false) {
+        const u = new URL(location);
+        // URL shows friendly names: services -> book, products -> shop.
+        u.searchParams.set('view', v === 'services' ? 'book' : v === 'products' ? 'shop' : v);
+        history.replaceState({ view: v }, '', u);
+    }
+    document.querySelectorAll('.view').forEach(s => s.classList.remove('active'));
+    $('view-' + v).classList.add('active');
+
+    const meta = VIEW_META[v][lang] || VIEW_META[v].en;
+    $('pageTitle').innerHTML = meta[0];
+    $('pageSub').textContent = meta[1];
+    // Hours line under the subtitle (shown on mobile): supply store on Shop, barbershop elsewhere.
+    $('pageHours').textContent = v === 'products'
+        ? t('Mon - Sat, 10AM - 6PM · Sun closed', 'Lun - Sab, 10AM - 6PM · Dom cerrado')
+        : t('Tue - Sun, 10AM - 7PM · Mon closed', 'Mar - Dom, 10AM - 7PM · Lun cerrado');
+    $('proBanner').style.display = VIEW_META[v].banner ? 'flex' : 'none';
+    // Home leads with its own hero, so the generic page heading is hidden there.
+    document.querySelector('.page-head').style.display = VIEW_META[v].hideHead ? 'none' : 'block';
+
+    // Brand + bottom-nav contacts follow the side of the business: Shop = supply store, else barbershop.
+    if (v === 'products') {
+        $('tnLogo').src = 'images/premium-logo.png';
+        $('tnLogo').alt = 'Premium Barber & Beauty Supply';
+        $('tnName').innerHTML = '<b>PREMIUM</b><small>BARBER &amp; BEAUTY SUPPLY</small>';
+        $('bnavFb').href = 'https://www.facebook.com/61590492305050';
+        $('bnavMap').href = 'https://www.google.com/maps/search/?api=1&query=180+S+Main+St+Chambersburg+PA+17201';
+        $('bnavPhone').href = 'tel:7174910997';
+        $('bnavEmail').href = 'mailto:premiumbarberbeautysupply@gmail.com';
+    } else {
+        $('tnLogo').src = 'images/synergy-logo.png';
+        $('tnLogo').alt = 'Synergy Dominican Barbershop';
+        $('tnName').innerHTML = '<b>SYNERGY</b><small>DOMINICAN BARBERSHOP</small>';
+        $('bnavFb').href = 'https://www.facebook.com/synergybarbershop/';
+        $('bnavMap').href = 'https://www.google.com/maps/search/?api=1&query=128+E+Queen+St+Chambersburg+PA';
+        $('bnavPhone').href = 'tel:7172513970';
+        $('bnavEmail').href = 'mailto:synergybarbers@gmail.com';
+    }
+
+    document.querySelectorAll('.tn-link[data-nav]').forEach(b => {
+        b.classList.toggle('active', b.dataset.nav === v);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (v === 'products') maybeSubscribe();
+    document.querySelector('.topnav').classList.toggle('nav-centered', v === 'about');
+    centerNav(v === 'about', prevView !== v);   // only slide on a real view change, not a re-render (e.g. language toggle)
+    if (v === 'about' && $('aboutStars')) $('aboutStars').innerHTML = starHTML(4.6);
+    if (v === 'about') { const vid = document.querySelector('.about-bg'); if (vid) vid.play().catch(() => {}); }
+}
+document.querySelectorAll('.tn-link[data-nav]').forEach(b => {
+    b.onclick = () => showView(b.dataset.nav);
+});
+function goServices() { showView('services'); }
+
+/* ── load catalog ────────────────────────────────────────── */
+async function loadProducts() {
+    try {
+        const res = await fetch('products.json?v=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        PRODUCTS = await res.json();
+        if (SHOP.hideSoldOut) PRODUCTS = PRODUCTS.filter(p => p.stock);
+        GROUPS = groupVariants(PRODUCTS);
+        PRODUCTS = PRODUCTS.concat(SERVICES);   // services are cart-resolvable, never grid cards
+    } catch (err) {
+        $('grid').innerHTML = `<div class="empty-msg">
+            ${t('Could not load the product catalog.', 'No se pudo cargar el catalogo.')}<br><br>
+            ${t('Run', 'Ejecuta')} <code>python3 build_products.py</code>
+            ${t('and open this page through a local server (not file://).', 'y abre esta pagina desde un servidor local (no file://).')}
+        </div>`;
+        PRODUCTS = SERVICES.slice();
+        return false;
+    }
+    return true;
+}
+
+/* Square lists every colour/size as its own row — collapse same-name rows
+   into one card with a variant picker so the grid stops repeating itself. */
+function groupVariants(list) {
+    const by = new Map();
+    list.forEach(p => {
+        const k = p.name.toLowerCase().trim();
+        if (!by.has(k)) by.set(k, []);
+        by.get(k).push(p);
+    });
+    return [...by.values()].map(rows => {
+        let variants = rows;
+        if (rows.length > 1) {
+            const labelled = rows.filter(r => r.variation);
+            if (labelled.length) {
+                variants = labelled.concat(rows.filter(r => !r.variation && !labelled.some(l => l.price === r.price)));
+            }
+        }
+        variants.sort((a, b) => a.variation.localeCompare(b.variation));
+        const lead = variants.find(v => v.img) || variants[0];
+        return {
+            key: lead.id, name: lead.name, cat: lead.cat,
+            desc: variants.find(v => v.desc)?.desc || '',
+            img: lead.img, sku: variants.map(v => v.sku).join(' '), vendor: lead.vendor,
+            minPrice: Math.min(...variants.map(v => v.price)),
+            maxPrice: Math.max(...variants.map(v => v.price)),
+            variants
+        };
+    });
+}
+
+/* ── products grid (lazy) ────────────────────────────────── */
+const PAGE_SIZE = 20;
+let shown = 0, currentList = [];
+
+function renderFilters() {
+    const counts = {};
+    GROUPS.forEach(g => { counts[g.cat] = (counts[g.cat] || 0) + 1; });
+    $('filterRow').innerHTML = [
+        `<button class="filter-btn${activeCat === 'All' ? ' active' : ''}" data-cat="All">${t('All','Todo')}<b>${GROUPS.length}</b></button>`,
+        ...Object.keys(counts).sort().map(c =>
+            `<button class="filter-btn${c === activeCat ? ' active' : ''}" data-cat="${attr(c)}">${esc(c)}<b>${counts[c]}</b></button>`)
+    ].join('');
+    $('filterRow').querySelectorAll('.filter-btn').forEach(b => {
+        b.onclick = () => { activeCat = b.dataset.cat; renderFilters(); renderGrid(); };
+    });
+}
+
+function visibleProducts() {
+    const q = query.trim().toLowerCase();
+    let list = GROUPS.filter(g => {
+        if (activeCat !== 'All' && g.cat !== activeCat) return false;
+        if (!q) return true;
+        return [g.name, g.desc, g.cat, g.sku, g.vendor, ...g.variants.map(v => v.variation)].join(' ').toLowerCase().includes(q);
+    });
+    if (sortBy === 'low')  list = [...list].sort((a,b) => a.minPrice - b.minPrice);
+    if (sortBy === 'high') list = [...list].sort((a,b) => b.maxPrice - a.maxPrice);
+    if (sortBy === 'az')   list = [...list].sort((a,b) => a.name.localeCompare(b.name));
+    if (sortBy === 'featured') {
+        // L3VEL3 (they have product images) lead the shop, then everyone else A–Z.
+        const isL3 = g => /l3vel3|level\s?3/i.test(`${g.name} ${g.vendor || ''} ${g.img || ''}`);
+        list = [...list].sort((a,b) => (isL3(b) - isL3(a)) || a.name.localeCompare(b.name));
+    }
+    return list;
+}
+
+function renderGrid() {
+    currentList = visibleProducts();
+    shown = 0;
+    $('grid').innerHTML = '';
+    if (!currentList.length) {
+        $('grid').innerHTML = `<div class="empty-msg">${t('No products match that search.','Ningun producto coincide con la busqueda.')}</div>`;
+        return;
+    }
+    appendBatch();
+}
+
+function appendBatch() {
+    const batch = currentList.slice(shown, shown + PAGE_SIZE);
+    if (!batch.length) return;
+    shown += batch.length;
+    $('grid').insertAdjacentHTML('beforeend', batch.map(cardHTML).join(''));
+    wireCards();
+}
+
+function cardHTML(g) {
+    const first = g.variants[0], multi = g.variants.length > 1;
+    const img = g.img
+        ? `<img src="${attr(g.img)}" alt="${attr(g.name)}" loading="lazy" onerror="this.parentNode.innerHTML='<div class=\\'no-img\\'><i class=\\'fa-solid fa-scissors\\'></i></div>'">`
+        : `<div class="no-img"><i class="fa-solid fa-scissors"></i><small>${t('In store','En tienda')}</small></div>`;
+    const picker = multi
+        ? `<select class="var-select">${g.variants.map(v => `<option value="${attr(v.id)}" data-price="${v.price}">${esc(v.variation || g.name)}</option>`).join('')}</select>`
+        : (first.variation ? `<div class="card-var">${esc(first.variation)}</div>` : '');
+    const priceLabel = multi && g.minPrice !== g.maxPrice ? `${money(g.minPrice)}&ndash;${money(g.maxPrice)}` : money(first.price);
+
+    return `<article class="card">
+        <div class="card-img-wrap">${img}</div>
+        <div class="card-body">
+            <div class="card-cat">${esc(g.cat)}</div>
+            <h3 class="card-name">${esc(g.name)}</h3>
+            ${picker}
+            ${multi ? `<div class="var-count">${g.variants.length} ${t('options','opciones')}</div>` : ''}
+            <p class="card-desc">${esc(g.desc)}</p>
+            <div class="card-foot">
+                <div class="price">${priceLabel}</div>
+                <div class="card-buy" data-key="${attr(first.id)}">${buyControl(first.id)}</div>
+            </div>
+        </div>
+    </article>`;
+}
+
+/* Product card buy control: an Add button until it's in the cart, then a
+   quantity stepper. */
+function buyControl(id) {
+    const q = cart[id] || 0;
+    return q > 0
+        ? `<div class="qty"><button data-cq="-1" data-id="${attr(id)}">&minus;</button><span>${q}</span><button data-cq="1" data-id="${attr(id)}">+</button></div>`
+        : `<button class="add-btn" data-add="${attr(id)}">${t('Add','Agregar')}</button>`;
+}
+function wireBuy(el) {
+    el.querySelectorAll('[data-add]').forEach(b => b.onclick = () => addToCart(b.dataset.add));
+    el.querySelectorAll('[data-cq]').forEach(b => b.onclick = () => changeQty(b.dataset.id, Number(b.dataset.cq)));
+}
+/* After any cart change, refresh every visible card's buy widget in place
+   (no grid re-render, so scroll position and lazy batches are preserved). */
+function refreshProductCards() {
+    document.querySelectorAll('.card-buy').forEach(el => { el.innerHTML = buyControl(el.dataset.key); wireBuy(el); });
+}
+function wireCards() {
+    $('grid').querySelectorAll('.var-select').forEach(sel => {
+        sel.onchange = () => {
+            const opt = sel.selectedOptions[0], card = sel.closest('.card');
+            card.querySelector('.price').textContent = money(Number(opt.dataset.price));
+            const buy = card.querySelector('.card-buy');
+            buy.dataset.key = opt.value;
+            buy.innerHTML = buyControl(opt.value);
+            wireBuy(buy);
+        };
+    });
+    $('grid').querySelectorAll('.card-buy').forEach(wireBuy);
+}
+
+new IntersectionObserver(e => { if (e[0].isIntersecting && currentView === 'products') appendBatch(); },
+    { rootMargin: '600px' }).observe($('loadMore'));
+
+/* ── services grid ───────────────────────────────────────── */
+function renderServiceGrid() {
+    // Park the booking panel outside the grid so resetting the grid HTML doesn't destroy it.
+    const bookingEl = $('svcBooking');
+    if (bookingEl && $('svcGrid').contains(bookingEl)) $('view-services').appendChild(bookingEl);
+
+    // All services shown together (haircut + grooming), no tabs.
+    const list = SERVICES.slice();
+    $('svcGrid').innerHTML = list.map(s => {
+        const open = booking.service && booking.service.id === s.id;
+        return `
+        <article class="svc-card${open ? ' booking-open' : ''}">
+            <div class="svc-head" data-toggle="${attr(s.id)}">
+                ${s.badge
+                    ? `<div class="svc-media svc-badge">${esc(s.badge)}</div>`
+                    : s.icon
+                        ? `<div class="svc-media svc-icon">${s.icon}</div>`
+                        : s.placeholder
+                            ? `<div class="svc-media svc-ph"></div>`
+                            : `<img src="${attr(s.img)}" alt="${attr(sName(s))}" loading="lazy">`}
+                <div class="svc-meta">
+                    <h3>${esc(sName(s))}</h3>
+                    <div class="svc-sub">${esc(sDesc(s))}</div>
+                    <div class="svc-facts">
+                        <span><i class="fa-solid fa-clock"></i>${s.mins} ${t('min','min')}</span>
+                        <span><i class="fa-solid fa-location-dot"></i>128 E Queen St</span>
+                    </div>
+                </div>
+                <div class="svc-right">
+                    <div class="svc-price">${money(s.price)}</div>
+                    <i class="fa-solid fa-chevron-down svc-chevron"></i>
+                </div>
+            </div>
+        </article>`;
+    }).join('');
+
+    $('svcGrid').querySelectorAll('[data-toggle]').forEach(h => {
+        h.onclick = () => toggleServiceBooking(h.dataset.toggle);
+    });
+
+    // Drop the booking panel (pick day & time, staff, etc.) INSIDE the open card.
+    if (booking.service && bookingEl) {
+        const head = $('svcGrid').querySelector(`[data-toggle="${booking.service.id}"]`);
+        const card = head && head.closest('.svc-card');
+        if (card) card.appendChild(bookingEl);
+    }
+}
+
+/* Accordion: click a service to open its booking; click it again to close. */
+function toggleServiceBooking(id) {
+    if (booking.service && booking.service.id === id) {
+        booking = { service:null, guests:1, extras:[], staff:null, date:null, time:null, committed:false };
+        $('svcBooking').style.display = 'none';
+        renderServiceGrid();
+    } else {
+        booking = { service: SERVICES.find(s => s.id === id), guests:1, extras:[], staff:null, date:null, time:null, committed:false };
+        stripStart = 0;
+        renderBook();
+        renderServiceGrid();
+        $('svcBooking').style.display = 'block';
+    }
+}
+
+/* Remove a service from the booking (works whether it's the main one or an extra). */
+function removeService(id) {
+    const s = SERVICES.find(x => x.id === id);
+    if (booking.service && booking.service.id === id) {
+        // Promote the next service-extra to main, or clear the booking.
+        const idx = booking.extras.findIndex(e => e.isService);
+        if (idx >= 0) {
+            const ex = booking.extras.splice(idx, 1)[0];
+            booking.service = SERVICES.find(x => sName(x) === ex.label) || null;
+            booking.guests = ex.qty || 1;
+        } else {
+            booking.service = null;
+        }
+    } else if (s) {
+        const i = booking.extras.findIndex(e => e.isService && e.label === sName(s));
+        if (i >= 0) booking.extras.splice(i, 1);
+    }
+    if (!booking.service) $('svcBooking').style.display = 'none';
+    else renderBook();
+    renderExtras(); renderBookCta(); renderCart(); renderServiceGrid();
+}
+
+/* Adult haircuts (the +/- big counter). Kid haircuts are counted on top. */
+function setGuestCount(delta) {
+    booking.guests = Math.min(5, Math.max(1, (booking.guests || 1) + delta));
+    if (booking.service) svcQty[booking.service.id] = booking.guests;
+    renderForWho();
+    renderBookCta();
+    if (booking.committed) renderCart();
+}
+/* "Just me" — reset to a single person (count back to 1, drop any kid haircuts). */
+function justMe() {
+    booking.guests = 1;
+    booking.extras = booking.extras.filter(e => !e.kid);
+    if (booking.service) svcQty[booking.service.id] = 1;
+    renderForWho();
+    renderBookCta();
+    renderServiceGrid();
+    if (booking.committed) renderCart();
+}
+function kidLines() { return booking.extras.filter(e => e.kid); }
+
+/* Big count = adult haircuts + all kid haircuts, and the removable kid list below. */
+function renderForWho() {
+    const kids = kidLines();
+    const total = (booking.guests || 1) + kids.reduce((s, e) => s + (e.qty || 1), 0);
+    if ($('guestBig'))   $('guestBig').textContent = total;
+    if ($('guestLabel')) $('guestLabel').textContent = total === 1 ? t('haircut','corte') : t('haircuts','cortes');
+
+    if ($('kidList')) {
+        $('kidList').innerHTML = kids.map(e => {
+            const i = booking.extras.indexOf(e);
+            return `<div class="added-row">
+                <span class="ar-name"><div class="ar-icon"><i class="fa-solid fa-child"></i></div><span>${esc(e.label)}${e.qty > 1 ? ` &times;${e.qty}` : ''}</span></span>
+                <span style="display:flex;align-items:center;gap:12px"><b>${money(e.price * (e.qty || 1))}</b><button class="ar-x" data-rmkid="${i}"><i class="fa-solid fa-xmark"></i></button></span>
+            </div>`;
+        }).join('');
+        $('kidList').querySelectorAll('[data-rmkid]').forEach(b => b.onclick = () => {
+            booking.extras.splice(Number(b.dataset.rmkid), 1);
+            renderForWho(); renderBookCta(); renderServiceGrid();
+            if (booking.committed) renderCart();
+        });
+    }
+}
+
+/* "Add kid haircut" — adds a Kid's Cut line to this appointment; each click adds one. */
+function addKidHaircut() {
+    const kid = SERVICES.find(s => s.id === 'svc-kidcut');
+    if (!kid) return;
+    const ex = kidLines()[0];
+    if (ex) ex.qty += 1;
+    else booking.extras.push({ label: sName(kid), price: kid.price, img: kid.img, isService: true, kid: true, qty: 1 });
+    renderForWho(); renderBookCta(); renderServiceGrid();
+    if (booking.committed) renderCart();
+}
+
+/* Add a service (× the qty shown on its card) to the booking. First one added
+   becomes the main service; the rest stack into "Add more". */
+function addService(id, qty = 1) {
+    const s = SERVICES.find(x => x.id === id);
+    if (!s || qty < 1) return;   // must choose a quantity first
+    qty = Math.min(5, qty);
+    if (!booking.service) {
+        booking = { service: s, guests: qty, extras:[], staff:null, date:null, time:null };
+        stripStart = 0;
+        renderBook();
+        showView('services');
+        $('svcBooking').style.display = 'block';
+    } else if (booking.service.id === id) {
+        booking.guests = Math.min(5, booking.guests + qty);
+        renderBook();
+    } else {
+        const ex = booking.extras.find(e => e.isService && e.label === sName(s));
+        if (ex) ex.qty += qty;
+        else booking.extras.push({ label: sName(s), price: s.price, img: s.img, isService: true, qty });
+        renderExtras(); renderBookCta(); renderCart();
+    }
+    renderServiceGrid();   // reflect the Add → Added state on the cards
+    $('pickDayTime').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* Is this service already in the booking (as the main service or an extra)? */
+function svcInBooking(id) {
+    if (booking.service && booking.service.id === id) return true;
+    const s = SERVICES.find(x => x.id === id);
+    return !!s && booking.extras.some(e => e.isService && e.label === sName(s));
+}
+/* Show the booking panel automatically for the first service in the tab, so the
+   pick day & time is visible inside the card without anyone clicking Add. */
+function openDefaultBooking() {
+    if (booking.service && booking.service.tab === activeSvcTab) return;   // keep an in-progress booking
+    const first = SERVICES.find(s => s.tab === activeSvcTab);
+    if (!first) return;
+    booking = { service: first, guests: svcQty[first.id] || 1, extras: [], staff: null, date: null, time: null, committed: false };
+    stripStart = 0;
+    renderBook();
+    renderServiceGrid();
+    $('svcBooking').style.display = 'block';
+}
+
+document.querySelectorAll('.svc-tab').forEach(tab => {
+    tab.onclick = () => {
+        activeSvcTab = tab.dataset.svctab;
+        document.querySelectorAll('.svc-tab').forEach(x => x.classList.toggle('active', x === tab));
+        // Switching tabs closes any open booking so all start collapsed.
+        booking = { service:null, guests:1, extras:[], staff:null, date:null, time:null, committed:false };
+        $('svcBooking').style.display = 'none';
+        renderServiceGrid();
+    };
+});
+
+/* ── booking: step 1 details ─────────────────────────────── */
+function startBooking(id, qty = 1) {
+    booking = { service: SERVICES.find(s => s.id === id), guests: Math.min(5, Math.max(1, qty)), extras:[], staff:null, date:null, time:null };
+    stripStart = 0;
+    renderBook();
+    showView('services');
+    $('svcBooking').style.display = 'block';
+    $('pickDayTime').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* One render for the whole booking page. */
+function renderBook() {
+    const s = booking.service;
+    if (!s) return;
+    $('pickDayTimeTitle').textContent = t(`Pick a day & time for ${sName(s)}`, `Elige dia y hora para ${sName(s)}`);
+    renderExtras();
+    renderSvcCatChips();
+    renderStaff();
+    renderDateStrip();
+    renderSlots();
+    renderForWho();
+    renderBookCta();
+}
+
+function renderBookCta() {
+    const ready = bookingReady();
+    if ($('bkTotal')) $('bkTotal').textContent = money(bookingTotal());
+    const btn = $('addToCartBtn');
+    btn.disabled = !ready;
+    btn.textContent = ready ? t('Add to cart','Agregar al carrito')
+        : !booking.staff ? t('Select a barber','Elige un barbero')
+        : t('Pick a day and time','Elige dia y hora');
+}
+
+/* Add the finished booking to the cart as its own appointment, then clear the draft
+   so the next service (for someone else) starts fresh. */
+function addBookingToCart() {
+    if (!bookingReady()) return;
+    appts.push({
+        service: booking.service,
+        guests:  booking.guests,
+        extras:  booking.extras.map(e => ({ ...e })),
+        staff:   booking.staff,
+        date:    booking.date,
+        time:    booking.time,
+        timeMin: booking.timeMin
+    });
+    booking = { service:null, guests:1, extras:[], staff:null, date:null, time:null };
+    $('svcBooking').style.display = 'none';
+    renderServiceGrid();   // collapse the card
+    renderCart();
+    openCart();            // drop the appointment into the cart drawer
+}
+
+function renderExtras() {
+    // Only products belong in the "Add products" list — added services live on the service cards.
+    const products = booking.extras.map((e, i) => ({ e, i })).filter(x => !x.e.isService);
+    if (!products.length) {
+        $('extraList').innerHTML = '';
+        return;
+    }
+    $('extraList').innerHTML = products.map(({ e, i }) => `
+        <div class="added-row">
+            <span class="ar-name">
+                ${e.img ? `<img src="${attr(e.img)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'ar-icon',innerHTML:'<i class=\\'fa-solid fa-bag-shopping\\'></i>'}))">`
+                        : `<div class="ar-icon"><i class="fa-solid fa-bag-shopping"></i></div>`}
+                <span>${esc(e.label)}${e.qty > 1 ? ` &times;${e.qty}` : ''}</span>
+            </span>
+            <span style="display:flex;align-items:center;gap:12px">
+                <b>${money(e.price * (e.qty || 1))}</b>
+                <button class="ar-x" data-rm="${i}"><i class="fa-solid fa-xmark"></i></button>
+            </span>
+        </div>`).join('');
+    $('extraList').querySelectorAll('[data-rm]').forEach(b => {
+        b.onclick = () => { booking.extras.splice(Number(b.dataset.rm), 1); renderExtras(); renderBookCta(); renderCart(); };
+    });
+}
+
+function openAddService() {
+    pickFrom(t('Add a service','Agregar un servicio'),
+        SERVICES.filter(s => s.id !== booking.service?.id).map(s => ({
+            name: sName(s), price: s.price, img: s.img, sub: `${s.mins} ${t('min','min')}`, isService: true
+        })));
+}
+/* Fixed product chips for the booking panel — each matches product categories by keyword. */
+const SVC_CAT_CHIPS = [
+    { key: 'all',   en: 'All',          es: 'Todo',           match: null },
+    { key: 'beard', en: 'Beard',        es: 'Barba',          match: ['beard'] },
+    { key: 'shave', en: 'Shave',        es: 'Afeitado',       match: ['shave', 'razor', 'blade'] },
+    { key: 'combs', en: 'Combs',        es: 'Peines',         match: ['comb', 'brush'] },
+    { key: 'skin',  en: 'Skin & Body',  es: 'Piel y Cuerpo',  match: ['skin', 'body'] }
+];
+
+function openAddProduct(match, label) {
+    const list = GROUPS.filter(g => {
+        if (!match) return true;
+        const c = (g.cat || '').toLowerCase();
+        return match.some(m => c.includes(m));
+    });
+    pickFrom(label ? t(`Add ${label}`, `Agregar ${label}`) : t('Add a product', 'Agregar un producto'),
+        list.map(g => ({ name: g.name, price: g.minPrice, img: g.img, sub: g.cat, isService: false })));
+}
+
+/* Category chips in the booking's "Add products" panel — each opens the picker filtered. */
+function renderSvcCatChips() {
+    const el = $('svcCatChips');
+    if (!el) return;
+    el.innerHTML = SVC_CAT_CHIPS.map(c => `<button class="svc-cat-chip" data-chip="${c.key}">${esc(t(c.en, c.es))}</button>`).join('');
+    el.querySelectorAll('[data-chip]').forEach(b => b.onclick = () => {
+        const chip = SVC_CAT_CHIPS.find(c => c.key === b.dataset.chip);
+        openAddProduct(chip && chip.match, chip && chip.key !== 'all' ? t(chip.en, chip.es) : '');
+    });
+}
+
+/* Searchable picker with product images and quantity steppers, so you can
+   add several of the same thing without reopening it. */
+function pickFrom(title, options) {
+    const ov = document.createElement('div');
+    ov.className = 'drawer-overlay open pick-overlay';
+    ov.innerHTML = `
+        <div class="pick-box">
+            <div class="pick-head">
+                <strong>${esc(title)}</strong>
+                <button class="drawer-close" data-x><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="pick-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="pickSearch" placeholder="${t('Search...','Buscar...')}" autocomplete="off">
+            </div>
+            <div class="pick-list" id="pickList"></div>
+            <button class="primary-btn" id="pickDone" style="margin-top:14px">${t('Done','Listo')}</button>
+        </div>`;
+    document.body.appendChild(ov);
+
+    const qty = {};                       // name -> count chosen in this session
+    const listEl = ov.querySelector('#pickList');
+
+    function draw(filter) {
+        const q = (filter || '').trim().toLowerCase();
+        const rows = options.filter(o => !q || (o.name + ' ' + o.sub).toLowerCase().includes(q)).slice(0, 80);
+        if (!rows.length) {
+            listEl.innerHTML = `<div class="pick-none">${t('Nothing matches that.','Nada coincide.')}</div>`;
+            return;
+        }
+        listEl.innerHTML = rows.map(o => {
+            const i = options.indexOf(o), n = qty[o.name] || 0;
+            const thumb = o.img
+                ? `<img src="${attr(o.img)}" alt="" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'pick-noimg',innerHTML:'<i class=\\'fa-solid fa-scissors\\'></i>'}))">`
+                : `<div class="pick-noimg"><i class="fa-solid fa-scissors"></i></div>`;
+            return `<div class="pick-row${n ? ' picked' : ''}">
+                ${thumb}
+                <div class="pick-info"><strong>${esc(o.name)}</strong><span>${esc(o.sub || '')}</span></div>
+                <div class="pick-price">${money(o.price)}</div>
+                <div class="qty">
+                    <button data-dec="${i}" ${n ? '' : 'disabled'}>&minus;</button>
+                    <span>${n}</span>
+                    <button data-inc="${i}">+</button>
+                </div>
+            </div>`;
+        }).join('');
+
+        listEl.querySelectorAll('[data-inc]').forEach(b => b.onclick = () => {
+            const o = options[Number(b.dataset.inc)];
+            qty[o.name] = (qty[o.name] || 0) + 1;
+            draw(ov.querySelector('#pickSearch').value);
+        });
+        listEl.querySelectorAll('[data-dec]').forEach(b => b.onclick = () => {
+            const o = options[Number(b.dataset.dec)];
+            qty[o.name] = Math.max(0, (qty[o.name] || 0) - 1);
+            draw(ov.querySelector('#pickSearch').value);
+        });
+    }
+
+    const close = () => ov.remove();
+    const commit = () => {
+        options.forEach(o => {
+            const n = qty[o.name] || 0;
+            if (!n) return;
+            const ex = booking.extras.find(e => e.label === o.name);
+            if (ex) ex.qty += n;
+            else booking.extras.push({ label: o.name, price: o.price, img: o.img, isService: o.isService, qty: n });
+        });
+        renderExtras(); renderBookCta(); renderCart();
+        close();
+    };
+
+    ov.querySelector('[data-x]').onclick = close;
+    ov.querySelector('#pickDone').onclick = commit;
+    ov.onclick = e => { if (e.target === ov) close(); };
+    ov.querySelector('#pickSearch').addEventListener('input', e => draw(e.target.value));
+    draw('');
+    setTimeout(() => ov.querySelector('#pickSearch').focus(), 60);
+}
+
+/* ── booking: staff (inline, no navigation) ──────────────── */
+function renderStaff() {
+    $('staffTitle').textContent = booking.service
+        ? t(`Select staff for ${sName(booking.service)}`, `Selecciona barbero para ${sName(booking.service)}`)
+        : t('Select staff', 'Selecciona barbero');
+    $('staffList').className = 'staff-scroll';
+    $('staffList').innerHTML = STAFF.map(st => {
+        const chosen = booking.staff && booking.staff.id === st.id;
+        const src = st.google ? t('Google reviews','resenas de Google') : t('reviews','resenas');
+        const reviewLink = st.booksy || (st.google ? 'https://www.google.com/search?q=Synergy+Dominican+Barbershop+Reviews' : null);
+        const subText = st.rating ? `${st.rating.toFixed(1)} &middot; ${st.reviews} ${src}` : '';
+        const sub = subText
+            ? (reviewLink
+                ? `<a class="staff-pill-sub review-link" href="${attr(reviewLink)}" target="_blank" rel="noopener" data-stop>${subText}</a>`
+                // No review link but has a stat.
+                : `<span class="staff-pill-sub">${subText}</span>`)
+            // No stat yet — show a neutral review placeholder so every barber has a review line.
+            : `<span class="staff-pill-sub staff-pill-sub-empty">${t('No reviews yet','Sin resenas aun')}</span>`;
+        // Barbers with a photo show it; the rest show the star rating.
+        const top = st.img
+            ? `<span class="staff-photo"><img src="${attr(st.img)}" alt="" loading="lazy"></span>`
+            : `<span class="staff-stars${st.rating ? '' : ' staff-stars-empty'}">${starHTML(st.rating || 0)}</span>`;
+        // Barbers with a gallery: tapping the name (only) opens their photos.
+        const name = esc(lang === 'es' && st.name_es ? st.name_es : st.name);
+        const nameEl = (st.gallery && st.gallery.length)
+            ? `<button class="staff-pill-name staff-name-link" data-gallery="${attr(st.id)}" data-stop>${name}<i class="fa-solid fa-images"></i></button>`
+            : `<span class="staff-pill-name">${name}</span>`;
+        return `
+        <div class="staff-pill${chosen ? ' selected' : ''}" data-staff="${attr(st.id)}" role="button" tabindex="0">
+            ${top}
+            ${nameEl}
+            ${sub}
+        </div>`;
+    }).join('');
+
+    $('staffList').querySelectorAll('[data-staff]').forEach(b => {
+        b.onclick = (e) => {
+            if (e.target.closest('[data-stop]')) return;   // reviews link / name-gallery handle their own clicks
+            const st = STAFF.find(s => s.id === b.dataset.staff);
+            booking.staff = (booking.staff && booking.staff.id === b.dataset.staff) ? null : st;
+            renderStaff();
+            renderBookCta();
+            renderCart();
+        };
+    });
+    $('staffList').querySelectorAll('[data-gallery]').forEach(b => {
+        b.onclick = () => openBarberGallery(b.dataset.gallery);
+    });
+}
+
+/* Photo modal for a barber's gallery. */
+function openBarberGallery(id) {
+    const st = STAFF.find(s => s.id === id);
+    if (!st || !st.gallery) return;
+    const ov = document.createElement('div');
+    ov.className = 'gallery-overlay open';
+    ov.innerHTML = `
+        <div class="gallery-box">
+            <div class="gallery-head"><strong>${esc(st.name)}</strong><button class="drawer-close" data-x><i class="fa-solid fa-xmark"></i></button></div>
+            <div class="gallery-grid">${st.gallery.map(src => `<img src="${attr(src)}" alt="" loading="lazy">`).join('')}</div>
+        </div>`;
+    document.body.appendChild(ov);
+    document.body.style.overflow = 'hidden';
+    const close = () => { ov.remove(); document.body.style.overflow = ''; };
+    ov.querySelector('[data-x]').onclick = close;
+    ov.onclick = e => { if (e.target === ov) close(); };
+}
+/* 5 stars filled to the rating (full / half / empty). */
+function starHTML(r) {
+    let s = '';
+    for (let i = 1; i <= 5; i++)
+        s += r >= i ? '<i class="fa-solid fa-star"></i>'
+            : (r >= i - 0.5 ? '<i class="fa-solid fa-star-half-stroke"></i>' : '<i class="fa-regular fa-star"></i>');
+    return s;
+}
+
+/* ── booking: date & time ────────────────────────────────── */
+let stripStart = 0;   // day-offset from today the date strip begins at
+
+function bookingTotal() {
+    const base = (booking.service?.price || 0) * booking.guests;
+    return base + booking.extras.reduce((s, e) => s + e.price * (e.qty || 1), 0);
+}
+
+const DOW = { en:['S','M','T','W','T','F','S'], es:['D','L','M','X','J','V','S'] };
+const MONTHS = {
+    en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+    es:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+};
+
+function midnight(d) { const x = new Date(d); x.setHours(0,0,0,0); return x; }
+
+/* Horizontal date strip: 14 days from `stripStart`, closed days disabled,
+   nothing in the past. Arrows page the window forward/back. */
+const STRIP_DAYS = 14;
+const DOW_SHORT = { en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], es:['Dom','Lun','Mar','Mie','Jue','Vie','Sab'] };
+const MON_SHORT = {
+    en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    es:['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
+};
+
+function renderDateStrip() {
+    const today = midnight(new Date());
+    let html = '';
+    for (let i = 0; i < STRIP_DAYS; i++) {
+        const date = new Date(today); date.setDate(today.getDate() + stripStart + i);
+        const closed = !BARBER_HOURS[date.getDay()];
+        const sel = booking.date && midnight(booking.date).getTime() === date.getTime();
+        html += `<button class="date-pill${sel ? ' selected' : ''}" data-iso="${date.toISOString()}" ${closed ? 'disabled' : ''}>
+            <span class="dp-dow">${DOW_SHORT[lang][date.getDay()]}</span>
+            <span class="dp-day">${date.getDate()}</span>
+            <span class="dp-mon">${MON_SHORT[lang][date.getMonth()]}</span>
+        </button>`;
+    }
+    document.querySelectorAll('.date-strip').forEach(strip => {
+        strip.innerHTML = html;
+        strip.querySelectorAll('[data-iso]').forEach(b => {
+            b.onclick = () => {
+                booking.date = new Date(b.dataset.iso);
+                booking.time = null;
+                renderDateStrip(); renderSlots(); renderBookCta(); renderCart();
+            };
+        });
+    });
+    document.querySelectorAll('.strip-prev').forEach(b => b.disabled = stripStart <= 0);
+
+    // Land the strip on the current day (or the selected one) — first open day if today is closed.
+    requestAnimationFrame(() => {
+        document.querySelectorAll('.date-strip').forEach(strip => {
+            const target = strip.querySelector('.date-pill.selected')
+                || strip.querySelector('.date-pill:not(:disabled)');
+            if (target) strip.scrollLeft = Math.max(0, target.offsetLeft - 6);
+        });
+    });
+}
+
+function shiftDates(n) {
+    stripStart = Math.max(0, stripStart + n * 7);
+    renderDateStrip();
+}
+
+function longDate(d) {
+    return d.toLocaleDateString(lang === 'es' ? 'es-US' : 'en-US', { weekday:'long', month:'long', day:'numeric' });
+}
+
+/* Slots are generated from opening hours in service-length steps, then any
+   slot already in the past (today only) is disabled — you can't book backwards. */
+function buildSlots(date) {
+    const hrs = BARBER_HOURS[date.getDay()];
+    if (!hrs) return [];
+    const [open, close] = hrs;
+    const step = Math.max(15, booking.service?.mins || 30);
+    const out = [];
+    const now = new Date();
+    const isToday = midnight(date).getTime() === midnight(now).getTime();
+
+    for (let m = open * 60; m + step <= close * 60; m += step) {
+        const h = Math.floor(m / 60), mm = m % 60;
+        const slotDate = new Date(date); slotDate.setHours(h, mm, 0, 0);
+        // Unavailable = already passed today, or inside a block you set in BLOCKS.
+        const past = (isToday && slotDate <= now) || slotBlocked(date, m, m + step);
+        const label = new Date(2000,0,1,h,mm).toLocaleTimeString(lang === 'es' ? 'es-US' : 'en-US', { hour:'numeric', minute:'2-digit' });
+        out.push({ label, h, mins: m, past });   // mins = minutes from midnight, for the calendar link
+    }
+    return out;
+}
+
+/* Morning / Afternoon / Evening are always all three rendered side by side so
+   the whole day is visible at once, with the continue button under them. */
+function renderSlots() {
+    const slots = booking.date ? buildSlots(booking.date) : [];
+    const groups = [
+        { label: t('Morning','Manana'),   items: slots.filter(s => s.h < 12) },
+        { label: t('Afternoon','Tarde'),  items: slots.filter(s => s.h >= 12 && s.h < 17) },
+        { label: t('Evening','Noche'),    items: slots.filter(s => s.h >= 17) }
+    ];
+
+    const none = !booking.date
+        ? t('Pick a day','Elige un dia')
+        : t('No times','Sin horarios');
+
+    const cols = groups.map(g => `
+        <div class="slot-group${g.items.length ? '' : ' empty'}">
+            <h5>${g.label}</h5>
+            <div class="slot-wrap" data-none="${attr(none)}">
+                ${g.items.map(s => `<button class="slot${booking.time === s.label ? ' selected' : ''}" data-slot="${attr(s.label)}" data-min="${s.mins}" ${s.past ? 'disabled' : ''}>${esc(s.label)}</button>`).join('')}
+            </div>
+        </div>`).join('');
+
+    // Services page: one flat horizontal scroll of every time, like the date strip.
+    const flat = slots.length
+        ? `<div class="slot-scroll">${slots.map(s => `<button class="slot${booking.time === s.label ? ' selected' : ''}" data-slot="${attr(s.label)}" data-min="${s.mins}" ${s.past ? 'disabled' : ''}>${esc(s.label)}</button>`).join('')}</div>`
+        : `<div class="slots-empty">${none}</div>`;
+
+    const ready = booking.date && booking.time;
+    document.querySelectorAll('.slots').forEach(panel => {
+        const svc = panel.closest('#view-services');
+        panel.innerHTML = svc
+            ? `<div class="slot-scroll-wrap">${flat}</div>`
+            : `<div class="slot-cols">${cols}</div>
+               <button class="primary-btn slot-continue" ${ready ? '' : 'disabled'}>
+                   ${ready ? t('Continue','Continuar') : t('Pick a day and time','Elige dia y hora')}
+               </button>`;
+
+        panel.querySelectorAll('[data-slot]').forEach(b => {
+            b.onclick = () => {
+                const on = booking.time === b.dataset.slot;
+                booking.time = on ? null : b.dataset.slot;
+                booking.timeMin = on ? null : Number(b.dataset.min);   // machine time for the calendar event
+                renderSlots(); renderBookCta();
+            };
+        });
+        const cont = panel.querySelector('.slot-continue');
+        if (cont) cont.onclick = () => { renderCart(); openCart(); };
+    });
+}
+
+/* ── booking: step 4 sign in ─────────────────────────────── */
+/* Reached two ways: finishing a booking, or checking out the cart. Builds the
+   right summary for whichever it is and only shows the pay box when products
+   are actually in the order. */
+/* Checkout summary — the exact same cards as the cart, plus the running total. */
+/* Checkout now lives in the cart modal — this is kept as a harmless no-op. */
+function renderCheckoutSummary() {}
+
+function goSignIn() {
+    openCart();
+}
+
+/* Back goes to the time picker when this came from booking, otherwise
+   to whatever the checkout came from. */
+function backFromSignIn() {
+    // Checkout is reached from the cart — go back to the last shopping view and
+    // reopen the cart so they can keep editing.
+    showView(bookingComplete() ? 'services' : 'products');
+    openCart();
+}
+
+/* Confirm gathers name + number, then emails the request to the right shop(s):
+   services -> barbershop, products -> supply store, both -> both. */
+const SHOP_EMAIL = { barbershop: 'synergybarbers@gmail.com', supply: 'premiumbarberbeautysupply@gmail.com' };
+
+// Google Apps Script web-app URL that drops each APPOINTMENT (services only) onto the shop
+// calendar as a tentative, per-barber-colored event. Products are NOT sent here — they stay in
+// the FormSubmit email for manual handling. Paste your deployed .../exec URL below to turn it on.
+const CALENDAR_HOOK = 'https://script.google.com/macros/s/AKfycbwzR49uA_skUmGyueQ1RA967RccV2EKL1ZJSy5bR2-UT_qXMVru2G2lewD7sE29Y8G3_A/exec';
+
+/* Fire the appointments at the calendar web app (fire-and-forget; services only). */
+function pushAppointmentsToCalendar(customer, phone, email, submittedAt) {
+    if (!CALENDAR_HOOK || !appts.length) return;
+    const appointments = appts.map(a => {
+        const d = a.date;
+        return {
+            service: sName(a.service),
+            barber: a.staff ? (a.staff.id === 'any' ? 'Walk-in' : a.staff.name) : 'Walk-in',
+            barberId: a.staff ? a.staff.id : 'any',
+            y: d.getFullYear(), mo: d.getMonth() + 1, d: d.getDate(),
+            startMin: a.timeMin != null ? a.timeMin : 0,
+            durationMin: a.service.mins || 30,
+            guests: a.guests,
+            extras: a.extras.map(e => ({ label: e.label, qty: e.qty || 1 }))
+        };
+    });
+    const body = JSON.stringify({ customer, phone, email: email || '', submittedAt: submittedAt || '', appointments });
+    // Apps Script web apps don't return CORS headers — fire-and-forget with no-cors + text/plain.
+    fetch(CALENDAR_HOOK, { method:'POST', mode:'no-cors', headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body }).catch(() => {});
+}
+
+/* The confirmation FormSubmit auto-emails the customer (only if they gave an email). */
+function autoReplyText(name) {
+    return t(
+        `Hi ${name}, thanks for booking with Synergy Dominican Barbershop! We received your request and will confirm your time shortly. Questions? Call (717) 251-3970.`,
+        `Hola ${name}, ¡gracias por reservar con Synergy Dominican Barbershop! Recibimos tu solicitud y confirmaremos tu hora en breve. ¿Preguntas? Llama al (717) 251-3970.`
+    );
+}
+async function confirmReservation() {
+    const first = $('siFirst').value.trim();
+    const last  = $('siLast').value.trim();
+    const phone = $('siPhone').value.trim();
+    const custEmail = $('siEmail').value.trim();
+    if (!first) { showToast(t('Enter your first name','Ingresa tu nombre')); return; }
+    if (!last)  { showToast(t('Enter your last name','Ingresa tu apellido')); return; }
+    if (!phone) { showToast(t('Enter your phone number','Ingresa tu telefono')); return; }
+    if (custEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(custEmail)) { showToast(t('Enter a valid email or leave it blank','Ingresa un correo valido o dejalo vacio')); return; }
+    const name = `${first} ${last}`;
+
+    const hasService  = bookingComplete() || cartLines().some(l => l.p.isService);
+    const hasProducts = cartLines().some(l => !l.p.isService);
+    const recipients = [];
+    if (hasService)  recipients.push(SHOP_EMAIL.barbershop);
+    if (hasProducts) recipients.push(SHOP_EMAIL.supply);
+    if (!recipients.length) recipients.push(SHOP_EMAIL.barbershop);
+
+    // Local (Eastern) timestamp of when they hit Confirm.
+    const submittedAt = new Date().toLocaleString('en-US', {
+        timeZone: 'America/New_York', weekday: 'short', year: 'numeric', month: 'short',
+        day: 'numeric', hour: 'numeric', minute: '2-digit'
+    }) + ' ET';
+    const message = orderText(name) + `\n\n${t('Submitted','Enviado')}: ${submittedAt}`
+        + (custEmail ? `\n${t('Customer email','Correo del cliente')}: ${custEmail}` : '');
+    const btn = $('checkoutBtn');
+    if (btn) { btn.disabled = true; btn.textContent = t('Sending...','Enviando...'); }
+
+    try {
+        await Promise.all(recipients.map((email, idx) => {
+            const payload = {
+                _subject: `New reservation — ${name}`,
+                _template: 'basic',
+                _captcha: 'false',
+                'First name': first,
+                'Last name': last,
+                Phone: phone,
+                Order: message
+            };
+            // Optional customer email: sets reply-to, and (once) auto-replies them a confirmation.
+            if (custEmail) {
+                payload.email = custEmail;
+                payload.Email = custEmail;
+                if (idx === 0) payload._autoresponse = autoReplyText(name);
+            }
+            return fetch(`https://formsubmit.co/ajax/${email}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(r => { if (!r.ok) throw new Error('send failed'); });
+        }));
+        // Drop the appointments onto the shop calendar (services only) before we clear them.
+        pushAppointmentsToCalendar(name, phone, custEmail, submittedAt);
+        // Clear the order, show the "Request sent" screen in the cart, then auto-close after 3s.
+        clearBooking();
+        cart = {}; saveCart(); renderCart();
+        $('siFirst').value = $('siLast').value = $('siPhone').value = $('siEmail').value = '';
+        $('cartSuccess').style.display = 'flex';
+        clearTimeout(cartCloseTimer);
+        cartCloseTimer = setTimeout(closeCart, 3000);
+    } catch (e) {
+        showToast(t('Could not send — please call the shop.','No se pudo enviar — por favor llama a la tienda.'));
+    } finally {
+        if (btn) { btn.disabled = false; renderCart(); }   // restores "Confirm  $X.XX"
+    }
+}
+function callBarbershop() { location.href = 'tel:' + SHOP.barberPhone; }
+function callSupply() { location.href = 'tel:' + SHOP.phone; }
+/* Share the shop — native share sheet if available, else open the share link. */
+function shareShop(which) {
+    const shops = {
+        synergy: { title: 'Synergy Dominican Barbershop', url: 'https://www.facebook.com/synergybarbershop/' },
+        premium: { title: 'Premium Barber & Beauty Supply', url: 'https://www.facebook.com/61590492305050' }
+    };
+    const s = shops[which] || shops.synergy;
+    if (navigator.share) navigator.share({ title: s.title, url: s.url }).catch(() => {});
+    else window.open(s.url, '_blank', 'noopener');
+}
+
+/* ── cart ────────────────────────────────────────────────── */
+function loadCart() {
+    try { cart = JSON.parse(localStorage.getItem('synergyPremiumCart') || '{}'); } catch (e) { cart = {}; }
+    Object.keys(cart).forEach(id => { if (!PRODUCTS.some(p => p.id === id)) delete cart[id]; });
+}
+function saveCart() { try { localStorage.setItem('synergyPremiumCart', JSON.stringify(cart)); } catch (e) {} }
+
+function addToCart(id) {
+    const p = PRODUCTS.find(x => x.id === id);
+    if (!p) return;
+    const next = (cart[id] || 0) + 1;
+    if (!p.isService && p.qty && next > p.qty) { showToast(t(`Only ${p.qty} in stock`, `Solo ${p.qty} en existencia`)); return; }
+    cart[id] = next;
+    saveCart(); renderCart(); refreshProductCards();
+    showToast(t(pName(p) + ' added', pName(p) + ' agregado'));
+}
+function changeQty(id, d) {
+    const p = PRODUCTS.find(x => x.id === id);
+    const next = (cart[id] || 0) + d;
+    if (p && !p.isService && p.qty && next > p.qty) { showToast(t(`Only ${p.qty} in stock`, `Solo ${p.qty} en existencia`)); return; }
+    if (next <= 0) delete cart[id]; else cart[id] = next;
+    saveCart(); renderCart(); refreshProductCards();
+}
+function cartLines() {
+    return Object.keys(cart).map(id => ({ p: PRODUCTS.find(x => x.id === id), qty: cart[id] })).filter(l => l.p);
+}
+/* There's at least one appointment in the cart. */
+function bookingComplete() { return appts.length > 0; }
+function bookingReady() { return !!(booking.service && booking.staff && booking.date && booking.time && booking.guests >= 1); }
+/* Total for one committed appointment (service × guests + its extras). */
+function apptTotal(a) {
+    return (a.service?.price || 0) * a.guests + a.extras.reduce((s, e) => s + e.price * (e.qty || 1), 0);
+}
+/* Cart stepper / remove for a committed appointment (by index). */
+function setApptGuests(ai, delta) {
+    const a = appts[ai]; if (!a) return;
+    a.guests = Math.min(5, Math.max(1, (a.guests || 1) + delta));
+    renderCart();
+}
+function removeAppt(ai) {
+    if (!appts[ai]) return;
+    appts.splice(ai, 1);
+    renderCart(); renderServiceGrid();
+}
+function setApptExtraQty(ai, ei, delta) {
+    const a = appts[ai]; if (!a || !a.extras[ei]) return;
+    a.extras[ei].qty = Math.max(1, (a.extras[ei].qty || 1) + delta);
+    renderCart();
+}
+function removeApptExtra(ai, ei) {
+    const a = appts[ai]; if (!a) return;
+    a.extras.splice(ei, 1);
+    renderCart();
+}
+/* Empty the whole cart — every appointment and product. */
+function clearCart() {
+    appts = [];
+    cart = {}; saveCart();
+    renderCart(); renderServiceGrid(); refreshProductCards();
+}
+function clearBooking() {
+    appts = [];
+    booking = { service:null, guests:1, extras:[], staff:null, date:null, time:null };
+    $('pickDayTimeTitle').textContent = t('Pick a day & time', 'Elige dia y hora');
+    $('svcBooking').style.display = 'none';
+    renderCart();
+    renderServiceGrid();   // collapse all cards
+    if ($('view-checkout').classList.contains('active')) renderCheckoutSummary();
+}
+/* Change the quantity of an added service/kid line from the cart's stepper. */
+function setExtraQty(i, delta) {
+    const e = booking.extras[i];
+    if (!e) return;
+    e.qty = Math.max(1, (e.qty || 1) + delta);
+    renderForWho(); renderBookCta(); renderCart(); renderServiceGrid();
+}
+/* Remove a product line from the cart. */
+function removeProduct(id) {
+    delete cart[id];
+    saveCart(); renderCart(); refreshProductCards();
+}
+/* Remove one added service/product line from the booking, from the cart or checkout. */
+function removeExtra(i) {
+    booking.extras.splice(i, 1);
+    renderExtras(); renderBookCta(); renderCart(); renderServiceGrid();
+    if ($('view-checkout').classList.contains('active')) renderCheckoutSummary();
+}
+function isPro() { const b = $('proBox'); return !!(b && b.checked); }
+function cartTotals() {
+    const lines = cartLines();
+    const prodSub = lines.reduce((s,l) => s + l.p.price * l.qty, 0);
+    // Licensed pros get 10% off products (not services).
+    const proDiscount = isPro() ? prodSub * 0.10 : 0;
+    const taxable = (prodSub - proDiscount);
+    const tax = taxable * SHOP.taxRate;
+    const appt = appts.reduce((s, a) => s + apptTotal(a), 0);
+    return { prodSub, proDiscount, tax, grand: prodSub - proDiscount + tax + appt };
+}
+
+/* The appointment + product cards — shared by the cart drawer and checkout,
+   so both show the same image / label / description / date-time / price / edit / remove. */
+function cartItemsHTML() {
+    const lines = cartLines();
+    const pro = isPro();
+
+    // One uniform card: name + remove ✕, description, then a − N + stepper and price.
+    const stepper = (decAttr, val, incAttr) =>
+        `<div class="qty"><button ${decAttr}>&minus;</button><span>${val}</span><button ${incAttr}>+</button></div>`;
+    const item = (name, priceHTML, descHTML, qtyHTML, removeAttr, editAttr) => `
+        <div class="cart-item">
+            <div class="ci-top"><strong>${name}</strong>
+                <div class="ci-actions">
+                    ${editAttr ? `<button class="ci-edit" ${editAttr}><i class="fa-solid fa-pen"></i></button>` : ''}
+                    <button class="ci-x" ${removeAttr}><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            ${descHTML ? `<div class="ci-desc">${descHTML}</div>` : ''}
+            <div class="ci-foot">${qtyHTML}<b class="ci-price">${priceHTML}</b></div>
+        </div>`;
+
+    // With a service in the order, products ride along to the barbershop; otherwise they're picked up in store.
+    const hasSvc = bookingComplete() || lines.some(l => l.p.isService);
+    const fulfillWord = hasSvc ? t('Deliver to barbershop','Entregar en barberia') : t('Pick up in store','Recoger en tienda');
+    const fulfillCell = (stepHTML) => `<div class="ci-foot-left">${stepHTML}<span class="ci-fulfill">${fulfillWord}</span></div>`;
+
+    // Each committed appointment, with its own barber + time, plus any per-appointment extras.
+    let apptHTML = '';
+    appts.forEach((a, ai) => {
+        const s = a.service;
+        const who = a.staff ? (a.staff.id === 'any' ? t('Walk-in','Sin cita') : a.staff.name) : t('Walk-in','Sin cita');
+        const when = `${esc(who)} · ${longDate(a.date)}, ${a.time}`;
+        const whenCell = (stepHTML) => `<div class="ci-foot-left">${stepHTML}<span class="ci-when">${when}</span></div>`;
+
+        apptHTML += item(esc(sName(s)), money(s.price * a.guests), '',
+            whenCell(stepper(`onclick="setApptGuests(${ai},-1)"`, a.guests, `onclick="setApptGuests(${ai},1)"`)),
+            `onclick="removeAppt(${ai})"`, `onclick="editBooking(${ai})"`);
+        a.extras.forEach((e, ei) => {
+            const step = stepper(`onclick="setApptExtraQty(${ai},${ei},-1)"`, e.qty || 1, `onclick="setApptExtraQty(${ai},${ei},1)"`);
+            apptHTML += e.isService
+                ? item(esc(e.label), money(e.price * (e.qty || 1)), '', whenCell(step), `onclick="removeApptExtra(${ai},${ei})"`)
+                : item(esc(e.label), money(e.price * (e.qty || 1)), '', fulfillCell(step), `onclick="removeApptExtra(${ai},${ei})"`);
+        });
+    });
+
+    const prodHTML = lines.filter(l => !l.p.isService).map(l => {
+        const line = l.p.price * l.qty;
+        const disc = pro ? line * 0.9 : null;   // 10% off products for pros
+        const priceHTML = disc != null
+            ? `<span class="ci-was">${money(line)}</span> ${money(disc)}`
+            : money(line);
+        const desc = l.p.variation ? esc(l.p.variation) : '';
+        const step = stepper(`data-q="-1" data-id="${attr(l.p.id)}"`, l.qty, `data-q="1" data-id="${attr(l.p.id)}"`);
+        return item(esc(pName(l.p)), priceHTML, desc, fulfillCell(step), `data-rmprod="${attr(l.p.id)}"`);
+    }).join('');
+
+    let html = '';
+    if (apptHTML) html += apptHTML;
+    if (prodHTML) html += prodHTML;
+    return html;
+}
+
+function renderCart() {
+    const lines = cartLines();
+    const apptUnits = appts.reduce((s,a) => s + a.guests + a.extras.reduce((x,e) => x + (e.qty||1), 0), 0);
+    const count = lines.reduce((s,l) => s + l.qty, 0) + apptUnits;
+    // Number of line items (cards) for the badge/bar.
+    const itemCount = lines.length + appts.reduce((s,a) => s + 1 + a.extras.length, 0);
+
+    [$('cartCount'), $('navCartCount')].forEach(b => {
+        if (!b) return;   // cart FAB was removed; only the nav badge remains
+        b.textContent = count;
+        b.style.display = count ? 'flex' : 'none';
+    });
+
+    $('cartBody').innerHTML = cartItemsHTML() || `<div class="cart-empty">${t('Your cart is empty.','Tu carrito esta vacio.')}</div>`;
+
+    $('cartBody').querySelectorAll('[data-q]').forEach(b => {
+        b.onclick = () => changeQty(b.dataset.id, Number(b.dataset.q));
+    });
+    $('cartBody').querySelectorAll('[data-rmprod]').forEach(b => {
+        b.onclick = () => removeProduct(b.dataset.rmprod);
+    });
+
+    const tot = cartTotals();
+    const hasProducts = lines.some(l => !l.p.isService);
+    // Fulfillment is automatic: products ride to the barbershop with a service, otherwise store pickup.
+    const hasSvc = bookingComplete() || lines.some(l => l.p.isService);
+    fulfillment = hasSvc ? 'barbershop' : 'pickup';
+    localStorage.setItem('synergyFulfillment', fulfillment);
+    // The licensed-barber checkbox only shows with products; otherwise it's just "View rewards".
+    const proLabel = document.querySelector('#proCheck .pro-check');
+    if (proLabel) proLabel.classList.toggle('show', hasProducts);
+    const has = lines.length || bookingComplete();
+    if ($('cartClearBtn')) $('cartClearBtn').style.display = has ? 'inline-flex' : 'none';
+    $('checkoutBtn').disabled = !has;
+    $('checkoutBtn').textContent = has ? `${t('Confirm','Confirmar')}  ${money(tot.grand)}` : t('Confirm','Confirmar');
+
+    // Bet-slip bar + header count reflect the cart; the bar hides entirely when empty.
+    if ($('cartBar')) $('cartBar').classList.toggle('show', !!has);
+    document.body.classList.toggle('cart-bar-on', !!has);   // extra bottom clearance when the bar shows
+    if ($('cartBarCount')) $('cartBarCount').textContent = itemCount;
+    if ($('cartBarTotal')) $('cartBarTotal').textContent = money(tot.grand);
+    if ($('cartHeadCount')) { $('cartHeadCount').textContent = itemCount; $('cartHeadCount').style.display = itemCount ? 'flex' : 'none'; }
+}
+
+/* Pull a committed appointment back out of the cart and into the draft to edit it. */
+function editBooking(ai) {
+    const a = appts[ai]; if (!a) return;
+    appts.splice(ai, 1);
+    booking = { service:a.service, guests:a.guests, extras:a.extras.map(e => ({ ...e })), staff:a.staff, date:a.date, time:a.time, timeMin:a.timeMin };
+    stripStart = 0;
+    closeCart();
+    renderBook();
+    renderServiceGrid();
+    showView('services');
+    if (booking.service) $('svcBooking').style.display = 'block';
+    $('pickDayTime').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function setFulfillment(mode) {
+    fulfillment = mode;
+    localStorage.setItem('synergyFulfillment', mode);
+    document.querySelectorAll('.fulfill-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+}
+
+let cartScrollY = 0, cartCloseTimer = null;
+function openCart() {
+    clearTimeout(cartCloseTimer);
+    if ($('cartSuccess')) $('cartSuccess').style.display = 'none';   // fresh start
+    cartScrollY = window.scrollY || window.pageYOffset || 0;
+    $('drawer').style.transform = '';
+    $('drawer').classList.add('open');
+    $('drawerOverlay').classList.add('open');
+    // Pin the page so the background can't scroll (works on iOS, unlike overflow:hidden).
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${cartScrollY}px`;
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.overflow = 'hidden';
+    if ($('drawerScroll')) $('drawerScroll').scrollTop = 0;
+}
+function closeCart() {
+    clearTimeout(cartCloseTimer);
+    $('drawer').classList.remove('open');
+    $('drawerOverlay').classList.remove('open');
+    $('drawer').style.transform = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, cartScrollY);
+    if ($('cartSuccess')) $('cartSuccess').style.display = 'none';   // reset for next open
+}
+
+/* Bottom-sheet drag: pull the header down to close (mobile). */
+(function () {
+    const drawer = $('drawer'), head = $('drawerHead');
+    if (!drawer || !head) return;
+    let startY = 0, dy = 0, dragging = false;
+    head.addEventListener('touchstart', e => { startY = e.touches[0].clientY; dy = 0; dragging = true; drawer.style.transition = 'none'; }, { passive: true });
+    head.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        dy = e.touches[0].clientY - startY;
+        if (dy > 0) { e.preventDefault(); drawer.style.transform = `translateY(${dy}px)`; }   // stop pull-to-refresh
+    }, { passive: false });
+    head.addEventListener('touchend', () => {
+        if (!dragging) return;
+        dragging = false;
+        drawer.style.transition = '';
+        if (dy > 90) closeCart();
+        else drawer.style.transform = '';
+    });
+})();
+
+/* ── chat (supply store, not the barbershop) ─────────────── */
+function openChat() {
+    $('chatFrame').src = `chat.html?lang=${lang}`;
+    $('chatOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeChat() {
+    $('chatOverlay').classList.remove('open');
+    $('chatFrame').src = 'about:blank';
+    document.body.style.overflow = '';
+}
+
+/* ── checkout ────────────────────────────────────────────── */
+/* One message covering whichever side of the business the order touches:
+   an appointment gets confirmed (with who / when / where), products get
+   reserved (with quantities and how they're being handed over). */
+function orderText(customerName) {
+    const lines = cartLines(), tot = cartTotals();
+    const items = lines.filter(l => !l.p.isService);
+    const svcs  = lines.filter(l => l.p.isService);
+
+    const parts = [];
+
+    if (appts.length) {
+        const n = appts.length;
+        parts.push(customerName
+            ? t(`Hi, this is ${customerName}. I would like to confirm ${n > 1 ? 'these appointments' : 'my appointment'}:`,
+                `Hola, soy ${customerName}. Quiero confirmar ${n > 1 ? 'estas citas' : 'mi cita'}:`)
+            : t(`Hi, I would like to confirm ${n > 1 ? 'these appointments' : 'my appointment'}:`,
+                `Hola, quiero confirmar ${n > 1 ? 'estas citas' : 'mi cita'}:`));
+        appts.forEach((appt, i) => {
+            const who = appt.staff
+                ? (appt.staff.id === 'any' ? t('Walk-in', 'Sin cita') : appt.staff.name)
+                : t('Walk-in', 'Sin cita');
+            if (n > 1) { parts.push(''); parts.push(`— ${t('Appointment','Cita')} ${i + 1} —`); }
+            parts.push(`${t('With','Con')}: ${who}`);
+            if (appt.staff && appt.staff.booksy) parts.push(`Booksy: ${appt.staff.booksy}`);
+            parts.push('');
+            parts.push(`${sName(appt.service)}${appt.guests > 1 ? ' x' + appt.guests : ''} (${appt.service.mins} ${t('min','min')}) - ${money(appt.service.price * appt.guests)}`);
+            appt.extras.forEach(e => parts.push(`+ ${e.label}${e.qty > 1 ? ' x' + e.qty : ''} - ${money(e.price * (e.qty || 1))}`));
+            parts.push('');
+            parts.push(`${t('When','Cuando')}: ${longDate(appt.date)}, ${appt.time}`);
+        });
+        parts.push('');
+        parts.push(`${t('Where','Donde')}: Synergy Dominican Barbershop, 128 E Queen St, Chambersburg, PA`);
+    } else {
+        parts.push(customerName
+            ? t(`Hi, this is ${customerName}. I would like to reserve:`, `Hola, soy ${customerName}. Quiero reservar:`)
+            : t('Hi, I would like to reserve:', 'Hola, quiero reservar:'));
+        if (svcs.length) {
+            parts.push('');
+            parts.push(t('Services:', 'Servicios:'));
+            svcs.forEach(l => parts.push(`${l.qty}x ${sName(l.p)} - ${money(l.p.price * l.qty)}`));
+        }
+    }
+
+    if (items.length) {
+        parts.push('');
+        parts.push(appts.length || svcs.length
+            ? t('I would like to reserve these products as well:', 'Tambien quiero apartar estos productos:')
+            : t('Products:', 'Productos:'));
+        items.forEach(l => parts.push(
+            `+ ${l.p.name}${l.p.variation ? ' (' + l.p.variation + ')' : ''}${l.qty > 1 ? ' x' + l.qty : ''} - ${money(l.p.price * l.qty)}`));
+        parts.push('');
+        parts.push(fulfillment === 'barbershop'
+            ? t('Deliver to the barbershop, 128 E Queen St', 'Entregar en la barberia, 128 E Queen St')
+            : t('Pick up at the supply store, 180 S Main St', 'Recoger en la tienda, 180 S Main St'));
+    }
+
+    if (isPro()) {
+        parts.push('');
+        parts.push(items.length
+            ? t("I'm a licensed barber / cosmetologist — 10% product discount applies (license shown at pickup).",
+                'Soy barbero / cosmetologo con licencia — aplica 10% de descuento en productos (licencia al recoger).')
+            : t("I'm a licensed barber / cosmetologist.", 'Soy barbero / cosmetologo con licencia.'));
+    }
+
+    parts.push('');
+    parts.push(`${t('Grand Total','Total')}: ${money(tot.grand)}`);   // grand already includes the appointment
+    return parts.join('\n');
+}
+function hasOrder() { return cartLines().length || bookingComplete(); }
+/* "Reserve via text" takes you to the checkout page; the text sends on Confirm. */
+function checkout() {
+    if (!hasOrder()) return;
+    closeCart();
+    goSignIn();
+}
+
+/* ── subscribe popup ─────────────────────────────────────── */
+function maybeSubscribe() {
+    // Subscribe popup disabled for now — re-enable by removing this return.
+    return;
+    // once per visitor, the first time they open Products
+    if (localStorage.getItem('synergySubscribed') || localStorage.getItem('synergySubDismissed')) return;
+    setTimeout(openSubscribe, 700);
+}
+function openSubscribe() {
+    $('subStep1').style.display = 'block';
+    $('subStep2').style.display = 'none';
+    $('subOverlay').classList.add('open');
+}
+function closeSubscribe() {
+    $('subOverlay').classList.remove('open');
+    if (!localStorage.getItem('synergySubscribed')) localStorage.setItem('synergySubDismissed', '1');
+}
+function submitSubscribe() {
+    const email = $('subEmail').value.trim();
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { showToast(t('Enter a valid email','Ingresa un correo valido')); return; }
+    localStorage.setItem('synergySubscribed', email);
+    $('subStep1').style.display = 'none';
+    $('subStep2').style.display = 'block';
+}
+$('subOverlay').addEventListener('click', function (e) { if (e.target === this) closeSubscribe(); });
+
+/* ── toast ───────────────────────────────────────────────── */
+let toastTimer;
+function showToast(msg) {
+    const el = $('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+}
+
+/* ── language ────────────────────────────────────────────── */
+function applyLang() {
+    document.querySelector('.lang-toggle').textContent = lang === 'en' ? 'ES' : 'EN';
+    document.querySelectorAll('[data-en]').forEach(el => {
+        const v = el.getAttribute('data-' + lang);
+        if (v !== null) el.innerHTML = v;
+    });
+    const s = $('search');
+    const ph = s.getAttribute('data-' + lang + '-ph');
+    if (ph) s.placeholder = ph;
+    document.documentElement.lang = lang;
+}
+function toggleLang() {
+    lang = lang === 'en' ? 'es' : 'en';
+    applyLang();
+    showView(currentView);
+    renderFilters(); renderGrid(); renderServiceGrid(); renderCart();
+    renderDateStrip(); renderSlots();
+    if (booking.service) { renderBook(); renderCart(); }
+}
+
+/* ── init ────────────────────────────────────────────────── */
+$('search').addEventListener('input', e => { query = e.target.value; renderGrid(); });
+$('sort').addEventListener('change', e => { sortBy = e.target.value; renderGrid(); });
+$('chatOverlay').addEventListener('click', function (e) { if (e.target === this) closeChat(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeCart(); closeChat(); } });
+
+(async function init() {
+    if (lang === 'es') applyLang();
+    await loadProducts();
+    loadCart();
+    renderFilters();
+    renderGrid();
+    renderServiceGrid();
+    renderDateStrip();
+    renderSlots();
+    renderStaff();
+    renderSvcCatChips();
+    setFulfillment(fulfillment);
+    renderCart();
+
+
+    // Don't let the browser restore the old scroll position on refresh — always start at the top.
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    // Deep link from chat "Book": #svc-id jumps straight into that booking.
+    const hash = location.hash.replace('#', '');
+    if (hash && SERVICES.some(s => s.id === hash)) {
+        startBooking(hash);
+    } else {
+        // Lands on barbershop booking; Premium products are the add-on side.
+        let want = new URLSearchParams(location.search).get('view');
+        const isCheckout = want === 'checkout' || want === 'signin';
+        // Accept friendly names (book/shop) and the old ones (services/products).
+        if (want === 'book') want = 'services';
+        if (want === 'shop') want = 'products';
+        // Default landing = About (brand intro); deep links (?view=book/shop) still win.
+        showView(['products','services','about'].includes(want) ? want : 'about');
+        if (isCheckout) openCart();   // checkout now opens in the cart modal
+    }
+    window.scrollTo(0, 0);
+})();
+</script>
+</body>
+</html>
