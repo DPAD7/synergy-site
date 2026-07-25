@@ -1106,9 +1106,8 @@ a.foot-line:hover { opacity: 1; color: var(--gold); }
 
     <!-- ══ VIEW: ABOUT ══════════════════════════════════════ -->
     <section class="view" id="view-about">
-        <video class="about-bg" autoplay loop muted playsinline preload="auto">
-            <source src="images/video/about-bg.mp4" type="video/mp4">
-        </video>
+        <!-- Loads only when the About view opens (see showView) — saves the download for everyone who never gets here. -->
+        <video class="about-bg" loop muted playsinline preload="none" data-src="images/video/about-bg.mp4"></video>
         <div class="about-hero">
             <h2 class="about-title" data-en="Two doors.<br>One family." data-es="Dos puertas.<br>Una familia.">Two doors.<br>One family.</h2>
             <span class="about-eyebrow" data-en="Chambersburg, PA" data-es="Chambersburg, PA">Chambersburg, PA</span>
@@ -1367,8 +1366,8 @@ const STAFF = [
     { id:'edwin',    name:'Edwin Wicho', active:true, licensed:true },
     { id:'tay',      name:'Tay',         active:true, licensed:true },
     // ── Everyone else ──
-    { id:'kalel',    name:'Kalel',  active:true, img:'images/barbers/kalel/IMG_0050.PNG',
-      gallery:['images/barbers/kalel/IMG_0050.PNG','images/barbers/kalel/IMG_0037.jpg'] },
+    { id:'kalel',    name:'Kalel',  active:true, img:'images/barbers/kalel/IMG_0050.jpg',
+      gallery:['images/barbers/kalel/IMG_0050.jpg','images/barbers/kalel/IMG_0037.jpg'] },
     { id:'stanley',  name:'Stanley',  active:true, rating:5.0, reviews:5,  booksy:'https://booksy.com/en-us/1687733_stanley-barber_barber-shop_33751_chambersburg' },
     { id:'eduard',   name:'Eduard',   active:true, rating:4.3, reviews:16, booksy:'https://booksy.com/en-us/1139004_eduard-barber_barber-shop_33751_chambersburg' },
     { id:'n',        name:'N',        active:true, rating:4.4, reviews:21, booksy:'https://booksy.com/en-us/1110999_n_barber-shop_33751_chambersburg' },
@@ -1474,6 +1473,15 @@ function showView(v, push) {
     }
     document.querySelectorAll('.view').forEach(s => s.classList.remove('active'));
     $('view-' + v).classList.add('active');
+
+    // About's background video is fetched on first visit to the view, not on page load.
+    if (v === 'about') {
+        const bg = document.querySelector('.about-bg');
+        if (bg && !bg.src && bg.dataset.src) {
+            bg.src = bg.dataset.src;
+            bg.play().catch(() => {});   // autoplay may be blocked; the still frame is fine
+        }
+    }
 
     const meta = VIEW_META[v][lang] || VIEW_META[v].en;
     $('pageTitle').innerHTML = meta[0];
