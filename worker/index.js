@@ -7,7 +7,11 @@ const LOCATION = 'L7DTBF77CSBMA';   // Synergy Dominican Barbershop
 export default {
     async fetch(request, env) {
         const url = new URL(request.url);
-        if (!url.pathname.startsWith('/api/')) return env.ASSETS.fetch(request);
+        // Non-API paths normally never reach here (run_worker_first covers /api/*
+        // only), but fall back to the asset server if one slips through.
+        if (!url.pathname.startsWith('/api/')) {
+            return env.ASSETS ? env.ASSETS.fetch(request) : new Response('Not found', { status: 404 });
+        }
 
         const token = env.SQUARE_ACCESS_TOKEN;
         if (!token) return json(500, { error: 'SQUARE_ACCESS_TOKEN is not configured' });

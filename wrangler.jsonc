@@ -1,11 +1,13 @@
 {
-  // Cloudflare Worker that serves the static site and handles the /api/* booking
-  // routes. Static files come from the repo root via the ASSETS binding.
+  // Static files are served straight from the repo by Cloudflare's asset server.
+  // Only /api/* runs the Worker — this avoids the Worker re-fetching its own
+  // domain for assets, which Cloudflare blocks (error 1042).
   "name": "synergy-site",
   "main": "worker/index.js",
   "compatibility_date": "2026-07-01",
   "assets": {
     "directory": "./",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
   }
 }
