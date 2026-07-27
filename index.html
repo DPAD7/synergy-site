@@ -1511,7 +1511,22 @@ function slotBlocked(date, startMin, endMin) {
 }
 
 let PRODUCTS = [], GROUPS = [];
-let lang = new URLSearchParams(location.search).get('lang') === 'es' ? 'es' : 'en';
+/* Language, most explicit wins: ?lang= in the URL, then whatever they last chose,
+   then the browser's own preference. A Spanish-speaking customer lands in Spanish
+   without having to find the toggle. */
+let lang = (() => {
+    const fromUrl = new URLSearchParams(location.search).get('lang');
+    if (fromUrl === 'es' || fromUrl === 'en') return fromUrl;
+
+    try {
+        const saved = localStorage.getItem('synergyLang');
+        if (saved === 'es' || saved === 'en') return saved;
+    } catch (e) {}
+
+    const prefs = navigator.languages && navigator.languages.length
+        ? navigator.languages : [navigator.language || ''];
+    return prefs.some(l => String(l).toLowerCase().startsWith('es')) ? 'es' : 'en';
+})();
 let activeCat = 'All', query = '', sortBy = 'featured', activeSvcTab = 'Haircut';
 const svcQty = {};   // per-service quantity chosen on the card before booking
 let cart = {};
@@ -3094,6 +3109,7 @@ function applyLang() {
 }
 function toggleLang() {
     lang = lang === 'en' ? 'es' : 'en';
+    try { localStorage.setItem('synergyLang', lang); } catch (e) {}   // remember the choice
     applyLang();
     showView(currentView);
     renderFilters(); renderGrid(); renderServiceGrid(); renderCart();
