@@ -15,7 +15,7 @@ exports.handler = async (event) => {
     try { req = JSON.parse(event.body || '{}'); }
     catch { return json(400, { error: 'Bad JSON' }); }
 
-    const { firstName, lastName, phone, email,
+    const { firstName, lastName, phone, email, idempotencyKey,
             serviceVariationId, teamMemberId, startAt, durationMinutes, note } = req;
 
     if (!firstName || !phone || !serviceVariationId || !teamMemberId || !startAt) {
@@ -36,7 +36,9 @@ exports.handler = async (event) => {
         const customerId = await findOrCreateCustomer(token, { firstName, lastName, phone, email });
 
         const booking = {
-            idempotency_key: `${teamMemberId}-${startAt}-${phone}`.slice(0, 192),
+            // The booking screen sends one key per attempt, so a double-click is
+            // ignored but a genuine rebook after a cancellation still goes through.
+            idempotency_key: (idempotencyKey || crypto.randomUUID()).slice(0, 192),
             booking: {
                 location_id: LOCATION,
                 start_at: startAt,
