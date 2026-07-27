@@ -23,6 +23,16 @@ exports.handler = async (event) => {
     }
 
     try {
+        // Square's CreateBooking does not reject overlaps on its own (booking_policy
+        // is ACCEPT_ALL), so confirm the slot is genuinely free before taking it.
+        const free = await slotIsFree(token, { serviceVariationId, teamMemberId, startAt });
+        if (!free) {
+            return json(409, {
+                error: 'That time was just taken. Please pick another.',
+                slotTaken: true,
+            });
+        }
+
         const customerId = await findOrCreateCustomer(token, { firstName, lastName, phone, email });
 
         const booking = {
@@ -62,6 +72,34 @@ exports.handler = async (event) => {
         return json(502, { error: e.message || 'Could not reach Square' });
     }
 };
+
+// Ask Square whether this exact barber is still free at this exact time.
+async function slotIsFree(token, { serviceVariationId, teamMemberId, startAt }) {
+    const start = new Date(startAt);
+    const end = new Date(start.getTime() + 60 * 60 * 1000);   // 1h window around the slot
+    const r = await fetch(`${SQUARE}/bookings/availability/search`, {
+        method: 'POST', headers: headers(token),
+        body: JSON.stringify({
+            query: {
+                filter: {
+                    start_at_range: { start_at: start.toISOString(), end_at: end.toISOString() },
+                    location_id: LOCATION,
+                    segment_filters: [{
+                        service_variation_id: serviceVariationId,
+                        team_member_id_filter: { any: [teamMemberId] },
+                    }],
+                },
+            },
+        }),
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(squareError(d));
+
+    const wanted = start.getTime();
+    return (d.availabilities || []).some(a =>
+        new Date(a.start_at).getTime() === wanted &&
+        a.appointment_segments?.some(s => s.team_member_id === teamMemberId));
+}
 
 async function findOrCreateCustomer(token, { firstName, lastName, phone, email }) {
     const search = await fetch(`${SQUARE}/customers/search`, {
