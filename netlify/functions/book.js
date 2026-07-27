@@ -103,13 +103,33 @@ async function slotIsFree(token, { serviceVariationId, teamMemberId, startAt }) 
         a.appointment_segments?.some(s => s.team_member_id === teamMemberId));
 }
 
+/* Square matches customers on E.164, so "(240) 520-4012" and "2405204012" must
+   both become "+12405204012" or we create a duplicate customer every visit. */
+function e164(raw) {
+    const digits = String(raw || '').replace(/\D/g, '');
+    if (digits.length === 10) return `+1${digits}`;
+    if (digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
+    return String(raw || '').startsWith('+') ? String(raw) : `+${digits}`;
+}
+
 async function findOrCreateCustomer(token, { firstName, lastName, phone, email }) {
+    phone = e164(phone);
     const search = await fetch(`${SQUARE}/customers/search`, {
         method: 'POST', headers: headers(token),
         body: JSON.stringify({ limit: 1, query: { filter: { phone_number: { exact: phone } } } }),
     });
     const found = await search.json();
-    if (found.customers?.length) return found.customers[0].id;
+    if (found.customers?.length) {
+        const existing = found.customers[0];
+        // Fill in an email we didn't have before, so the record improves over time.
+        if (email && !existing.email_address) {
+            await fetch(`${SQUARE}/customers/${existing.id}`, {
+                method: 'PUT', headers: headers(token),
+                body: JSON.stringify({ email_address: email }),
+            }).catch(() => {});
+        }
+        return existing.id;
+    }
 
     const create = await fetch(`${SQUARE}/customers`, {
         method: 'POST', headers: headers(token),
