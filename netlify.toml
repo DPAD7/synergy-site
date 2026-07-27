@@ -1,0 +1,14 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+# Friendlier paths for the booking endpoints.
+[[redirects]]
+  from = "/api/availability"
+  to = "/.netlify/functions/availability"
+  status = 200
+
+[[redirects]]
+  from = "/api/book"
+  to = "/.netlify/functions/book"
+  status = 200
