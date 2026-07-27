@@ -1520,6 +1520,68 @@ let currentView = 'products';
 
 /* booking draft (the one service being configured on a card) */
 let booking = { service:null, guests:1, extras:[], staff:null, date:null, time:null };
+
+/* ── Square booking bridge ───────────────────────────────────────────────────
+   Barbers, service ids and free times come from Square via /api/*. If Square is
+   unreachable the site falls back to its own hours, so booking never dies —
+   it just loses live availability. */
+const SQ = {
+    ready: false,
+    staff: [],                 // [{id, displayName}] — only barbers Square will book
+    serviceByName: {},         // "Haircut" -> {variationId, minutes}
+    avail: { key: null, times: null, loading: false },
+};
+
+async function sqLoadCatalog() {
+    try {
+        const r = await fetch('/api/catalog');
+        if (!r.ok) throw new Error('catalog');
+        const d = await r.json();
+        SQ.staff = d.staff || [];
+        SQ.serviceByName = {};
+        (d.services || []).forEach(s => { SQ.serviceByName[s.name] = s; });
+        SQ.ready = true;
+    } catch (e) {
+        SQ.ready = false;      // stay on the built-in slot logic
+    }
+}
+
+const sqFirstName = (n) => String(n || '').trim().split(/\s+/)[0].toLowerCase();
+
+/* Local Date -> the "H:MM" key used to match Square's slots against ours. */
+const sqTimeKey = (d) => `${d.getHours()}:${String(d.getMinutes()).padStart(2, '0')}`;
+
+/* Pull the free times for the chosen day + service, then redraw the slot grid. */
+async function sqLoadAvailability() {
+    if (!SQ.ready || !booking.date || !booking.service) return;
+    const svc = SQ.serviceByName[booking.service.name];
+    if (!svc) return;
+
+    const start = midnight(booking.date);
+    const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
+    const key = `${svc.variationId}|${start.toISOString()}|${booking.staff?.sqId || ''}`;
+    if (SQ.avail.key === key || SQ.avail.loading) return;
+
+    SQ.avail.loading = true;
+    try {
+        const qs = new URLSearchParams({
+            serviceVariationId: svc.variationId,
+            startAt: start.toISOString(),
+            endAt: end.toISOString(),
+        });
+        if (booking.staff?.sqId) qs.set('teamMemberId', booking.staff.sqId);
+        const r = await fetch(`/api/availability?${qs}`);
+        const d = await r.json();
+        SQ.avail = {
+            key,
+            loading: false,
+            times: new Set((d.slots || []).map(s => sqTimeKey(new Date(s.startAt)))),
+        };
+    } catch (e) {
+        SQ.avail = { key, loading: false, times: null };   // unknown -> don't block anyone
+    }
+    renderSlots();
+}
 /* committed appointments in the cart — each is its own service + barber + time,
    so a kids cut for one person and a senior cut for another live side by side. */
 let appts = [];
@@ -2188,12 +2250,26 @@ function pickFrom(title, options) {
 }
 
 /* ── booking: staff (inline, no navigation) ──────────────── */
+/* Who to offer. With Square up, only barbers it will actually book — matched to
+   the site's profiles by first name so photos and galleries survive. Without
+   Square, the site's own list, exactly as before. */
+function bookableStaff() {
+    if (!SQ.ready || !SQ.staff.length) return STAFF;
+    return SQ.staff.map(sq => {
+        const local = STAFF.find(s => sqFirstName(s.name) === sqFirstName(sq.displayName));
+        return local
+            ? { ...local, sqId: sq.id }
+            : { id: `sq-${sq.id}`, name: sq.displayName, sqId: sq.id };
+    });
+}
+
 function renderStaff() {
     $('staffTitle').textContent = booking.service
         ? t(`Select staff for ${sName(booking.service)}`, `Selecciona barbero para ${sName(booking.service)}`)
         : t('Select staff', 'Selecciona barbero');
     $('staffList').className = 'staff-scroll';
-    $('staffList').innerHTML = STAFF.map(st => {
+    const staffOptions = bookableStaff();
+    $('staffList').innerHTML = staffOptions.map(st => {
         const chosen = booking.staff && booking.staff.id === st.id;
         const src = st.google ? t('Google reviews','resenas de Google') : t('reviews','resenas');
         const reviewLink = st.booksy || (st.google ? 'https://www.google.com/search?q=Synergy+Dominican+Barbershop+Reviews' : null);
@@ -2225,7 +2301,7 @@ function renderStaff() {
     $('staffList').querySelectorAll('[data-staff]').forEach(b => {
         b.onclick = (e) => {
             if (e.target.closest('[data-stop]')) return;   // reviews link / name-gallery handle their own clicks
-            const st = STAFF.find(s => s.id === b.dataset.staff);
+            const st = staffOptions.find(s => s.id === b.dataset.staff);
             booking.staff = (booking.staff && booking.staff.id === b.dataset.staff) ? null : st;
             renderStaff();
             renderBookCta();
@@ -2346,8 +2422,10 @@ function buildSlots(date) {
     for (let m = open * 60; m + step <= close * 60; m += step) {
         const h = Math.floor(m / 60), mm = m % 60;
         const slotDate = new Date(date); slotDate.setHours(h, mm, 0, 0);
-        // Unavailable = already passed today, or inside a block you set in BLOCKS.
-        const past = (isToday && slotDate <= now) || slotBlocked(date, m, m + step);
+        // Unavailable = already passed today, inside a block you set in BLOCKS, or
+        // already taken according to Square (once its availability has loaded).
+        const takenInSquare = SQ.avail.times ? !SQ.avail.times.has(sqTimeKey(slotDate)) : false;
+        const past = (isToday && slotDate <= now) || slotBlocked(date, m, m + step) || takenInSquare;
         const label = new Date(2000,0,1,h,mm).toLocaleTimeString(lang === 'es' ? 'es-US' : 'en-US', { hour:'numeric', minute:'2-digit' });
         out.push({ label, h, mins: m, past });   // mins = minutes from midnight, for the calendar link
     }
@@ -2357,6 +2435,7 @@ function buildSlots(date) {
 /* Morning / Afternoon / Evening are always all three rendered side by side so
    the whole day is visible at once, with the continue button under them. */
 function renderSlots() {
+    sqLoadAvailability();          // no-op once loaded for this day/service/barber
     const slots = booking.date ? buildSlots(booking.date) : [];
     const groups = [
         { label: t('Morning','Manana'),   items: slots.filter(s => s.h < 12) },
@@ -2435,6 +2514,50 @@ const SHOP_EMAIL = { barbershop: 'synergybarbers@gmail.com', supply: 'premiumbar
 const CALENDAR_HOOK = 'https://script.google.com/macros/s/AKfycbwzR49uA_skUmGyueQ1RA967RccV2EKL1ZJSy5bR2-UT_qXMVru2G2lewD7sE29Y8G3_A/exec';
 
 /* Fire the appointments at the calendar web app (fire-and-forget; services only). */
+/* Send each appointment in the cart to Square. Returns {booked, slotTaken, failed}.
+   A taken slot stops the whole confirm so the customer can pick again. */
+async function sqCreateBookings(first, last, phone, email) {
+    const out = { booked: [], slotTaken: false, failed: false };
+    if (!SQ.ready) return out;                       // Square down — keep the email flow
+
+    const withStaff = appts.filter(a => a.service && a.staff?.sqId && a.date && a.timeMin != null);
+    if (!withStaff.length) return out;
+
+    for (const a of withStaff) {
+        const svc = SQ.serviceByName[a.service.name];
+        if (!svc) continue;
+
+        const start = new Date(a.date);
+        start.setHours(Math.floor(a.timeMin / 60), a.timeMin % 60, 0, 0);
+
+        try {
+            const r = await fetch('/api/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    idempotencyKey: `${a.staff.sqId}-${start.toISOString()}-${Date.now()}`,
+                    firstName: first, lastName: last, phone,
+                    email: email || undefined,
+                    serviceVariationId: svc.variationId,
+                    teamMemberId: a.staff.sqId,
+                    startAt: start.toISOString(),
+                    durationMinutes: a.service.mins || svc.minutes || 30,
+                    note: a.extras?.length ? `Also buying: ${a.extras.map(e => e.label).join(', ')}` : '',
+                }),
+            });
+            const d = await r.json();
+            if (r.status === 409 || d.slotTaken) { out.slotTaken = true; return out; }
+            if (!r.ok) { out.failed = true; return out; }
+            out.booked.push(d.bookingId);
+        } catch (e) {
+            out.failed = true;
+            return out;
+        }
+    }
+    SQ.avail = { key: null, times: null, loading: false };   // times just changed
+    return out;
+}
+
 function pushAppointmentsToCalendar(customer, phone, email, submittedAt) {
     if (!CALENDAR_HOOK || !appts.length) return;
     const appointments = appts.map(a => {
@@ -2489,6 +2612,22 @@ async function confirmReservation() {
         + (custEmail ? `\n${t('Customer email','Correo del cliente')}: ${custEmail}` : '');
     const btn = $('checkoutBtn');
     if (btn) { btn.disabled = true; btn.textContent = t('Sending...','Enviando...'); }
+
+    // Appointments go into Square first — it owns the calendar and is the only
+    // thing that can tell us the slot is still free. Products still go by email.
+    const sq = await sqCreateBookings(first, last, phone, custEmail);
+    if (sq.slotTaken) {
+        if (btn) { btn.disabled = false; btn.textContent = t('Confirm','Confirmar'); }
+        showToast(t('That time was just taken. Please pick another.',
+                    'Esa hora se acaba de ocupar. Elige otra.'));
+        return;
+    }
+    if (sq.failed) {
+        if (btn) { btn.disabled = false; btn.textContent = t('Confirm','Confirmar'); }
+        showToast(t('Could not book that time. Please try again.',
+                    'No se pudo reservar. Intenta de nuevo.'));
+        return;
+    }
 
     try {
         await Promise.all(recipients.map((email, idx) => {
@@ -3001,6 +3140,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeCart(
         showView(['products','services','about'].includes(want) ? want : 'about');
         if (isCheckout) openCart();   // checkout now opens in the cart modal
     }
+    // Pull Square's bookable barbers and service ids, then redraw with live data.
+    sqLoadCatalog().then(() => { renderStaff(); renderSlots(); });
     window.scrollTo(0, 0);
 })();
 </script>
