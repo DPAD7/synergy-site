@@ -906,7 +906,9 @@ a.staff-pill-sub.review-link:hover { color: #fff; opacity: 1; }
 /* chat modal */
 .book-overlay { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.75); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 20px; }
 .book-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
-.book-modal { width: 100%; max-width: 480px; height: 90vh; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.85); position: relative; }
+/* dvh tracks the real viewport on phones, where the address bar makes vh too tall
+   and pushes the close button off the top of the screen. */
+.book-modal { width: 100%; max-width: 480px; height: 90vh; height: 90dvh; max-height: calc(100dvh - 40px); border-radius: 24px; overflow: hidden; box-shadow: 0 25px 60px rgba(0,0,0,0.85); position: relative; }
 .book-modal iframe { width: 100%; height: 100%; border: none; border-radius: 24px; }
 .book-close {
     position: absolute; top: 14px; right: 14px; z-index: 10;
@@ -915,6 +917,14 @@ a.staff-pill-sub.review-link:hover { color: #fff; opacity: 1; }
     color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition);
 }
 .book-close:hover { background: var(--gold); color: var(--ink); }
+
+/* Phones: less padding around the modal and a bigger, safely inset close button. */
+@media (max-width: 600px) {
+    .book-overlay { padding: 12px; }
+    .book-modal { height: calc(100dvh - 24px); max-height: calc(100dvh - 24px); border-radius: 18px; }
+    .book-modal iframe { border-radius: 18px; }
+    .book-close { top: 10px; right: 10px; width: 42px; height: 42px; font-size: 1.05rem; background: rgba(0,0,0,0.8); }
+}
 
 /* subscribe popup */
 .sub-overlay {
