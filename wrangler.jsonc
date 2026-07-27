@@ -1,0 +1,11 @@
+{
+  // Cloudflare Worker that serves the static site and handles the /api/* booking
+  // routes. Static files come from the repo root via the ASSETS binding.
+  "name": "synergy-site",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-07-01",
+  "assets": {
+    "directory": "./",
+    "binding": "ASSETS"
+  }
+}
