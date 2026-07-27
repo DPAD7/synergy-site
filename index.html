@@ -2286,16 +2286,8 @@ function renderStaff() {
     const staffOptions = bookableStaff();
     $('staffList').innerHTML = staffOptions.map(st => {
         const chosen = booking.staff && booking.staff.id === st.id;
-        const src = st.google ? t('Google reviews','resenas de Google') : t('reviews','resenas');
-        const reviewLink = st.booksy || (st.google ? 'https://www.google.com/search?q=Synergy+Dominican+Barbershop+Reviews' : null);
-        const subText = st.rating ? `${st.rating.toFixed(1)} &middot; ${st.reviews} ${src}` : '';
-        const sub = subText
-            ? (reviewLink
-                ? `<a class="staff-pill-sub review-link" href="${attr(reviewLink)}" target="_blank" rel="noopener" data-stop>${subText}</a>`
-                // No review link but has a stat.
-                : `<span class="staff-pill-sub">${subText}</span>`)
-            // No stat yet — show a neutral review placeholder so every barber has a review line.
-            : `<span class="staff-pill-sub staff-pill-sub-empty">${t('No reviews yet','Sin resenas aun')}</span>`;
+        // Rating text and review counts are hidden — the stars alone carry it.
+        const sub = '';
         // Barbers with a photo show it; the rest show the star rating.
         const top = st.img
             ? `<span class="staff-photo"><img src="${attr(st.img)}" alt="" loading="lazy"></span>`
