@@ -2276,17 +2276,40 @@ function pickFrom(title, options) {
 }
 
 /* ── booking: staff (inline, no navigation) ──────────────── */
+/* Order is shuffled so no barber permanently owns the top of the list. It is
+   settled once per page load and again whenever a different service is picked —
+   never mid-interaction, so the list doesn't move under someone's finger. */
+let staffOrder = { key: null, ids: [] };
+
+const isWalkIn = (s) => /walk[- ]?in/i.test(s.name || '');
+
+function shuffledStaff(list) {
+    const key = booking.service ? booking.service.id : 'none';
+    if (staffOrder.key !== key) {
+        const rest = list.filter(s => !isWalkIn(s));
+        for (let i = rest.length - 1; i > 0; i--) {          // Fisher-Yates
+            const j = Math.floor(Math.random() * (i + 1));
+            [rest[i], rest[j]] = [rest[j], rest[i]];
+        }
+        staffOrder = { key, ids: rest.map(s => s.id) };
+    }
+    const walkIn = list.filter(isWalkIn);                     // always first
+    const byId = new Map(list.map(s => [s.id, s]));
+    const ordered = staffOrder.ids.map(id => byId.get(id)).filter(Boolean);
+    const missed = list.filter(s => !isWalkIn(s) && !staffOrder.ids.includes(s.id));
+    return [...walkIn, ...ordered, ...missed];
+}
+
 /* Who to offer. With Square up, only barbers it will actually book — matched to
-   the site's profiles by first name so photos and galleries survive. Without
-   Square, the site's own list, exactly as before. */
+   the site's profiles by first name. Without Square, the site's own list. */
 function bookableStaff() {
-    if (!SQ.ready || !SQ.staff.length) return STAFF;
-    return SQ.staff.map(sq => {
+    if (!SQ.ready || !SQ.staff.length) return shuffledStaff(STAFF);
+    return shuffledStaff(SQ.staff.map(sq => {
         const local = STAFF.find(s => sqFirstName(s.name) === sqFirstName(sq.displayName));
         return local
             ? { ...local, sqId: sq.id }
             : { id: `sq-${sq.id}`, name: sq.displayName, rating: 4.5, sqId: sq.id };
-    });
+    }));
 }
 
 function renderStaff() {
