@@ -1450,7 +1450,7 @@ const ICON_EYEBROW  = '<svg viewBox="0 0 32 32" width="30" height="30" fill="non
 // Cut photos are real work from the shop (images/barbers/…), matched to each service.
 const SERVICES = [
     { id:'svc-haircut',  tab:'Haircut',  name:'Haircut',                   name_es:'Corte',                       price:35, mins:30, img:'images/images1.jpeg',
-      desc:'Fade, taper, classic, buzz or military. Washed and styled.', desc_es:'Fade, taper, clasico, buzz o militar. Lavado y peinado.' },
+      desc:'Fade, taper, classic, buzz or military.', desc_es:'Fade, taper, clasico, buzz o militar.' },
     { id:'svc-kidcut',   tab:'Haircut',  name:'Kids Haircut',              name_es:'Corte de Nino',               price:30, mins:30, img:'images/barbers/marcos/001E17E0-A2FF-4BB4-93D3-821C23C8C09D.jpg',
       desc:'Patient cuts for the young ones (12 & under).', desc_es:'Cortes con paciencia para los pequenos (12 y menor).' },
     { id:'svc-kidshape', tab:'Haircut',  name:'Kids Shape Up',             name_es:'Delineado de Nino',           price:15, mins:15, img:'images/barbers/marcos/IMG_1148.JPG',
@@ -1479,15 +1479,13 @@ const SERVICES = [
 const STAFF = [
     { id:'any',      name:'Walk-in', name_es:'Sin cita', active:true, rating:4.5, reviews:38, google:true },
     // ── Licensed (shown first) ──
-    { id:'marcos',   name:'Marcos', rating:4.5, active:true, licensed:true, img:'images/barbers/marcos/IMG_1115.JPG',
-      gallery:['images/barbers/marcos/IMG_1115.JPG','images/barbers/marcos/IMG_1117.JPG','images/barbers/marcos/IMG_1118.JPG','images/barbers/marcos/IMG_1120.JPG','images/barbers/marcos/IMG_1122.JPG','images/barbers/marcos/IMG_1129.JPG','images/barbers/marcos/IMG_1146.JPG','images/barbers/marcos/IMG_1148.JPG','images/barbers/marcos/IMG_1160.JPG','images/barbers/marcos/IMG_1163.JPG','images/barbers/marcos/IMG_1278.JPG','images/barbers/marcos/IMG_1306.JPG','images/barbers/marcos/IMG_1334.JPG','images/barbers/marcos/IMG_1427.JPG','images/barbers/marcos/IMG_1428.JPG','images/barbers/marcos/IMG_0239.JPG','images/barbers/marcos/IMG_0244.JPG','images/barbers/marcos/IMG_0276.JPG','images/barbers/marcos/IMG_0282.JPG','images/barbers/marcos/IMG_0337.JPG','images/barbers/marcos/001E17E0-A2FF-4BB4-93D3-821C23C8C09D.jpg'] },
+    { id:'marcos',   name:'Marcos', rating:4.5, active:true, licensed:true },
     { id:'diogenes', name:'Diogenes', rating:4.5, active:true, licensed:true, rating:4.5, reviews:18, booksy:'https://booksy.com/en-us/685187_diogenes-by-sinergy-barbershop_barber-shop_33751_chambersburg' },
     { id:'jash',     name:'Jash', rating:4.5,        active:true, licensed:true },
     { id:'edwin',    name:'Edwin Wicho', active:true, licensed:true },
     { id:'tay',      name:'Tay', rating:4.5,         active:true, licensed:true },
     // ── Everyone else ──
-    { id:'kalel',    name:'Kalel', rating:4.5,  active:true, img:'images/barbers/kalel/IMG_0050.jpg',
-      gallery:['images/barbers/kalel/IMG_0050.jpg','images/barbers/kalel/IMG_0037.jpg'] },
+    { id:'kalel',    name:'Kalel', rating:4.5,  active:true },
     { id:'stanley',  name:'Stanley', rating:4.5,  active:true, rating:4.5, reviews:5,  booksy:'https://booksy.com/en-us/1687733_stanley-barber_barber-shop_33751_chambersburg' },
     { id:'eduard',   name:'Eduard', rating:4.5,   active:true, rating:4.5, reviews:16, booksy:'https://booksy.com/en-us/1139004_eduard-barber_barber-shop_33751_chambersburg' },
     { id:'rodrigo',  name:'Rodrigo', rating:4.5,   active:true },
