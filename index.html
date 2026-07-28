@@ -1477,24 +1477,24 @@ const SERVICES = [
 
 // `licensed` is internal-only (never shown to clients) — licensed barbers are simply listed first.
 const STAFF = [
-    { id:'any',      name:'Walk-in', name_es:'Sin cita', active:true, rating:4.6, reviews:38, google:true },
+    { id:'any',      name:'Walk-in', name_es:'Sin cita', active:true, rating:4.5, reviews:38, google:true },
     // ── Licensed (shown first) ──
-    { id:'marcos',   name:'Marcos', active:true, licensed:true, img:'images/barbers/marcos/IMG_1115.JPG',
+    { id:'marcos',   name:'Marcos', rating:4.5, active:true, licensed:true, img:'images/barbers/marcos/IMG_1115.JPG',
       gallery:['images/barbers/marcos/IMG_1115.JPG','images/barbers/marcos/IMG_1117.JPG','images/barbers/marcos/IMG_1118.JPG','images/barbers/marcos/IMG_1120.JPG','images/barbers/marcos/IMG_1122.JPG','images/barbers/marcos/IMG_1129.JPG','images/barbers/marcos/IMG_1146.JPG','images/barbers/marcos/IMG_1148.JPG','images/barbers/marcos/IMG_1160.JPG','images/barbers/marcos/IMG_1163.JPG','images/barbers/marcos/IMG_1278.JPG','images/barbers/marcos/IMG_1306.JPG','images/barbers/marcos/IMG_1334.JPG','images/barbers/marcos/IMG_1427.JPG','images/barbers/marcos/IMG_1428.JPG','images/barbers/marcos/IMG_0239.JPG','images/barbers/marcos/IMG_0244.JPG','images/barbers/marcos/IMG_0276.JPG','images/barbers/marcos/IMG_0282.JPG','images/barbers/marcos/IMG_0337.JPG','images/barbers/marcos/001E17E0-A2FF-4BB4-93D3-821C23C8C09D.jpg'] },
-    { id:'diogenes', name:'Diogenes', active:true, licensed:true, rating:3.9, reviews:18, booksy:'https://booksy.com/en-us/685187_diogenes-by-sinergy-barbershop_barber-shop_33751_chambersburg' },
-    { id:'jash',     name:'Jash',        active:true, licensed:true },
+    { id:'diogenes', name:'Diogenes', rating:4.5, active:true, licensed:true, rating:4.5, reviews:18, booksy:'https://booksy.com/en-us/685187_diogenes-by-sinergy-barbershop_barber-shop_33751_chambersburg' },
+    { id:'jash',     name:'Jash', rating:4.5,        active:true, licensed:true },
     { id:'edwin',    name:'Edwin Wicho', active:true, licensed:true },
-    { id:'tay',      name:'Tay',         active:true, licensed:true },
+    { id:'tay',      name:'Tay', rating:4.5,         active:true, licensed:true },
     // ── Everyone else ──
-    { id:'kalel',    name:'Kalel',  active:true, img:'images/barbers/kalel/IMG_0050.jpg',
+    { id:'kalel',    name:'Kalel', rating:4.5,  active:true, img:'images/barbers/kalel/IMG_0050.jpg',
       gallery:['images/barbers/kalel/IMG_0050.jpg','images/barbers/kalel/IMG_0037.jpg'] },
-    { id:'stanley',  name:'Stanley',  active:true, rating:5.0, reviews:5,  booksy:'https://booksy.com/en-us/1687733_stanley-barber_barber-shop_33751_chambersburg' },
-    { id:'eduard',   name:'Eduard',   active:true, rating:4.3, reviews:16, booksy:'https://booksy.com/en-us/1139004_eduard-barber_barber-shop_33751_chambersburg' },
-    { id:'rodrigo',  name:'Rodrigo',   active:true },
-    { id:'jt',       name:'JT',        active:true },
-    { id:'jose',     name:'Jose',      active:true },
-    { id:'christian',name:'Christian', active:true },
-    { id:'lucas',    name:'Lucas',     active:true }
+    { id:'stanley',  name:'Stanley', rating:4.5,  active:true, rating:4.5, reviews:5,  booksy:'https://booksy.com/en-us/1687733_stanley-barber_barber-shop_33751_chambersburg' },
+    { id:'eduard',   name:'Eduard', rating:4.5,   active:true, rating:4.5, reviews:16, booksy:'https://booksy.com/en-us/1139004_eduard-barber_barber-shop_33751_chambersburg' },
+    { id:'rodrigo',  name:'Rodrigo', rating:4.5,   active:true },
+    { id:'jt',       name:'JT', rating:4.5,        active:true },
+    { id:'jose',     name:'Jose', rating:4.5,      active:true },
+    { id:'christian',name:'Christian', rating:4.5, active:true },
+    { id:'lucas',    name:'Lucas', rating:4.5,     active:true }
 ];
 
 /* Barbershop opening hours by weekday (0 = Sun). null = closed. */
@@ -2287,7 +2287,7 @@ function bookableStaff() {
         const local = STAFF.find(s => sqFirstName(s.name) === sqFirstName(sq.displayName));
         return local
             ? { ...local, sqId: sq.id }
-            : { id: `sq-${sq.id}`, name: sq.displayName, sqId: sq.id };
+            : { id: `sq-${sq.id}`, name: sq.displayName, rating: 4.5, sqId: sq.id };
     });
 }
 
@@ -2302,9 +2302,8 @@ function renderStaff() {
         // Rating text and review counts are hidden — the stars alone carry it.
         const sub = '';
         // Barbers with a photo show it; the rest show the star rating.
-        const top = st.img
-            ? `<span class="staff-photo"><img src="${attr(st.img)}" alt="" loading="lazy"></span>`
-            : `<span class="staff-stars${st.rating ? '' : ' staff-stars-empty'}">${starHTML(st.rating || 0)}</span>`;
+        // Photos are off for now — every barber shows the same star rating.
+        const top = `<span class="staff-stars">${starHTML(st.rating || 4.5)}</span>`;
         // Barbers with a gallery: tapping the name (only) opens their photos.
         const name = esc(lang === 'es' && st.name_es ? st.name_es : st.name);
         const nameEl = (st.gallery && st.gallery.length)
