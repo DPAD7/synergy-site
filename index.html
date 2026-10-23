@@ -2667,6 +2667,12 @@ async function confirmReservation() {
     if (!last)  { showToast(t('Enter your last name','Ingresa tu apellido')); return; }
     if (!phone) { showToast(t('Enter your phone number','Ingresa tu telefono')); return; }
     if (custEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(custEmail)) { showToast(t('Enter a valid email or leave it blank','Ingresa un correo valido o dejalo vacio')); return; }
+    // Nothing picked, nothing sent: an empty form reached the shop on Oct 23, 2026 with
+    // no service, date or time and a $0.00 total.
+    if (!bookingComplete() && !cartLines().length) {
+        showToast(t('Pick a service, date and time first','Elige un servicio, fecha y hora primero'));
+        return;
+    }
     const name = `${first} ${last}`;
 
     const hasService  = bookingComplete() || cartLines().some(l => l.p.isService);
